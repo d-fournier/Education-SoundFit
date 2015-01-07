@@ -6,7 +6,6 @@ package fr.soundfit.android.ui.activity;
  * By Donovan on 03/01/2015.
  */
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +13,7 @@ import android.view.MenuItem;
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.fragment.PlaceholderFragment;
 
-public class MainActivity extends ActionBarActivity {
+public class HomeActivity extends GenericActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
