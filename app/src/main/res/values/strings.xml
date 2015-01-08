@@ -2,7 +2,16 @@
 <!-- Will contain all localisable string -->
 <resources>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="hello_world">Page 1</string>
+    <string name="action_settings">Paramètres</string>
+
+    <!-- Authentification -->
+    <string name="connect">Se connecter</string>
+
+    <!-- Level Chooser -->
+    <string name="level_chooser_title">Choix du niveau</string>
+    <string name="level_chooser_first_choice">Débutant</string>
+    <string name="level_chooser_second_choice">Confirmé</string>
+    <string name="level_chooser_third_choice">Expert</string>
 
 </resources>

@@ -9,6 +9,8 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 import fr.soundfit.android.R;
+import fr.soundfit.android.ui.utils.IntentUtils;
+import fr.soundfit.android.ui.utils.PrefUtils;
 
 /**
  * Project : SoundFit
@@ -57,15 +59,23 @@ public class SplashscreenActivity extends GenericActivity {
             @Override
             public void run() {
                 if(!isFinishing()){
-                    launchHomeActivity();
+                    if(shouldLaunchWelcomeActivity()){
+                        IntentUtils.launchWelcomeActivity(SplashscreenActivity.this);
+                    } else {
+                        IntentUtils.launchHomeActivity(SplashscreenActivity.this);
+                    }
+                    finish();
                 }
             }
         }, SPLASH_TIME_OUT);
     }
 
-    private void launchHomeActivity(){
-        Intent i = new Intent(this, HomeActivity.class);
-        startActivity(i);
-        finish();
+
+
+    protected boolean shouldLaunchWelcomeActivity(){
+        return !PrefUtils.isUserConnected(this) || PrefUtils.getUserLevel(this) == -1
+                || PrefUtils.getUserMusicPreference(this) == -1;
     }
+
+
 }
