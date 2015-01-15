@@ -3,13 +3,7 @@
 
     <item
         android:id="@android:id/background">
-        <shape
-            android:shape="line">
-            <stroke
-                android:width="5dp"
-                android:color="@color/theme_red">
-            </stroke>
-        </shape>
+        <nine-patch android:src="@drawable/chooser_bar_red"/>
     </item>
 
     <item
