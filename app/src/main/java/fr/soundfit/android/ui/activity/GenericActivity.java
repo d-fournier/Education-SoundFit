@@ -7,5 +7,5 @@ import android.support.v7.app.ActionBarActivity;
  * Package : fr.soundfit.android.ui.activity
  * By Donovan on 07/01/2015.
  */
-public class GenericActivity extends ActionBarActivity {
+public abstract class GenericActivity extends ActionBarActivity {
 }

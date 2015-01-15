@@ -7,9 +7,9 @@
     </style>
 
     <!-- Base application theme. -->
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/theme_red</item>
-        <item name="colorPrimaryDark">@color/theme_red_dark</item>
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
     </style>
 
 </resources>

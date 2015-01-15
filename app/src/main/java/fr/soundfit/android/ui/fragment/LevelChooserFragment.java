@@ -4,9 +4,13 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.activity.WelcomeActivity;
+import fr.soundfit.android.ui.view.VerticalChooser;
 
 /**
  * Project : SoundFit
@@ -18,6 +22,10 @@ public class LevelChooserFragment extends GenericFragment implements View.OnClic
     public static final String TAG = LevelChooserFragment.class.getSimpleName();
 
     protected Button mNextButton;
+    protected Button mFirstChoiceBt;
+    protected Button mSecondChoiceBt;
+    protected Button mThirdChoiceBt;
+    protected VerticalChooser mChooser;
 
     public static LevelChooserFragment newInstance() {
         LevelChooserFragment fragment = new LevelChooserFragment();
@@ -34,15 +42,30 @@ public class LevelChooserFragment extends GenericFragment implements View.OnClic
     @Override
     protected void bindView(View view) {
         super.bindView(view);
-        mNextButton = (Button) view.findViewById(R.id.welcome_next);
+        mNextButton = (Button) view.findViewById(R.id.level_chooser_validate);
         mNextButton.setOnClickListener(this);
+        mFirstChoiceBt = (Button) view.findViewById(R.id.level_chooser_first_choice);
+        mFirstChoiceBt.setOnClickListener(this);
+        mSecondChoiceBt= (Button) view.findViewById(R.id.level_chooser_second_choice);
+        mSecondChoiceBt.setOnClickListener(this);
+        mThirdChoiceBt = (Button) view.findViewById(R.id.level_chooser_third_choice);
+        mThirdChoiceBt.setOnClickListener(this);
+        mChooser = (VerticalChooser) view.findViewById(R.id.level_chooser_chooser);
     }
 
     @Override
     public void onClick(View v) {
-        Activity act = getActivity();
-        if(act != null && act instanceof WelcomeActivity){
-            ((WelcomeActivity)act).onNextPageClick();
+        if(v == mNextButton){
+            Activity act = getActivity();
+            if(act != null && act instanceof WelcomeActivity){
+                ((WelcomeActivity)act).onNextPageClick();
+            }
+        } else if (v == mFirstChoiceBt) {
+            mChooser.setProgress(0);
+        } else if (v == mSecondChoiceBt) {
+            mChooser.setProgress(1);
+        } else if (v == mThirdChoiceBt){
+            mChooser.setProgress(2);
         }
     }
 

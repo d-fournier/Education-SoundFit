@@ -3,5 +3,7 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="space_default">16dp</dimen>
+
     <dimen name="splachscreen_space">16dp</dimen>
 </resources>
