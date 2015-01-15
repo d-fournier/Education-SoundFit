@@ -10,6 +10,7 @@ import org.w3c.dom.Text;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.activity.WelcomeActivity;
+import fr.soundfit.android.ui.utils.PrefUtils;
 import fr.soundfit.android.ui.view.VerticalChooser;
 
 /**
@@ -51,13 +52,17 @@ public class LevelChooserFragment extends GenericFragment implements View.OnClic
         mThirdChoiceBt = (Button) view.findViewById(R.id.level_chooser_third_choice);
         mThirdChoiceBt.setOnClickListener(this);
         mChooser = (VerticalChooser) view.findViewById(R.id.level_chooser_chooser);
+        mChooser.setProgress(PrefUtils.getUserLevel(getActivity()));
     }
+
+
 
     @Override
     public void onClick(View v) {
         if(v == mNextButton){
             Activity act = getActivity();
             if(act != null && act instanceof WelcomeActivity){
+                PrefUtils.setUserLevel(getActivity(), mChooser.getProgress());
                 ((WelcomeActivity)act).onNextPageClick();
             }
         } else if (v == mFirstChoiceBt) {

@@ -3,7 +3,17 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <!-- Text Size -->
+    <dimen name="text_size_xsmall">11sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size_large">18sp</dimen>
+    <dimen name="text_size_xlarge">20sp</dimen>
+
     <dimen name="space_default">16dp</dimen>
 
     <dimen name="splachscreen_space">16dp</dimen>
+    
+    <!-- Shape dimensions -->
+    <dimen name="rounded_rectangle_radius">16dp</dimen>
 </resources>

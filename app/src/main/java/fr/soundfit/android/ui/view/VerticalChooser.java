@@ -51,7 +51,7 @@ public class VerticalChooser extends SeekBar {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
             case MotionEvent.ACTION_UP:
-                setProgress(getMax() - (int) (getMax() * event.getY() / getHeight()));
+                setProgress(Math.round(getMax() * event.getY() / getHeight()));
                 onSizeChanged(getWidth(), getHeight(), 0, 0);
                 break;
             case MotionEvent.ACTION_CANCEL:
@@ -60,9 +60,10 @@ public class VerticalChooser extends SeekBar {
         return true;
     }
 
+
     @Override
     public synchronized void setProgress(int progress) {
-        super.setProgress(progress);
+        super.setProgress(getMax() - progress);
         onSizeChanged(getWidth(), getHeight(), 0, 0);
     }
 }
