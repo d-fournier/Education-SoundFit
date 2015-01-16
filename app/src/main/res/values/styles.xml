@@ -22,4 +22,10 @@
         <item name="android:textSize">@dimen/text_size_large</item>
     </style>
 
+    <style name="Chooser_Red">
+        <item name="android:thumb">@drawable/thumb_red</item>
+        <item name="android:progressDrawable">@drawable/chooser_red</item>
+        
+    </style>
+
 </resources>

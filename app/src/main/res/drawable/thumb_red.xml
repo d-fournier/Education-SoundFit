@@ -3,11 +3,21 @@
     <item android:state_pressed="true">
         <shape android:shape="oval">
             <solid android:color="@color/theme_red"/>
+            <size android:width="32dp"
+                android:height="32dp"/>
         </shape>
     </item>
     <item>
-        <shape android:shape="oval">
-            <solid android:color="@color/theme_red"/>
-        </shape>
+        <layer-list >
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@color/theme_white"/>
+                    <size android:width="32dp"
+                        android:height="32dp"/>
+                    <stroke android:color="@color/theme_red"
+                        android:width="8dp"/>
+                </shape>
+            </item>
+        </layer-list>
     </item>
 </selector>
