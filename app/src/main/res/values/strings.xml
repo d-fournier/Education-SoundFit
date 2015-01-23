@@ -8,10 +8,18 @@
     <!-- Authentification -->
     <string name="connect">Se connecter</string>
 
+    <!-- Common String -->
+    <string name="next">Suivant</string>
+
     <!-- Level Chooser -->
     <string name="level_chooser_title">Choix du niveau</string>
     <string name="level_chooser_first_choice">Débutant</string>
     <string name="level_chooser_second_choice">Confirmé</string>
     <string name="level_chooser_third_choice">Expert</string>
+
+    <!-- Music Chooser -->
+    <string name="music_chooser_title">Mode de diffusion</string>
+    <string name="music_chooser_first_choice">Faîtes moi découvrir</string>
+    <string name="music_chooser_second_choice">Je gère mes Playlist</string>
 
 </resources>

@@ -75,6 +75,10 @@ public class WelcomePagerAdapter extends FragmentPagerAdapter {
         notifyDataSetChanged();
     }
 
+    public int getCurrentProgress(){
+        return mCurrentProgress;
+    }
+
     public int getTotalPages(){
         return WELCOME_SCREEN_NUMBER;
     }
@@ -85,4 +89,5 @@ public class WelcomePagerAdapter extends FragmentPagerAdapter {
         }
         notifyDataSetChanged();
     }
+
 }

@@ -7,6 +7,8 @@ import android.widget.Button;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.activity.WelcomeActivity;
+import fr.soundfit.android.ui.utils.PrefUtils;
+import fr.soundfit.android.ui.view.VerticalChooser;
 
 /**
  * Project : SoundFit
@@ -18,6 +20,9 @@ public class MusicPreferenceChooserFragment extends GenericFragment implements V
     public static final String TAG = MusicPreferenceChooserFragment.class.getSimpleName();
 
     protected Button mNextButton;
+    protected Button mFirstChoiceBt;
+    protected Button mSecondChoiceBt;
+    protected VerticalChooser mChooser;
 
     public static MusicPreferenceChooserFragment newInstance() {
         MusicPreferenceChooserFragment fragment = new MusicPreferenceChooserFragment();
@@ -34,15 +39,28 @@ public class MusicPreferenceChooserFragment extends GenericFragment implements V
     @Override
     protected void bindView(View view) {
         super.bindView(view);
-        mNextButton = (Button) view.findViewById(R.id.welcome_next);
+        mNextButton = (Button) view.findViewById(R.id.music_chooser_validate);
         mNextButton.setOnClickListener(this);
+        mFirstChoiceBt = (Button) view.findViewById(R.id.chooser_first_choice);
+        mFirstChoiceBt.setOnClickListener(this);
+        mSecondChoiceBt= (Button) view.findViewById(R.id.chooser_second_choice);
+        mSecondChoiceBt.setOnClickListener(this);
+        mChooser = (VerticalChooser) view.findViewById(R.id.music_chooser_chooser);
+        mChooser.setProgress(PrefUtils.getUserMusicPreference(getActivity()));
     }
 
     @Override
     public void onClick(View v) {
-        Activity act = getActivity();
-        if(act != null && act instanceof WelcomeActivity){
-            ((WelcomeActivity)act).onNextPageClick();
+        if(v == mNextButton){
+            Activity act = getActivity();
+            if(act != null && act instanceof WelcomeActivity){
+                PrefUtils.setUserMusicPreference(getActivity(), mChooser.getProgress());
+                ((WelcomeActivity)act).onNextPageClick();
+            }
+        } else if (v == mFirstChoiceBt) {
+            mChooser.setProgress(0);
+        } else if (v == mSecondChoiceBt) {
+            mChooser.setProgress(1);
         }
     }
 }

@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.activity.WelcomeActivity;
+import fr.soundfit.android.ui.utils.PrefUtils;
 
 /**
  * Project : SoundFit
@@ -42,6 +43,7 @@ public class AuthentificationFragment extends GenericFragment implements View.On
     public void onClick(View v) {
         Activity act = getActivity();
         if(act != null && act instanceof WelcomeActivity){
+            PrefUtils.setUserConnected(getActivity(), true);
             ((WelcomeActivity)act).onNextPageClick();
         }
     }

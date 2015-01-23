@@ -18,4 +18,7 @@
     
     <!-- Shape dimensions -->
     <dimen name="rounded_rectangle_radius">16dp</dimen>
+
+    <!-- Chooser Offser -->
+    <dimen name="chooser_offset">-24dp</dimen>
 </resources>

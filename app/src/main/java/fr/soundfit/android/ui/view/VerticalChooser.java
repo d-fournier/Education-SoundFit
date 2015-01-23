@@ -36,8 +36,8 @@ public class VerticalChooser extends SeekBar {
     }
 
     protected void onDraw(Canvas c) {
-        c.rotate(-90);
-        c.translate(-getHeight(), 0);
+        c.rotate(90);
+        c.translate(0, -getWidth());
         super.onDraw(c);
     }
 
@@ -63,7 +63,7 @@ public class VerticalChooser extends SeekBar {
 
     @Override
     public synchronized void setProgress(int progress) {
-        super.setProgress(getMax() - progress);
+        super.setProgress(progress);
         onSizeChanged(getWidth(), getHeight(), 0, 0);
     }
 }

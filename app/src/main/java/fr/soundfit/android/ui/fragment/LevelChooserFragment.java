@@ -45,11 +45,11 @@ public class LevelChooserFragment extends GenericFragment implements View.OnClic
         super.bindView(view);
         mNextButton = (Button) view.findViewById(R.id.level_chooser_validate);
         mNextButton.setOnClickListener(this);
-        mFirstChoiceBt = (Button) view.findViewById(R.id.level_chooser_first_choice);
+        mFirstChoiceBt = (Button) view.findViewById(R.id.chooser_first_choice);
         mFirstChoiceBt.setOnClickListener(this);
-        mSecondChoiceBt= (Button) view.findViewById(R.id.level_chooser_second_choice);
+        mSecondChoiceBt= (Button) view.findViewById(R.id.chooser_second_choice);
         mSecondChoiceBt.setOnClickListener(this);
-        mThirdChoiceBt = (Button) view.findViewById(R.id.level_chooser_third_choice);
+        mThirdChoiceBt = (Button) view.findViewById(R.id.chooser_third_choice);
         mThirdChoiceBt.setOnClickListener(this);
         mChooser = (VerticalChooser) view.findViewById(R.id.level_chooser_chooser);
         mChooser.setProgress(PrefUtils.getUserLevel(getActivity()));
