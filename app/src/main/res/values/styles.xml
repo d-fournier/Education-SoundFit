@@ -2,8 +2,30 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/theme_blue</item>
-        <item name="colorPrimaryDark">@color/theme_blue_dark</item>
+        <item name="colorPrimary">@color/theme_red</item>
+        <item name="colorPrimaryDark">@color/theme_red_dark</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--  -->
+    <style name="Button_Red">
+        <item name="android:background">@drawable/button_red</item>
+        <item name="android:textColor">@color/theme_white</item>
+        <item name="android:drawablePadding">@dimen/space_default</item>
+        <item name="android:padding">@dimen/space_default</item>
+        <item name="android:layout_margin">@dimen/space_default</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="Chooser_Red">
+        <item name="android:thumb">@drawable/thumb_red</item>
+        <item name="android:progressDrawable">@drawable/chooser_red</item>
+        
     </style>
 
 </resources>

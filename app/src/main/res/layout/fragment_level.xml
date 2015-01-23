@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_marginTop="@dimen/space_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/splashscreen_logo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/level_chooser_title"
+                android:textSize="@dimen/text_size_xxxlarge"
+                android:textColor="@color/theme_red"
+                android:layout_marginTop="@dimen/space_default"
+                android:textStyle="bold"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/chooser_proposition"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/chooser_first_choice"
+                        style="@style/Button_Red"
+                        android:drawableLeft="@drawable/dice_1"
+                        android:text="@string/level_chooser_first_choice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <Button
+                        android:id="@+id/chooser_second_choice"
+                        style="@style/Button_Red"
+                        android:drawableLeft="@drawable/dice_2"
+                        android:text="@string/level_chooser_second_choice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <Button
+                        android:id="@+id/chooser_third_choice"
+                        style="@style/Button_Red"
+                        android:drawableLeft="@drawable/dice_3"
+                        android:text="@string/level_chooser_third_choice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <fr.soundfit.android.ui.view.VerticalChooser
+                    android:id="@+id/level_chooser_chooser"
+                    style="@style/Chooser_Red"
+                    android:layout_alignTop="@id/chooser_proposition"
+                    android:layout_alignBottom="@id/chooser_proposition"
+                    android:layout_toRightOf="@id/chooser_proposition"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:thumbOffset="@dimen/chooser_offset"
+                    android:max="2"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:layout_gravity="right"
+        android:id="@+id/level_chooser_validate"
+        android:text="@string/next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
