@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="theme_red">#ff0000</color>
-    <color name="theme_red_dark">#c10000</color>
+    <color name="theme_red">#c10000</color>
+    <color name="theme_red_dark">#ff840000</color>
     <color name="theme_white">#FFFFFF</color>
     <color name="theme_black">#000000</color>
 

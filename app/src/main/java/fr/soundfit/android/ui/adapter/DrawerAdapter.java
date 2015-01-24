@@ -60,10 +60,10 @@ public class DrawerAdapter extends BaseAdapter {
         viewHolder.mTitleTV.setText(ResourceUtils.getResourceId(ResourceUtils.ResourceType.STRING, name, mContext));
         if(getItemType(i) == -1){
             viewHolder.mTitleTV.setTextColor(mContext.getResources().getColor(R.color.theme_red));
-            viewHolder.mTitleTV.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+            viewHolder.mTitleTV.setBackgroundResource(R.color.theme_white);
         } else {
-            viewHolder.mTitleTV.setTextColor(mContext.getResources().getColor(R.color.theme_black));
-            viewHolder.mTitleTV.setGravity(Gravity.START | Gravity.CENTER_VERTICAL);
+            viewHolder.mTitleTV.setTextColor(mContext.getResources().getColor(R.color.theme_white));
+            viewHolder.mTitleTV.setBackgroundResource(R.color.theme_red);
         }
 
         return view;

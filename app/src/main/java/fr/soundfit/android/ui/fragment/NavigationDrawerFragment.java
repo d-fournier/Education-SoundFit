@@ -32,7 +32,7 @@ import fr.soundfit.android.ui.utils.ResourceUtils;
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-public class NavigationDrawerFragment extends GenericFragment implements AdapterView.OnItemClickListener {
+public class NavigationDrawerFragment extends Fragment implements AdapterView.OnItemClickListener {
     /**
      * Remember the position of the selected item.
      */
@@ -80,17 +80,15 @@ public class NavigationDrawerFragment extends GenericFragment implements Adapter
     }
 
     @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_navigation_drawer;
-    }
-
-    @Override
-    protected void bindView(View view) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView = (ListView) view;
         mDrawerListView.setOnItemClickListener(this);
         mAdapter = new DrawerAdapter(getActivity());
         mDrawerListView.setAdapter(mAdapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+        mDrawerListView.addHeaderView(inflater.inflate(R.layout.item_drawer_header, container));
+        return view;
     }
 
     public boolean isDrawerOpen() {
