@@ -4,5 +4,6 @@
     <color name="theme_red">#ff0000</color>
     <color name="theme_red_dark">#c10000</color>
     <color name="theme_white">#FFFFFF</color>
+    <color name="theme_black">#000000</color>
 
 </resources>

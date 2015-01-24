@@ -1,10 +1,10 @@
 package fr.soundfit.android.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -12,7 +12,7 @@ import fr.soundfit.android.R;
 import fr.soundfit.android.ui.fragment.NavigationDrawerFragment;
 import fr.soundfit.android.ui.fragment.PlaceholderFragment;
 
-public class HomeActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class HomeActivity extends GenericActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -40,11 +40,31 @@ public class HomeActivity extends ActionBarActivity implements NavigationDrawerF
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
+    public void onNavigationDrawerItemSelected(long id) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment;
+        if(id == R.id.id_drawer_my_account){
+            fragment = PlaceholderFragment.newInstance((int) id);
+        } else if(id == R.id.id_drawer_sharing){
+            fragment = PlaceholderFragment.newInstance((int) id);
+        } else if(id == R.id.id_drawer_my_music){
+            fragment = PlaceholderFragment.newInstance((int) id);
+        } else if(id == R.id.id_drawer_my_level){
+            fragment = PlaceholderFragment.newInstance((int) id);
+        } else if(id == R.id.id_drawer_my_connected_objects){
+            fragment = PlaceholderFragment.newInstance((int) id);
+        } else if(id == R.id.id_drawer_about_soundfit){
+            fragment = PlaceholderFragment.newInstance((int) id);
+        } else if(id == R.id.id_drawer_discover_app){
+            fragment = PlaceholderFragment.newInstance((int) id);
+        } else if(id == R.id.id_drawer_contact_us){
+            fragment = PlaceholderFragment.newInstance((int) id);
+        } else {
+            fragment = PlaceholderFragment.newInstance((int) id);
+        }
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, fragment)
                 .commit();
     }
 

@@ -11,6 +11,20 @@
     <!-- Common String -->
     <string name="next">Suivant</string>
 
+    <!-- MenuDrawer -->
+    <string name="welcome">Accueil</string>
+    <string name="profile">Profil</string>
+    <string name="my_account">Mon compte</string>
+    <string name="sharing">Partage</string>
+    <string name="my_activity">Mon Activité</string>
+    <string name="my_music">Ma Musique</string>
+    <string name="my_level">Mon niveau</string>
+    <string name="my_connected_objects">Mes objets connectés</string>
+    <string name="about">A Propos</string>
+    <string name="about_soundfit">A propos de Soundfit</string>
+    <string name="discover_app">Découvrir l\'application</string>
+    <string name="contact_us">Nous contacter</string>
+
     <!-- Level Chooser -->
     <string name="level_chooser_title">Choix du niveau</string>
     <string name="level_chooser_first_choice">Débutant</string>
