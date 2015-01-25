@@ -10,8 +10,10 @@
     tools:context="fr.soundfit.android.ui.activity.HomeActivity$PlaceholderFragment">
 
     <TextView
+        android:gravity="center"
         android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="@string/unavailable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

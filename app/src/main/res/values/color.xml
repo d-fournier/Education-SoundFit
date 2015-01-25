@@ -2,6 +2,7 @@
 <resources>
 
     <color name="theme_red">#c10000</color>
+    <color name="theme_red_light">#fff80000</color>
     <color name="theme_red_dark">#ff840000</color>
     <color name="theme_white">#FFFFFF</color>
     <color name="theme_black">#000000</color>

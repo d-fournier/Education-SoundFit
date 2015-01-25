@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.fragment.NavigationDrawerFragment;
 import fr.soundfit.android.ui.fragment.PlaceholderFragment;
+import fr.soundfit.android.ui.utils.ResourceUtils;
 
 public class HomeActivity extends GenericActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
@@ -40,28 +41,32 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(long id) {
+    public void onNavigationDrawerItemSelected(String tag) {
         // update the main content by replacing fragments
+        int nameId = ResourceUtils.getResourceId(ResourceUtils.ResourceType.STRING, tag, this);
+        mTitle = getString(nameId);
+        int id = ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, tag, this);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment;
         if(id == R.id.id_drawer_my_account){
-            fragment = PlaceholderFragment.newInstance((int) id);
+            fragment = PlaceholderFragment.newInstance();
         } else if(id == R.id.id_drawer_sharing){
-            fragment = PlaceholderFragment.newInstance((int) id);
+            fragment = PlaceholderFragment.newInstance();
         } else if(id == R.id.id_drawer_my_music){
-            fragment = PlaceholderFragment.newInstance((int) id);
+            fragment = PlaceholderFragment.newInstance();
         } else if(id == R.id.id_drawer_my_level){
-            fragment = PlaceholderFragment.newInstance((int) id);
+            fragment = PlaceholderFragment.newInstance();
         } else if(id == R.id.id_drawer_my_connected_objects){
-            fragment = PlaceholderFragment.newInstance((int) id);
+            fragment = PlaceholderFragment.newInstance();
         } else if(id == R.id.id_drawer_about_soundfit){
-            fragment = PlaceholderFragment.newInstance((int) id);
+            fragment = PlaceholderFragment.newInstance();
         } else if(id == R.id.id_drawer_discover_app){
-            fragment = PlaceholderFragment.newInstance((int) id);
+            fragment = PlaceholderFragment.newInstance();
         } else if(id == R.id.id_drawer_contact_us){
-            fragment = PlaceholderFragment.newInstance((int) id);
+            fragment = PlaceholderFragment.newInstance();
         } else {
-            fragment = PlaceholderFragment.newInstance((int) id);
+            fragment = PlaceholderFragment.newInstance();
         }
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)

@@ -14,7 +14,7 @@
 
     <!--  -->
     <style name="Button_Red">
-        <item name="android:background">@drawable/button_red</item>
+        <item name="android:background">@drawable/button_rounded_red</item>
         <item name="android:textColor">@color/theme_white</item>
         <item name="android:drawablePadding">@dimen/space_default</item>
         <item name="android:padding">@dimen/space_default</item>

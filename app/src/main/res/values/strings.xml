@@ -10,6 +10,7 @@
 
     <!-- Common String -->
     <string name="next">Suivant</string>
+    <string name="unavailable">Indisponible</string>
 
     <!-- MenuDrawer -->
     <string name="welcome">Accueil</string>

@@ -35,7 +35,7 @@ public class DrawerAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        String name = mContext.getResources().getStringArray(R.array.drawer_items)[i];
+            String name = mContext.getResources().getStringArray(R.array.drawer_items)[i];
         return  ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, name, mContext);
     }
 
@@ -63,7 +63,7 @@ public class DrawerAdapter extends BaseAdapter {
             viewHolder.mTitleTV.setBackgroundResource(R.color.theme_white);
         } else {
             viewHolder.mTitleTV.setTextColor(mContext.getResources().getColor(R.color.theme_white));
-            viewHolder.mTitleTV.setBackgroundResource(R.color.theme_red);
+            viewHolder.mTitleTV.setBackgroundResource(R.drawable.button_red);
         }
 
         return view;

@@ -167,10 +167,8 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
     }
 
     private void selectItem(int position) {
-        long id = 0;
-        if(mAdapter != null){
-            id =  mAdapter.getItemId(position);
-        }
+        String tag = getResources().getStringArray(R.array.drawer_items)[position];
+
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
@@ -179,7 +177,7 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
             mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
         if (mCallbacks != null) {
-            mCallbacks.onNavigationDrawerItemSelected(id);
+            mCallbacks.onNavigationDrawerItemSelected(tag);
         }
     }
 
@@ -247,7 +245,7 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        selectItem(position);
+        selectItem(position-1);
     }
 
     /**
@@ -257,6 +255,6 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
         /**
          * Called when an item in the navigation drawer is selected.
          */
-        void onNavigationDrawerItemSelected(long position);
+        void onNavigationDrawerItemSelected(String position);
     }
 }
