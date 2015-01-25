@@ -1,0 +1,11 @@
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:choiceMode="singleChoice"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="@dimen/drawer_space_list"
+    android:background="@color/theme_white"
+    tools:context="fr.soundfit.android.ui.fragment.NavigationDrawerFragment"
+    android:paddingTop="@dimen/space_default"
+    android:paddingBottom="@dimen/space_default"/>
