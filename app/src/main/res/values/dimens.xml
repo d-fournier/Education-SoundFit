@@ -19,6 +19,7 @@
 
 
     <dimen name="space_default">16dp</dimen>
+    <dimen name="content_witdh">320dp</dimen>
     <dimen name="splachscreen_space">16dp</dimen>
 
     <!-- Shape dimensions -->
