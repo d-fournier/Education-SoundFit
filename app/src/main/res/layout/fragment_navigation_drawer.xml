@@ -8,4 +8,5 @@
     android:background="@color/theme_white"
     tools:context="fr.soundfit.android.ui.fragment.NavigationDrawerFragment"
     android:paddingTop="@dimen/space_default"
-    android:paddingBottom="@dimen/space_default"/>
+    android:paddingBottom="@dimen/space_default"
+    android:clipToPadding="false"/>
