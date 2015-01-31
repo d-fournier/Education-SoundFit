@@ -45,21 +45,21 @@
                     android:layout_height="wrap_content">
                     <Button
                         android:id="@+id/chooser_first_choice"
-                        style="@style/Button_Red"
+                        style="@style/Button_Rounded_Red"
                         android:drawableLeft="@drawable/dice_1"
                         android:text="@string/level_chooser_first_choice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <Button
                         android:id="@+id/chooser_second_choice"
-                        style="@style/Button_Red"
+                        style="@style/Button_Rounded_Red"
                         android:drawableLeft="@drawable/dice_2"
                         android:text="@string/level_chooser_second_choice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <Button
                         android:id="@+id/chooser_third_choice"
-                        style="@style/Button_Red"
+                        style="@style/Button_Rounded_Red"
                         android:drawableLeft="@drawable/dice_3"
                         android:text="@string/level_chooser_third_choice"
                         android:layout_width="match_parent"
@@ -83,6 +83,7 @@
     </ScrollView>
 
     <Button
+        style="@style/Button_Red"
         android:layout_gravity="right"
         android:id="@+id/level_chooser_validate"
         android:text="@string/next"

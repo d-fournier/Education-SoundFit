@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:paddingTop="@dimen/space_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/splashscreen_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up_title"
+            android:textSize="@dimen/text_size_large"
+            android:textColor="@color/theme_red"
+            android:textStyle="italic"
+            android:layout_marginTop="@dimen/space_default"
+            android:layout_marginBottom="@dimen/space_default"/>
+
+        <EditText
+            android:id="@+id/login_name_first"
+            android:layout_width="@dimen/content_witdh"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_first"
+            style="@style/EditText_Red"/>
+
+        <EditText
+            android:id="@+id/login_name_last"
+            android:layout_width="@dimen/content_witdh"
+            android:layout_height="wrap_content"
+            android:hint="@string/name_last"
+            style="@style/EditText_Red"/>
+
+        <EditText
+            android:id="@+id/login_mail"
+            android:layout_width="@dimen/content_witdh"
+            android:layout_height="wrap_content"
+            android:hint="@string/mail"
+            style="@style/EditText_Red"
+            android:inputType="textWebEmailAddress"/>
+
+        <EditText
+            android:id="@+id/login_password"
+            android:layout_width="@dimen/content_witdh"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            style="@style/EditText_Red"
+            android:inputType="textPassword"/>
+
+        <EditText
+            android:id="@+id/login_password_again"
+            android:layout_width="@dimen/content_witdh"
+            android:layout_height="wrap_content"
+            android:hint="@string/password_again"
+            style="@style/EditText_Red"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/login_sign_up"
+            android:layout_width="@dimen/circle_length"
+            android:layout_height="@dimen/circle_length"
+            android:layout_marginTop="@dimen/space_default"
+            android:text="@string/ok"
+            style="@style/Button_Round_Red"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+</ScrollView>

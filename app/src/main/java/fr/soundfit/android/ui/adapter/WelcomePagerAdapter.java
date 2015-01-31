@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import fr.soundfit.android.ui.fragment.AuthentificationFragment;
+import fr.soundfit.android.ui.fragment.LoginFragment;
 import fr.soundfit.android.ui.fragment.LevelChooserFragment;
 import fr.soundfit.android.ui.fragment.MusicPreferenceChooserFragment;
 
@@ -49,10 +49,10 @@ public class WelcomePagerAdapter extends FragmentPagerAdapter {
                 break;
             case LOGIN_SCREEN_INDEX:
             default:
-                tag = AuthentificationFragment.TAG;
+                tag = LoginFragment.TAG;
                 frag = mFragmentManager.findFragmentByTag(tag);
                 if(frag == null){
-                    frag = AuthentificationFragment.newInstance();
+                    frag = LoginFragment.newInstance();
                 }
                 break;
         }
