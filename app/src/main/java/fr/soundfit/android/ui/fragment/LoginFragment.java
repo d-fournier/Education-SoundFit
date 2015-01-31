@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.activity.WelcomeActivity;
-import fr.soundfit.android.ui.utils.PrefUtils;
+import fr.soundfit.android.utils.PrefUtils;
 
 /**
  * Project : SoundFit

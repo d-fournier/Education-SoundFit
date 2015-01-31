@@ -5,7 +5,7 @@ import android.support.v4.view.ViewPager;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.adapter.WelcomePagerAdapter;
-import fr.soundfit.android.ui.utils.IntentUtils;
+import fr.soundfit.android.utils.IntentUtils;
 
 /**
  * Project : SoundFit

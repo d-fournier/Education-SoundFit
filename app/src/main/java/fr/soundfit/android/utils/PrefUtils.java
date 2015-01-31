@@ -1,4 +1,4 @@
-package fr.soundfit.android.ui.utils;
+package fr.soundfit.android.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,7 +6,7 @@ import android.preference.PreferenceManager;
 
 /**
  * Project : SoundFit
- * Package : fr.soundfit.android.ui.utils
+ * Package : fr.soundfit.android.utils
  * By Donovan on 08/01/2015.
  */
 public class PrefUtils {
