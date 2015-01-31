@@ -2,15 +2,22 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true" >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
         <ImageView
             android:paddingTop="@dimen/space_default"
@@ -73,6 +80,12 @@
             android:layout_marginTop="@dimen/space_default"
             android:text="@string/ok"
             style="@style/Button_Round_Red"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
 
     </LinearLayout>
 </ScrollView>
