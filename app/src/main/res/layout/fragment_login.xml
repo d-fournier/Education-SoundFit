@@ -22,34 +22,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_up_title"
-            android:textSize="@dimen/text_size_xxxlarge"
+            android:textSize="@dimen/text_size_large"
             android:textColor="@color/theme_red"
-            android:textStyle="bold"
+            android:textStyle="italic"
             android:layout_marginTop="@dimen/space_default"
             android:layout_marginBottom="@dimen/space_default"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/login_name_first"
             android:layout_width="@dimen/content_witdh"
             android:layout_height="wrap_content"
             android:hint="@string/name_first"
             style="@style/EditText_Red"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/login_name_last"
             android:layout_width="@dimen/content_witdh"
             android:layout_height="wrap_content"
             android:hint="@string/name_last"
             style="@style/EditText_Red"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/login_mail"
             android:layout_width="@dimen/content_witdh"
             android:layout_height="wrap_content"
             android:hint="@string/mail"
-            style="@style/EditText_Red"/>
+            style="@style/EditText_Red"
+            android:inputType="textWebEmailAddress"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/login_password"
             android:layout_width="@dimen/content_witdh"
             android:layout_height="wrap_content"
@@ -57,7 +58,7 @@
             style="@style/EditText_Red"
             android:inputType="textPassword"/>
 
-        <com.rengwuxian.materialedittext.MaterialEditText
+        <EditText
             android:id="@+id/login_password_again"
             android:layout_width="@dimen/content_witdh"
             android:layout_height="wrap_content"
@@ -67,9 +68,11 @@
 
         <Button
             android:id="@+id/login_sign_up"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/circle_length"
+            android:layout_height="@dimen/circle_length"
             android:layout_marginTop="@dimen/space_default"
-            android:text="@string/ok"/>
+            android:text="@string/ok"
+            style="@style/Button_Round_Red"/>
+
     </LinearLayout>
 </ScrollView>
