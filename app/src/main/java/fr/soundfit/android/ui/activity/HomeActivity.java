@@ -49,42 +49,26 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment;
-        if(id == R.id.id_drawer_my_account){
-            fragment = PlaceholderFragment.newInstance();
-        } else if(id == R.id.id_drawer_sharing){
-            fragment = PlaceholderFragment.newInstance();
-        } else if(id == R.id.id_drawer_my_music){
-            fragment = PlaceholderFragment.newInstance();
-        } else if(id == R.id.id_drawer_my_level){
-            fragment = PlaceholderFragment.newInstance();
-        } else if(id == R.id.id_drawer_my_connected_objects){
-            fragment = PlaceholderFragment.newInstance();
-        } else if(id == R.id.id_drawer_about_soundfit){
-            fragment = PlaceholderFragment.newInstance();
-        } else if(id == R.id.id_drawer_discover_app){
-            fragment = PlaceholderFragment.newInstance();
-        } else if(id == R.id.id_drawer_contact_us){
-            fragment = PlaceholderFragment.newInstance();
-        } else {
-            fragment = PlaceholderFragment.newInstance();
+        switch (id){
+            case R.id.id_drawer_home:
+                fragment = PlaceholderFragment.newInstance();
+                break;
+            case R.id.id_drawer_playlist:
+                fragment = PlaceholderFragment.newInstance();
+                break;
+            case R.id.id_drawer_challenges:
+                fragment = PlaceholderFragment.newInstance();
+                break;
+            case R.id.id_drawer_parameter:
+                fragment = PlaceholderFragment.newInstance();
+                break;
+            default:
+                fragment = PlaceholderFragment.newInstance();
+                break;
         }
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
-    }
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
     }
 
     public void restoreActionBar() {
@@ -98,10 +82,6 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.home, menu);
             restoreActionBar();
             return true;
         }
@@ -114,11 +94,6 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

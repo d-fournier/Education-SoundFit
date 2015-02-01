@@ -14,6 +14,11 @@
     <string name="ok">OK</string>
 
     <!-- MenuDrawer -->
+    <string name="home">Accueil</string>
+    <string name="playlist">Playlists</string>
+    <string name="challenges">Challenges</string>
+    <string name="parameters">Paramètres</string>
+    <!-- MenuSettings -->
     <string name="welcome">Accueil</string>
     <string name="profile">Profil</string>
     <string name="my_account">Mon compte</string>

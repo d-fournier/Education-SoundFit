@@ -16,14 +16,16 @@ import fr.soundfit.android.utils.ResourceUtils;
 public class DrawerAdapter extends BaseAdapter {
 
     Context mContext;
+    int mRessourceArray;
 
-    public DrawerAdapter(Context context){
+    public DrawerAdapter(Context context, int ressourceArray){
         mContext = context;
+        mRessourceArray = ressourceArray;
     }
 
     @Override
     public int getCount() {
-        return mContext.getResources().getStringArray(R.array.drawer_items).length;
+        return mContext.getResources().getStringArray(mRessourceArray).length;
     }
 
     @Override
@@ -33,12 +35,12 @@ public class DrawerAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-            String name = mContext.getResources().getStringArray(R.array.drawer_items)[i];
+            String name = mContext.getResources().getStringArray(mRessourceArray)[i];
         return  ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, name, mContext);
     }
 
     public int getItemType(int position){
-        String name = mContext.getResources().getStringArray(R.array.drawer_items)[position];
+        String name = mContext.getResources().getStringArray(mRessourceArray)[position];
         return mContext.getResources().getInteger(ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, name, mContext));
     }
 
@@ -54,7 +56,7 @@ public class DrawerAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolderItem) view.getTag();
         }
-        String name = mContext.getResources().getStringArray(R.array.drawer_items)[i];
+        String name = mContext.getResources().getStringArray(mRessourceArray)[i];
         viewHolder.mTitleTV.setText(ResourceUtils.getResourceId(ResourceUtils.ResourceType.STRING, name, mContext));
         if(getItemType(i) == -1){
             viewHolder.mTitleTV.setTextColor(mContext.getResources().getColor(R.color.theme_red));

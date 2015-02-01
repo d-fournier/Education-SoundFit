@@ -2,42 +2,21 @@
 <resources>
 
     <string-array name="drawer_items">
-        <item>drawer_profile</item>
-        <item>drawer_my_account</item>
-        <item>drawer_sharing</item>
-        <item>drawer_my_activity</item>
-        <item>drawer_my_music</item>
-        <item>drawer_my_level</item>
-        <item>drawer_my_connected_objects</item>
-        <item>drawer_about</item>
-        <item>drawer_about_soundfit</item>
-        <item>drawer_discover_app</item>
-        <item>drawer_contact_us</item>
+        <item>drawer_home</item>
+        <item>drawer_playlist</item>
+        <item>drawer_challenges</item>
+        <item>drawer_parameter</item>
     </string-array>
 
-    <item name="string_drawer_profile" type="string">@string/profile</item>
-    <item name="string_drawer_my_account" type="string">@string/my_account</item>
-    <item name="string_drawer_sharing" type="string">@string/sharing</item>
-    <item name="string_drawer_my_activity" type="string">@string/my_activity</item>
-    <item name="string_drawer_my_music" type="string">@string/my_music</item>
-    <item name="string_drawer_my_level" type="string">@string/my_level</item>
-    <item name="string_drawer_my_connected_objects" type="string">@string/my_connected_objects</item>
-    <item name="string_drawer_about" type="string">@string/about</item>
-    <item name="string_drawer_about_soundfit" type="string">@string/about_soundfit</item>
-    <item name="string_drawer_discover_app" type="string">@string/discover_app</item>
-    <item name="string_drawer_contact_us" type="string">@string/contact_us</item>
+    <item name="string_drawer_home" type="string">@string/home</item>
+    <item name="string_drawer_playlist" type="string">@string/playlist</item>
+    <item name="string_drawer_challenges" type="string">@string/challenges</item>
+    <item name="string_drawer_parameter" type="string">@string/parameters</item>
 
-    <item name="id_drawer_profile" type="id">-1</item>
-    <item name="id_drawer_my_account" type="id">0</item>
-    <item name="id_drawer_sharing" type="id">1</item>
-    <item name="id_drawer_my_activity" type="id">-1</item>
-    <item name="id_drawer_my_music" type="id">2</item>
-    <item name="id_drawer_my_level" type="id">3</item>
-    <item name="id_drawer_my_connected_objects" type="id">4</item>
-    <item name="id_drawer_about" type="id">-1</item>
-    <item name="id_drawer_about_soundfit" type="id">5</item>
-    <item name="id_drawer_discover_app" type="id">6</item>
-    <item name="id_drawer_contact_us" type="id">7</item>
+    <item name="id_drawer_home" type="id">0</item>
+    <item name="id_drawer_playlist" type="id">1</item>
+    <item name="id_drawer_challenges" type="id">2</item>
+    <item name="id_drawer_parameter" type="id">3</item>
 
 
 </resources>
