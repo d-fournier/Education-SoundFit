@@ -16,14 +16,16 @@ import fr.soundfit.android.utils.ResourceUtils;
 public class DrawerAdapter extends BaseAdapter {
 
     Context mContext;
+    int mRessourceArray;
 
-    public DrawerAdapter(Context context){
+    public DrawerAdapter(Context context, int ressourceArray){
         mContext = context;
+        mRessourceArray = ressourceArray;
     }
 
     @Override
     public int getCount() {
-        return mContext.getResources().getStringArray(R.array.drawer_items).length;
+        return mContext.getResources().getStringArray(mRessourceArray).length;
     }
 
     @Override
@@ -33,13 +35,15 @@ public class DrawerAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-            String name = mContext.getResources().getStringArray(R.array.drawer_items)[i];
-        return  ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, name, mContext);
+        return  ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, getTag(i), mContext);
     }
 
     public int getItemType(int position){
-        String name = mContext.getResources().getStringArray(R.array.drawer_items)[position];
-        return mContext.getResources().getInteger(ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, name, mContext));
+        return mContext.getResources().getInteger(ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, getTag(position), mContext));
+    }
+
+    public String getTag(int position){
+        return mContext.getResources().getStringArray(mRessourceArray)[position];
     }
 
     @Override
@@ -54,7 +58,7 @@ public class DrawerAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolderItem) view.getTag();
         }
-        String name = mContext.getResources().getStringArray(R.array.drawer_items)[i];
+        String name = getTag(i);
         viewHolder.mTitleTV.setText(ResourceUtils.getResourceId(ResourceUtils.ResourceType.STRING, name, mContext));
         if(getItemType(i) == -1){
             viewHolder.mTitleTV.setTextColor(mContext.getResources().getColor(R.color.theme_red));

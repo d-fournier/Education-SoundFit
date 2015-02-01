@@ -10,10 +10,16 @@
 
     <!-- Common String -->
     <string name="next">Suivant</string>
+    <string name="validate">Valider</string>
     <string name="unavailable">Indisponible</string>
     <string name="ok">OK</string>
 
     <!-- MenuDrawer -->
+    <string name="home">Accueil</string>
+    <string name="playlist">Playlists</string>
+    <string name="challenges">Challenges</string>
+    <string name="parameters">Paramètres</string>
+    <!-- MenuSettings -->
     <string name="welcome">Accueil</string>
     <string name="profile">Profil</string>
     <string name="my_account">Mon compte</string>
@@ -43,8 +49,8 @@
 
     <!-- Music Chooser -->
     <string name="music_chooser_title">Mode de diffusion</string>
-    <string name="music_chooser_first_choice">Faîtes moi découvrir</string>
-    <string name="music_chooser_second_choice">Je gère mes Playlist</string>
+    <string name="music_chooser_first_choice">Découvrir</string>
+    <string name="music_chooser_second_choice">Mes playlists</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
@@ -52,5 +58,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
+    
+    <string name="contact_subject">Application Soundfit - Android</string>
+    <string name="contact_chooser">Envoyer par email</string>
 
 </resources>

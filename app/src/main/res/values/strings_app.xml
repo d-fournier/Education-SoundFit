@@ -3,5 +3,6 @@
 <resources>
 
     <string name="app_name">SoundFit</string>
+    <string name="contact_mail">contact@soundfit.fr</string>
 
 </resources>
