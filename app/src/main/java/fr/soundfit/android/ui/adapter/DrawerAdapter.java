@@ -1,16 +1,14 @@
 package fr.soundfit.android.ui.adapter;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import fr.soundfit.android.R;
-import fr.soundfit.android.ui.utils.ResourceUtils;
+import fr.soundfit.android.utils.ResourceUtils;
 
 /**
  * Created by Donovan on 24/01/2015.

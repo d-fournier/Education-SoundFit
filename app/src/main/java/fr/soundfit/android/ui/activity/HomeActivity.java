@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.fragment.NavigationDrawerFragment;
 import fr.soundfit.android.ui.fragment.PlaceholderFragment;
-import fr.soundfit.android.ui.utils.ResourceUtils;
+import fr.soundfit.android.utils.ResourceUtils;
 
 public class HomeActivity extends GenericActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 

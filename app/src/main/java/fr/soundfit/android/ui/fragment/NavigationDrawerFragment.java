@@ -6,10 +6,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,14 +16,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.adapter.DrawerAdapter;
-import fr.soundfit.android.ui.utils.PrefUtils;
-import fr.soundfit.android.ui.utils.ResourceUtils;
+import fr.soundfit.android.utils.PrefUtils;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -85,9 +80,9 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
         mDrawerListView = (ListView) view;
         mDrawerListView.setOnItemClickListener(this);
         mAdapter = new DrawerAdapter(getActivity());
+        mDrawerListView.addHeaderView(inflater.inflate(R.layout.item_drawer_header, container));
         mDrawerListView.setAdapter(mAdapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-        mDrawerListView.addHeaderView(inflater.inflate(R.layout.item_drawer_header, container));
         return view;
     }
 

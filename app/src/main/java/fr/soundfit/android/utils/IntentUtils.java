@@ -1,4 +1,4 @@
-package fr.soundfit.android.ui.utils;
+package fr.soundfit.android.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import fr.soundfit.android.ui.activity.WelcomeActivity;
 
 /**
  * Project : SoundFit
- * Package : fr.soundfit.android.ui.utils
+ * Package : fr.soundfit.android.utils
  * By Donovan on 08/01/2015.
  */
 public class IntentUtils {

@@ -1,4 +1,4 @@
-package fr.soundfit.android.ui.utils;
+package fr.soundfit.android.utils;
 
         import android.content.Context;
         import android.content.res.Resources;
