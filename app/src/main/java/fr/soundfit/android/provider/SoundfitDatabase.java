@@ -1,4 +1,4 @@
-package fr.soundfit.android.ui.provider;
+package fr.soundfit.android.provider;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

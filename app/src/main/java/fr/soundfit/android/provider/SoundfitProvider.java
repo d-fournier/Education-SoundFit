@@ -1,4 +1,4 @@
-package fr.soundfit.android.ui.provider;
+package fr.soundfit.android.provider;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -27,7 +27,7 @@ public class SoundfitProvider extends ContentProvider {
     private static final String JOKER = "*";
 
     private static final int SONG_SORT = 100;
-    private static final int SONG_SORT_TYPE = 101;
+    private static final int SONG_SORT_ID = 101;
 
     protected static SoundfitDatabase mDatabase;
 
@@ -37,7 +37,7 @@ public class SoundfitProvider extends ContentProvider {
             Log.d(TAG, "authority=[" + authority + "]");
         }
         matcher.addURI(authority, SoundfitContract.PATH_SONG_SORT, SONG_SORT);
-        matcher.addURI(authority, SoundfitContract.PATH_SONG_SORT + SEPARATOR + NUMBER, SONG_SORT_TYPE);
+        matcher.addURI(authority, SoundfitContract.PATH_SONG_SORT + SEPARATOR + NUMBER, SONG_SORT_ID);
         return matcher;
     }
 
@@ -71,7 +71,7 @@ public class SoundfitProvider extends ContentProvider {
                 return c;
             }
 
-            case SONG_SORT_TYPE: {
+            case SONG_SORT_ID: {
                 final StringBuilder select = new StringBuilder();
                 if (!TextUtils.isEmpty(selection)) {
                     select.append(selection);
@@ -79,9 +79,9 @@ public class SoundfitProvider extends ContentProvider {
                 }
                 select.append(SoundfitContract.Tables.SONG_SORT);
                 select.append('.');
-                select.append(SoundfitContract.SongSortTable.ID_TYPE);
+                select.append(SoundfitContract.SongSortTable.ID_SONG);
                 select.append(" = ");
-                select.append(SoundfitContract.SongSortTable.getType(uri));
+                select.append(SoundfitContract.SongSortTable.getSongID(uri));
                 selection = select.toString();
                 final Cursor c = db.query(SoundfitContract.Tables.SONG_SORT, projection, selection, selectionArgs, null, null, sortOrder);
                 c.setNotificationUri(getContext().getContentResolver(), uri);
@@ -102,7 +102,7 @@ public class SoundfitProvider extends ContentProvider {
         switch (match) {
             case SONG_SORT:
                 return SoundfitContract.SongSortTable.CONTENT_TYPE;
-            case SONG_SORT_TYPE:
+            case SONG_SORT_ID:
                 return SoundfitContract.SongSortTable.CONTENT_ITEM_TYPE;
         }
         return null;
@@ -118,15 +118,14 @@ public class SoundfitProvider extends ContentProvider {
         if (db == null || !db.isOpen()) {
             return null;
         }
-
         final int match = mUriMatcher.match(uri);
         switch (match) {
 
             case SONG_SORT:
-            case SONG_SORT_TYPE: {
+            case SONG_SORT_ID: {
                 db.insertOrThrow(SoundfitContract.Tables.SONG_SORT, null, values);
                 getContext().getContentResolver().notifyChange(uri, null);
-                return SoundfitContract.SongSortTable.buildUriWithOwnId(values.getAsString(SoundfitContract.NewsTable._ID));
+                return SoundfitContract.SongSortTable.buildUriWithSongID(values.getAsString(SoundfitContract.SongSortTable._ID));
             }
 
             default:
@@ -152,25 +151,25 @@ public class SoundfitProvider extends ContentProvider {
 
         switch (match) {
 
-            case NEWS: {
-                final int retVal = db.delete(EclypsiaContract.Tables.NEWS, selection, selectionArgs);
+            case SONG_SORT: {
+                final int retVal = db.delete(SoundfitContract.Tables.SONG_SORT, selection, selectionArgs);
                 getContext().getContentResolver().notifyChange(uri, null);
                 return retVal;
             }
 
-            case NEWS_ID: {
+            case SONG_SORT_ID: {
                 final StringBuilder select = new StringBuilder();
                 if (!TextUtils.isEmpty(selection)) {
                     select.append(selection);
                     select.append(" AND ");
                 }
-                select.append(EclypsiaContract.Tables.NEWS);
+                select.append(SoundfitContract.Tables.SONG_SORT);
                 select.append('.');
-                select.append(EclypsiaContract.NewsTable.ID);
+                select.append(SoundfitContract.SongSortTable.ID_SONG);
                 select.append(" = ");
-                select.append(EclypsiaContract.NewsTable.getId(uri));
+                select.append(SoundfitContract.SongSortTable.getSongID(uri));
                 selection = select.toString();
-                final int retVal = db.delete(EclypsiaContract.Tables.NEWS, selection, selectionArgs);
+                final int retVal = db.delete(SoundfitContract.Tables.SONG_SORT, selection, selectionArgs);
                 getContext().getContentResolver().notifyChange(uri, null);
                 return retVal;
             }
@@ -198,25 +197,25 @@ public class SoundfitProvider extends ContentProvider {
         final int match = mUriMatcher.match(uri);
         switch (match) {
 
-            case NEWS: {
-                final int retVal = db.update(EclypsiaContract.Tables.NEWS, values, selection, selectionArgs);
+            case SONG_SORT: {
+                final int retVal = db.update(SoundfitContract.Tables.SONG_SORT, values, selection, selectionArgs);
                 getContext().getContentResolver().notifyChange(uri, null);
                 return retVal;
             }
 
-            case NEWS_ID: {
+            case SONG_SORT_ID: {
                 final StringBuilder select = new StringBuilder();
                 if (!TextUtils.isEmpty(selection)) {
                     select.append(selection);
                     select.append(" AND ");
                 }
-                select.append(EclypsiaContract.Tables.NEWS);
+                select.append(SoundfitContract.Tables.SONG_SORT);
                 select.append('.');
-                select.append(EclypsiaContract.NewsTable.ID);
+                select.append(SoundfitContract.SongSortTable.ID_SONG);
                 select.append(" = ");
-                select.append(EclypsiaContract.NewsTable.getId(uri));
+                select.append(SoundfitContract.SongSortTable.getSongID(uri));
                 selection = select.toString();
-                final int retVal = db.update(EclypsiaContract.Tables.NEWS, values, selection, selectionArgs);
+                final int retVal = db.update(SoundfitContract.Tables.SONG_SORT, values, selection, selectionArgs);
                 getContext().getContentResolver().notifyChange(uri, null);
                 return retVal;
             }

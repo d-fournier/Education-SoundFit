@@ -1,4 +1,4 @@
-package fr.soundfit.android.ui.provider;
+package fr.soundfit.android.provider;
 
 import android.net.Uri;
 import android.provider.BaseColumns;
@@ -62,11 +62,11 @@ public class SoundfitContract {
         }
 
 
-        public static Uri buildUriWithType(String type) {
-            return CONTENT_URI.buildUpon().appendPath(String.valueOf(type)).build();
+        public static Uri buildUriWithSongID(String id) {
+            return CONTENT_URI.buildUpon().appendPath(String.valueOf(id)).build();
         }
 
-        public static String getType(Uri uri) {
+        public static String getSongID(Uri uri) {
             return uri.getPathSegments().get(1);
         }
     }
