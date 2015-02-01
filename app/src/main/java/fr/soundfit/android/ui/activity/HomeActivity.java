@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.fragment.NavigationDrawerFragment;
 import fr.soundfit.android.ui.fragment.PlaceholderFragment;
+import fr.soundfit.android.ui.fragment.SettingsFragment;
 import fr.soundfit.android.utils.ResourceUtils;
 
 public class HomeActivity extends GenericActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -60,7 +61,7 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
                 fragment = PlaceholderFragment.newInstance();
                 break;
             case R.id.id_drawer_parameter:
-                fragment = PlaceholderFragment.newInstance();
+                fragment = SettingsFragment.newInstance();
                 break;
             default:
                 fragment = PlaceholderFragment.newInstance();
