@@ -37,14 +37,14 @@ public class WelcomePagerAdapter extends FragmentPagerAdapter {
                 tag = LevelChooserFragment.TAG;
                 frag = mFragmentManager.findFragmentByTag(tag);
                 if(frag == null){
-                    frag = LevelChooserFragment.newInstance();
+                    frag = LevelChooserFragment.newInstance(false);
                 }
                 break;
             case MUSIC_PREFERENCE_SCREEN_INDEX:
                 tag = MusicPreferenceChooserFragment.TAG;
                 frag = mFragmentManager.findFragmentByTag(tag);
                 if(frag == null){
-                    frag = MusicPreferenceChooserFragment.newInstance();
+                    frag = MusicPreferenceChooserFragment.newInstance(false);
                 }
                 break;
             case LOGIN_SCREEN_INDEX:

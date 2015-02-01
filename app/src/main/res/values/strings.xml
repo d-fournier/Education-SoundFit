@@ -10,6 +10,7 @@
 
     <!-- Common String -->
     <string name="next">Suivant</string>
+    <string name="validate">Valider</string>
     <string name="unavailable">Indisponible</string>
     <string name="ok">OK</string>
 
@@ -57,5 +58,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
+    
+    <string name="contact_subject">Application Soundfit - Android</string>
+    <string name="contact_chooser">Envoyer par email</string>
 
 </resources>

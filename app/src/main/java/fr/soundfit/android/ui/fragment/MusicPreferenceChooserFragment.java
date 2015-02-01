@@ -15,18 +15,21 @@ import fr.soundfit.android.ui.view.VerticalChooser;
  * Package : fr.soundfit.android.ui.fragment
  * By Donovan on 08/01/2015.
  */
-public class MusicPreferenceChooserFragment extends GenericFragment implements View.OnClickListener {
+public class MusicPreferenceChooserFragment extends GenericDialogFragment implements View.OnClickListener {
 
     public static final String TAG = MusicPreferenceChooserFragment.class.getSimpleName();
+
+    private static final String EXTRA_IS_DIALOG = "fr.soundfit.android.EXTRA_IS_DIALOG";
 
     protected Button mNextButton;
     protected Button mFirstChoiceBt;
     protected Button mSecondChoiceBt;
     protected VerticalChooser mChooser;
 
-    public static MusicPreferenceChooserFragment newInstance() {
+    public static MusicPreferenceChooserFragment newInstance(boolean isDialog) {
         MusicPreferenceChooserFragment fragment = new MusicPreferenceChooserFragment();
         Bundle args = new Bundle();
+        args.putBoolean(EXTRA_IS_DIALOG, isDialog);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,6 +50,10 @@ public class MusicPreferenceChooserFragment extends GenericFragment implements V
         mSecondChoiceBt.setOnClickListener(this);
         mChooser = (VerticalChooser) view.findViewById(R.id.music_chooser_chooser);
         mChooser.setProgress(PrefUtils.getUserMusicPreference(getActivity()));
+        if(mIsDialog) {
+            mNextButton.setText(R.string.validate);
+            view.findViewById(R.id.music_chooser_logo).setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -56,6 +63,9 @@ public class MusicPreferenceChooserFragment extends GenericFragment implements V
             if(act != null && act instanceof WelcomeActivity){
                 PrefUtils.setUserMusicPreference(getActivity(), mChooser.getProgress());
                 ((WelcomeActivity)act).onNextPageClick();
+            } else if(mIsDialog){
+                PrefUtils.setUserMusicPreference(getActivity(), mChooser.getProgress());
+                this.dismiss();
             }
         } else if (v == mFirstChoiceBt) {
             mChooser.setProgress(0);
