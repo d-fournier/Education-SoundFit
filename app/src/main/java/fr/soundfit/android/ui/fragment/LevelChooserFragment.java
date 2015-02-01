@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.activity.WelcomeActivity;
@@ -15,9 +16,11 @@ import fr.soundfit.android.ui.view.VerticalChooser;
  * Package : fr.soundfit.android.ui.fragment
  * By Donovan on 08/01/2015.
  */
-public class LevelChooserFragment extends GenericFragment implements View.OnClickListener{
+public class LevelChooserFragment extends GenericDialogFragment implements View.OnClickListener{
 
     public static final String TAG = LevelChooserFragment.class.getSimpleName();
+
+
 
     protected Button mNextButton;
     protected Button mFirstChoiceBt;
@@ -25,9 +28,10 @@ public class LevelChooserFragment extends GenericFragment implements View.OnClic
     protected Button mThirdChoiceBt;
     protected VerticalChooser mChooser;
 
-    public static LevelChooserFragment newInstance() {
+    public static LevelChooserFragment newInstance(boolean isDialog) {
         LevelChooserFragment fragment = new LevelChooserFragment();
         Bundle args = new Bundle();
+        args.putBoolean(EXTRA_IS_DIALOG, isDialog);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,6 +40,7 @@ public class LevelChooserFragment extends GenericFragment implements View.OnClic
     protected int getLayoutId() {
         return R.layout.fragment_level;
     }
+
 
     @Override
     protected void bindView(View view) {
@@ -50,9 +55,12 @@ public class LevelChooserFragment extends GenericFragment implements View.OnClic
         mThirdChoiceBt.setOnClickListener(this);
         mChooser = (VerticalChooser) view.findViewById(R.id.level_chooser_chooser);
         mChooser.setProgress(PrefUtils.getUserLevel(getActivity()));
+
+        if(mIsDialog){
+            mNextButton.setText(R.string.validate);
+            view.findViewById(R.id.level_chooser_logo).setVisibility(View.GONE);
+        }
     }
-
-
 
     @Override
     public void onClick(View v) {
@@ -61,6 +69,9 @@ public class LevelChooserFragment extends GenericFragment implements View.OnClic
             if(act != null && act instanceof WelcomeActivity){
                 PrefUtils.setUserLevel(getActivity(), mChooser.getProgress());
                 ((WelcomeActivity)act).onNextPageClick();
+            } else if(mIsDialog){
+                PrefUtils.setUserLevel(getActivity(), mChooser.getProgress());
+                this.dismiss();
             }
         } else if (v == mFirstChoiceBt) {
             mChooser.setProgress(0);
