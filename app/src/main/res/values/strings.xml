@@ -58,7 +58,12 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
-    
+
+    <!-- Playlist -->
+    <string name="my_playlist">Mes Playlists</string>
+    <string name="soundfit_playlist">SoundFit Playlist</string>
+
+    <!-- Contact -->
     <string name="contact_subject">Application Soundfit - Android</string>
     <string name="contact_chooser">Envoyer par email</string>
 
