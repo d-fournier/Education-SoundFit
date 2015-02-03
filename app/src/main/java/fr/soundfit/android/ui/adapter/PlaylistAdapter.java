@@ -25,30 +25,29 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
 
     public PlaylistAdapter(Context context, int resource, List<Playlist> objects) {
         super(context, resource, objects);
+        mContext = context;
     }
 
     @Override
     public View getView(final int position, final View convertView, final ViewGroup parent) {
         Playlist playlist = getItem(position);
+        ViewHolder vh;
 
         View view = convertView;
         if (view == null) {
             LayoutInflater vi = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = vi.inflate(R.layout.item_playlist, null);
-            ViewHolder vh = new ViewHolder();
+            vh = new ViewHolder();
             vh.mTitleTV = (TextView) view.findViewById(R.id.playlist_title);
             vh.mDescTV = (TextView) view.findViewById(R.id.playlist_description);
             view.setTag(vh);
+        } else {
+            vh = (ViewHolder) view.getTag();
         }
 
 
-        TextView textView = (TextView) view.findViewById(android.R.id.text1);
-        textView.setText(playlist.getTitle());
-
-        ImageView imageView = (ImageView) view.findViewById(android.R.id.icon);
-        Picasso.with(UserPlaylistsActivity.this).load(playlist.getPictureUrl())
-                .into(imageView);
-
+        vh.mTitleTV.setText(playlist.getTitle());
+        vh.mDescTV.setText(""+playlist.getTracks().size());
         return view;
     }
 

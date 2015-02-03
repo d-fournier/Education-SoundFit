@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.fragment.LevelChooserFragment;
 import fr.soundfit.android.ui.fragment.MusicPreferenceChooserFragment;
+import fr.soundfit.android.ui.fragment.UserPlaylistListFragment;
 
 /**
  * Project : SoundFit
@@ -46,18 +47,18 @@ public class PlaylistPagerAdapter extends FragmentPagerAdapter {
         String tag;
         switch (position){
             case USER_TAB_INDEX:
-                tag = LevelChooserFragment.TAG;
+                tag = UserPlaylistListFragment.TAG+USER_TAB_INDEX;
                 frag = mFragmentManager.findFragmentByTag(tag);
                 if(frag == null){
-                    frag = LevelChooserFragment.newInstance(false);
+                    frag = UserPlaylistListFragment.newInstance();
                 }
                 break;
             default:
             case SOUNDFIT_TAB_INDEX:
-                tag = MusicPreferenceChooserFragment.TAG;
+                tag = UserPlaylistListFragment.TAG+SOUNDFIT_TAB_INDEX;
                 frag = mFragmentManager.findFragmentByTag(tag);
                 if(frag == null){
-                    frag = MusicPreferenceChooserFragment.newInstance(false);
+                    frag = UserPlaylistListFragment.newInstance();
                 }
                 break;
         }
