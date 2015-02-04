@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="preference_music_array">
+        <item>@string/music_chooser_first_choice</item>
+        <item>@string/music_chooser_second_choice</item>
+    </string-array>
+
+    <string-array name="preference_level_array">
+        <item>@string/level_chooser_first_choice</item>
+        <item>@string/level_chooser_second_choice</item>
+        <item>@string/level_chooser_third_choice</item>
+    </string-array>
+
+</resources>

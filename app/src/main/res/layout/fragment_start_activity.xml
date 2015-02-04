@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <Spinner
+        android:id="@+id/start_activity_spinner_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/start_activity_spinner_music"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <ImageButton
+        style="@style/Button_Round_Red"
+        android:src="@drawable/abc_ic_menu_paste_mtrl_am_alpha"
+        android:layout_width="@dimen/circle_length"
+        android:layout_height="@dimen/circle_length" />
+
+</LinearLayout>

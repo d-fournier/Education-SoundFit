@@ -51,6 +51,8 @@
     <string name="music_chooser_title">Mode de diffusion</string>
     <string name="music_chooser_first_choice">Découvrir</string>
     <string name="music_chooser_second_choice">Mes playlists</string>
+
+
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
