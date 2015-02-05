@@ -41,17 +41,18 @@
     <string name="password">Mot de passe</string>
     <string name="password_again">Confirmez le mot de passe</string>
 
-    <!-- Level Chooser -->
+    <!-- Level -->
     <string name="level_chooser_title">Choix du niveau</string>
-    <string name="level_chooser_first_choice">Débutant</string>
-    <string name="level_chooser_second_choice">Confirmé</string>
-    <string name="level_chooser_third_choice">Expert</string>
-    <string name="level_chooser_fourth_choice">Perso</string>
+    <string name="level_chooser_beginner">Débutant</string>
+    <string name="level_chooser_experienced">Confirmé</string>
+    <string name="level_chooser_expert">Expert</string>
+    <string name="level_chooser_customised">Perso</string>
+    <string name="level_range_string">Vitesse comprise entre %1$s et %2$s km/h</string>
 
-    <!-- Music Chooser -->
+    <!-- Music -->
     <string name="music_chooser_title">Mode de diffusion</string>
-    <string name="music_chooser_first_choice">Découvrir</string>
-    <string name="music_chooser_second_choice">Mes playlists</string>
+    <string name="music_chooser_discover">Découvrir</string>
+    <string name="music_chooser_my_playlist">Mes playlists</string>
 
     <!-- Start Activity -->
     <string name="selected_level">Niveau sélectionné</string>

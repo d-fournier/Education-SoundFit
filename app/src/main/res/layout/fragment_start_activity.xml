@@ -21,19 +21,25 @@
             android:id="@+id/start_activity_spinner_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/preference_level_array"/>
+            android:entries="@array/level_string_array"/>
 
-        <com.appyvet.rangebar.RangeBar
+        <TextView
+            android:id="@+id/start_activity_range_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.edmodo.rangebar.RangeBar
             android:id="@+id/start_activity_range_bar"
             android:layout_width="match_parent"
-            android:layout_height="72dp"
-            custom:tickStart="5"
-            custom:tickInterval="0.1"
-            custom:tickEnd="15"
-            custom:tickColor="@color/theme_transparent"
-            custom:pinColor="@color/theme_red"
-            custom:connectingLineColor ="@color/theme_red"
-            custom:selectorColor  ="@color/theme_red"/>
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_default"
+            android:layout_marginRight="@dimen/space_default"
+            custom:tickCount="101"
+            custom:tickHeight="0dp"
+            custom:thumbRadius="2dp"
+            custom:thumbColorNormal="@color/theme_red"
+            custom:thumbColorPressed="@color/theme_red_dark"
+            custom:connectingLineColor ="@color/theme_red"/>
 
         <TextView
             android:text="@string/selected_level"
@@ -49,8 +55,7 @@
         <Spinner
             android:id="@+id/start_activity_spinner_playlist"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:entries="@array/preference_music_array"/>
+            android:layout_height="wrap_content"/>
 
         <ImageButton
             android:id="@+id/start_activity_validate"

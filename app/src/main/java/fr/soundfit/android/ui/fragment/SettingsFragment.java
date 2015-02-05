@@ -48,7 +48,6 @@ public class SettingsFragment extends GenericFragment implements AdapterView.OnI
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String tag = mAdapter.getTag(position);
         int itemId = ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, tag, getActivity());
-
         switch(itemId){
             case R.id.id_settings_my_account:
                 break;

@@ -2,15 +2,31 @@
 <resources>
 
     <string-array name="preference_music_array">
-        <item>@string/music_chooser_first_choice</item>
-        <item>@string/music_chooser_second_choice</item>
+        <item>@string/music_chooser_discover</item>
+        <item>@string/music_chooser_my_playlist</item>
     </string-array>
 
-    <string-array name="preference_level_array">
-        <item>@string/level_chooser_first_choice</item>
-        <item>@string/level_chooser_second_choice</item>
-        <item>@string/level_chooser_third_choice</item>
-        <item>@string/level_chooser_fourth_choice</item>
+
+    <!-- Level Informations -->
+    <string-array name="level_string_array">
+        <item>@string/level_chooser_beginner</item>
+        <item>@string/level_chooser_experienced</item>
+        <item>@string/level_chooser_expert</item>
+        <item>@string/level_chooser_customised</item>
     </string-array>
+
+    <integer-array name="level_min_array">
+        <item>10</item>
+        <item>30</item>
+        <item>50</item>
+        <item>0</item>
+    </integer-array>
+
+    <integer-array name="level_max_array">
+        <item>40</item>
+        <item>60</item>
+        <item>90</item>
+        <item>100</item>
+    </integer-array>
 
 </resources>
