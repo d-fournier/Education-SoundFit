@@ -10,6 +10,7 @@
         <item>@string/level_chooser_first_choice</item>
         <item>@string/level_chooser_second_choice</item>
         <item>@string/level_chooser_third_choice</item>
+        <item>@string/level_chooser_fourth_choice</item>
     </string-array>
 
 </resources>
