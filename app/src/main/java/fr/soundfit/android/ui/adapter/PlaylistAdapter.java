@@ -39,7 +39,7 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
             view = vi.inflate(R.layout.item_playlist, null);
             vh = new ViewHolder();
             vh.mTitleTV = (TextView) view.findViewById(R.id.playlist_title);
-            vh.mDescTV = (TextView) view.findViewById(R.id.playlist_description);
+            //vh.mDescTV = (TextView) view.findViewById(R.id.playlist_description);
             view.setTag(vh);
         } else {
             vh = (ViewHolder) view.getTag();
@@ -47,7 +47,7 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
 
 
         vh.mTitleTV.setText(playlist.getTitle());
-        vh.mDescTV.setText(""+playlist.getTracks().size());
+        //vh.mDescTV.setText(""+playlist.getTracks().size());
         return view;
     }
 

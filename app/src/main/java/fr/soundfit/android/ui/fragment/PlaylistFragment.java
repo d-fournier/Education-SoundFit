@@ -40,6 +40,8 @@ public class PlaylistFragment extends GenericFragment implements SlidingTabLayou
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setCustomTabColorizer(this);
         mSlidingTabLayout.setViewPager(mViewPager);
+
+
     }
 
     @Override
