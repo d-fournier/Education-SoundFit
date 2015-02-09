@@ -8,6 +8,8 @@
     <dimen name="drawer_item_height">48dp</dimen>
     <dimen name="drawer_space_list">4dp</dimen>
 
+    <dimen name="playlist_item_height">64dp</dimen>
+
     <!-- Text Size -->
     <dimen name="text_size_xsmall">11sp</dimen>
     <dimen name="text_size_small">12sp</dimen>

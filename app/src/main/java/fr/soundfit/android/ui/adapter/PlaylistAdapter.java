@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.deezer.sdk.model.Playlist;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
             view = vi.inflate(R.layout.item_playlist, null);
             vh = new ViewHolder();
             vh.mTitleTV = (TextView) view.findViewById(R.id.playlist_title);
-            //vh.mDescTV = (TextView) view.findViewById(R.id.playlist_description);
+            vh.mPictTV = (ImageView) view.findViewById(R.id.playlist_picture);
             view.setTag(vh);
         } else {
             vh = (ViewHolder) view.getTag();
@@ -47,12 +48,13 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
 
 
         vh.mTitleTV.setText(playlist.getTitle());
-        //vh.mDescTV.setText(""+playlist.getTracks().size());
+        ImageLoader.getInstance().displayImage(playlist.getPictureUrl(), vh.mPictTV);
+
         return view;
     }
 
     private class ViewHolder{
         TextView mTitleTV;
-        TextView mDescTV;
+        ImageView mPictTV;
     }
 }
