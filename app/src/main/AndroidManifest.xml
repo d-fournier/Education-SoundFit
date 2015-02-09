@@ -43,7 +43,15 @@
                 android:value=".ui.activity.HomeActivity" />
 
         </activity>
+
+
+        <provider
+            android:name=".provider.SoundfitProvider"
+            android:authorities="fr.soundfit.android.provider"
+            android:exported="false" />
     </application>
+
+
 
 </manifest>
 

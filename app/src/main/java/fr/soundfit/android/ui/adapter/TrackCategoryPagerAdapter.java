@@ -5,8 +5,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.deezer.sdk.model.Playlist;
+
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.fragment.PlaylistListFragment;
+import fr.soundfit.android.ui.fragment.TrackListFragment;
 
 /**
  * Project : SoundFit
@@ -23,11 +26,13 @@ public class TrackCategoryPagerAdapter extends FragmentPagerAdapter {
 
     protected FragmentManager mFragmentManager;
     protected Context mContext;
+    protected Playlist mPlaylist;
 
-    public TrackCategoryPagerAdapter(FragmentManager fm, Context context) {
+    public TrackCategoryPagerAdapter(FragmentManager fm, Context context, Playlist playlist) {
         super(fm);
         mFragmentManager = fm;
         mContext = context;
+        mPlaylist = playlist;
     }
 
     @Override
@@ -51,37 +56,39 @@ public class TrackCategoryPagerAdapter extends FragmentPagerAdapter {
         String tag;
         switch (position){
             case SLOW_INDEX:
-                tag = PlaylistListFragment.TAG+ SLOW_INDEX;
+                tag = TrackListFragment.TAG+ SLOW_INDEX;
                 frag = mFragmentManager.findFragmentByTag(tag);
                 if(frag == null){
-                    frag = PlaylistListFragment.newInstance(true);
+                    frag = TrackListFragment.newInstance(mPlaylist, 0);
                 }
                 break;
             case MOVE_INDEX:
-                tag = PlaylistListFragment.TAG+ MOVE_INDEX;
+                tag = TrackListFragment.TAG+ MOVE_INDEX;
                 frag = mFragmentManager.findFragmentByTag(tag);
                 if(frag == null){
-                    frag = PlaylistListFragment.newInstance(false);
+                    frag = TrackListFragment.newInstance(mPlaylist, 2);
                 }
                 break;
             case NOT_SORTED_INDEX:
-                tag = PlaylistListFragment.TAG+ NOT_SORTED_INDEX;
+                tag = TrackListFragment.TAG+ NOT_SORTED_INDEX;
                 frag = mFragmentManager.findFragmentByTag(tag);
                 if(frag == null){
-                    frag = PlaylistListFragment.newInstance(true);
+                    frag = TrackListFragment.newInstance(mPlaylist, -1);
                 }
                 break;
             default:
             case NORMAL_INDEX:
-                tag = PlaylistListFragment.TAG+ NORMAL_INDEX;
+                tag = TrackListFragment.TAG+ NORMAL_INDEX;
                 frag = mFragmentManager.findFragmentByTag(tag);
                 if(frag == null){
-                    frag = PlaylistListFragment.newInstance(false);
+                    frag = TrackListFragment.newInstance(mPlaylist, 1);
                 }
                 break;
         }
         return frag;
     }
+
+
 
     @Override
     public int getCount() {

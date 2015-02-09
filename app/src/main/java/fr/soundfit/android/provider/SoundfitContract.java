@@ -62,8 +62,8 @@ public class SoundfitContract {
         }
 
 
-        public static Uri buildUriWithSongID(String id) {
-            return CONTENT_URI.buildUpon().appendPath(String.valueOf(id)).build();
+        public static Uri buildUriWithType(String type) {
+            return CONTENT_URI.buildUpon().appendPath(String.valueOf(type)).build();
         }
 
         public static String getSongID(Uri uri) {

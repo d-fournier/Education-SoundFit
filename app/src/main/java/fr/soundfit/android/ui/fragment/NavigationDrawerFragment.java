@@ -31,7 +31,7 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
     /**
      * Remember the position of the selected item.
      */
-    private static final String STATE_SELECTED_POSITION = "fr.dfournier.eclypsia.STATE_SELECTED_POSITION";
+    private static final String STATE_SELECTED_POSITION = "fr.soundfit.android.STATE_SELECTED_POSITION";
 
 
     /**

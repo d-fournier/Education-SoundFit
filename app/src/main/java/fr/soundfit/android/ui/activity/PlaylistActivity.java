@@ -32,7 +32,7 @@ public class PlaylistActivity extends GenericChildActivity {
         final FragmentManager fm = getSupportFragmentManager();
         mFragment = fm.findFragmentByTag(tag);
         if (mFragment == null) {
-            mFragment =  TrackCategoryPagerFragment.newInstance();
+            mFragment =  TrackCategoryPagerFragment.newInstance(mPlaylistId);
             fm.beginTransaction().add(R.id.container, mFragment, tag).commit();
         } else {
             fm.beginTransaction().show(mFragment).commit();

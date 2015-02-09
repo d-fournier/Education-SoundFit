@@ -39,7 +39,7 @@ import fr.soundfit.android.ui.adapter.PlaylistAdapter;
  * Package : fr.soundfit.android.ui.fragment
  * By Donovan on 02/02/2015.
  */
-public class PlaylistListFragment extends GenericFragment implements PlayerWrapperListener, OnPlayerProgressListener, AdapterView.OnItemClickListener {
+public class PlaylistListFragment extends GenericFragment implements AdapterView.OnItemClickListener {
 
     public static final String TAG = PlaylistListFragment.class.getSimpleName();
 
@@ -50,7 +50,6 @@ public class PlaylistListFragment extends GenericFragment implements PlayerWrapp
     private ListView mPlaylistLV;
     private PlaylistAdapter mAdapter;
     private List<Playlist> mPlaylistList;
-    private PlaylistPlayer mPlaylistPlayer;
 
     public static PlaylistListFragment newInstance(boolean isUserPlaylist) {
         PlaylistListFragment fragment = new PlaylistListFragment();
@@ -85,9 +84,6 @@ public class PlaylistListFragment extends GenericFragment implements PlayerWrapp
 
         mPlaylistLV.setOnItemClickListener(this);
 
-        //build the player
-        createPlayer();
-
     }
 
     @Override
@@ -110,77 +106,6 @@ public class PlaylistListFragment extends GenericFragment implements PlayerWrapp
         Intent i = new Intent(getActivity(), PlaylistActivity.class);
         i.putExtra(PlaylistActivity.EXTRA_PLAYLIST_ID, playlist.getId());
         startActivity(i);
-    }
-
-    /**
-     * Je crée ma notification
-     */
-
-    private void createNotification(String notification_title){
-        final NotificationManager mNotification = (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
-
-        final Intent launchNotifiactionIntent = new Intent(getActivity(), SplashscreenActivity.class);
-        final PendingIntent pendingIntent = PendingIntent.getActivity(getActivity().getApplicationContext(),
-                0, launchNotifiactionIntent,
-                PendingIntent.FLAG_ONE_SHOT);
-
-
-        Notification.Builder builder = new Notification.Builder(getActivity().getApplicationContext())
-                .setWhen(System.currentTimeMillis())
-                .setSmallIcon(R.drawable.app_title)
-                .setContentTitle(notification_title)
-                .setContentText("Cliquez sur moi je suis une notification")
-                .setContentIntent(pendingIntent)
-                .addAction(R.drawable.ic_action_play, "Play", PendingIntent.getActivity(getActivity().getApplicationContext(), 0,
-                        getActivity().getIntent(), 0, null));
-
-        mNotification.notify(0, builder.build());
-
-    }
-
-    /**
-     * Creates the PlaylistPlayer
-     */
-    private void createPlayer() {
-        try {
-            mPlaylistPlayer = new PlaylistPlayer(getActivity().getApplication(), mDeezerConnect,
-                    new WifiAndMobileNetworkStateChecker());
-            mPlaylistPlayer.addPlayerListener(this);
-            mPlaylistPlayer.addOnPlayerProgressListener(this);
-        }
-        catch (OAuthException e) {
-            //handleError(e);
-        }
-        catch (TooManyPlayersExceptions e) {
-           // handleError(e);
-        }
-        catch (DeezerError e) {
-          //  handleError(e);
-        }
-    }
-
-
-    @Override
-    public void onPlayerProgress(long l) {
-    }
-
-    @Override
-    public void onAllTracksEnded() {
-    }
-
-    @Override
-    public void onPlayTrack(Track track) {
-
-    }
-
-    @Override
-    public void onTrackEnded(Track track) {
-
-    }
-
-    @Override
-    public void onRequestException(Exception e, Object o) {
-
     }
 
     private class PlaylistListener extends JsonRequestListener{

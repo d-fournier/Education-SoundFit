@@ -27,7 +27,7 @@ public class SoundfitProvider extends ContentProvider {
     private static final String JOKER = "*";
 
     private static final int SONG_SORT = 100;
-    private static final int SONG_SORT_ID = 101;
+    private static final int SONG_SORT_TYPE = 101;
 
     protected static SoundfitDatabase mDatabase;
 
@@ -37,7 +37,7 @@ public class SoundfitProvider extends ContentProvider {
             Log.d(TAG, "authority=[" + authority + "]");
         }
         matcher.addURI(authority, SoundfitContract.PATH_SONG_SORT, SONG_SORT);
-        matcher.addURI(authority, SoundfitContract.PATH_SONG_SORT + SEPARATOR + NUMBER, SONG_SORT_ID);
+        matcher.addURI(authority, SoundfitContract.PATH_SONG_SORT + SEPARATOR + NUMBER, SONG_SORT_TYPE);
         return matcher;
     }
 
@@ -71,7 +71,7 @@ public class SoundfitProvider extends ContentProvider {
                 return c;
             }
 
-            case SONG_SORT_ID: {
+            case SONG_SORT_TYPE: {
                 final StringBuilder select = new StringBuilder();
                 if (!TextUtils.isEmpty(selection)) {
                     select.append(selection);
@@ -79,7 +79,7 @@ public class SoundfitProvider extends ContentProvider {
                 }
                 select.append(SoundfitContract.Tables.SONG_SORT);
                 select.append('.');
-                select.append(SoundfitContract.SongSortTable.ID_SONG);
+                select.append(SoundfitContract.SongSortTable.ID_TYPE);
                 select.append(" = ");
                 select.append(SoundfitContract.SongSortTable.getSongID(uri));
                 selection = select.toString();
@@ -102,7 +102,7 @@ public class SoundfitProvider extends ContentProvider {
         switch (match) {
             case SONG_SORT:
                 return SoundfitContract.SongSortTable.CONTENT_TYPE;
-            case SONG_SORT_ID:
+            case SONG_SORT_TYPE:
                 return SoundfitContract.SongSortTable.CONTENT_ITEM_TYPE;
         }
         return null;
@@ -122,10 +122,10 @@ public class SoundfitProvider extends ContentProvider {
         switch (match) {
 
             case SONG_SORT:
-            case SONG_SORT_ID: {
+            case SONG_SORT_TYPE: {
                 db.insertOrThrow(SoundfitContract.Tables.SONG_SORT, null, values);
                 getContext().getContentResolver().notifyChange(uri, null);
-                return SoundfitContract.SongSortTable.buildUriWithSongID(values.getAsString(SoundfitContract.SongSortTable._ID));
+                return SoundfitContract.SongSortTable.buildUriWithType(values.getAsString(SoundfitContract.SongSortTable.ID_TYPE));
             }
 
             default:
@@ -157,7 +157,7 @@ public class SoundfitProvider extends ContentProvider {
                 return retVal;
             }
 
-            case SONG_SORT_ID: {
+            case SONG_SORT_TYPE: {
                 final StringBuilder select = new StringBuilder();
                 if (!TextUtils.isEmpty(selection)) {
                     select.append(selection);
@@ -165,7 +165,7 @@ public class SoundfitProvider extends ContentProvider {
                 }
                 select.append(SoundfitContract.Tables.SONG_SORT);
                 select.append('.');
-                select.append(SoundfitContract.SongSortTable.ID_SONG);
+                select.append(SoundfitContract.SongSortTable.ID_TYPE);
                 select.append(" = ");
                 select.append(SoundfitContract.SongSortTable.getSongID(uri));
                 selection = select.toString();
@@ -203,7 +203,7 @@ public class SoundfitProvider extends ContentProvider {
                 return retVal;
             }
 
-            case SONG_SORT_ID: {
+            case SONG_SORT_TYPE: {
                 final StringBuilder select = new StringBuilder();
                 if (!TextUtils.isEmpty(selection)) {
                     select.append(selection);
@@ -211,7 +211,7 @@ public class SoundfitProvider extends ContentProvider {
                 }
                 select.append(SoundfitContract.Tables.SONG_SORT);
                 select.append('.');
-                select.append(SoundfitContract.SongSortTable.ID_SONG);
+                select.append(SoundfitContract.SongSortTable.ID_TYPE);
                 select.append(" = ");
                 select.append(SoundfitContract.SongSortTable.getSongID(uri));
                 selection = select.toString();
