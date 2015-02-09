@@ -9,12 +9,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.deezer.sdk.model.Permissions;
 import com.deezer.sdk.model.Playlist;
 import com.deezer.sdk.model.Track;
 import com.deezer.sdk.network.connect.DeezerConnect;
-import com.deezer.sdk.network.connect.SessionStore;
-import com.deezer.sdk.network.connect.event.DialogListener;
 import com.deezer.sdk.network.request.AsyncDeezerTask;
 import com.deezer.sdk.network.request.DeezerRequest;
 import com.deezer.sdk.network.request.DeezerRequestFactory;
@@ -32,7 +29,8 @@ import java.util.List;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.activity.GenericActivity;
-import fr.soundfit.android.ui.activity.PlayerActivity;
+import fr.soundfit.android.ui.activity.HomeActivity;
+import fr.soundfit.android.ui.activity.PlaylistActivity;
 import fr.soundfit.android.ui.activity.SplashscreenActivity;
 import fr.soundfit.android.ui.adapter.PlaylistAdapter;
 
@@ -41,20 +39,23 @@ import fr.soundfit.android.ui.adapter.PlaylistAdapter;
  * Package : fr.soundfit.android.ui.fragment
  * By Donovan on 02/02/2015.
  */
-public class PlaylistFragment extends GenericFragment implements PlayerWrapperListener, OnPlayerProgressListener, AdapterView.OnItemClickListener {
+public class PlaylistListFragment extends GenericFragment implements PlayerWrapperListener, OnPlayerProgressListener, AdapterView.OnItemClickListener {
 
-    public static final String TAG = PlaylistFragment.class.getSimpleName();
+    public static final String TAG = PlaylistListFragment.class.getSimpleName();
+
+    private static final String EXTRA_USER_PLAYLIST = "fr.soundfit.android.EXTRA_USER_PLAYLIST";
 
     protected DeezerConnect mDeezerConnect = null;
+    private boolean mIsUserPlaylist = false;
     private ListView mPlaylistLV;
     private PlaylistAdapter mAdapter;
     private List<Playlist> mPlaylistList;
     private PlaylistPlayer mPlaylistPlayer;
-    private PlayerActivity mPlayerActivity = new PlayerActivity();
 
-    public static PlaylistFragment newInstance() {
-        PlaylistFragment fragment = new PlaylistFragment();
+    public static PlaylistListFragment newInstance(boolean isUserPlaylist) {
+        PlaylistListFragment fragment = new PlaylistListFragment();
         Bundle args = new Bundle();
+        args.putBoolean(EXTRA_USER_PLAYLIST, isUserPlaylist);
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,6 +63,14 @@ public class PlaylistFragment extends GenericFragment implements PlayerWrapperLi
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_playlist_list_user;
+    }
+
+    @Override
+    protected void initArg(Bundle args) {
+        super.initArg(args);
+        if(args != null){
+            mIsUserPlaylist = args.getBoolean(EXTRA_USER_PLAYLIST, false);
+        }
     }
 
     @Override
@@ -82,14 +91,25 @@ public class PlaylistFragment extends GenericFragment implements PlayerWrapperLi
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        DeezerRequest request;
+        if(mIsUserPlaylist){
+            request = DeezerRequestFactory.requestCurrentUserPlaylists();
+        } else {
+            request = DeezerRequestFactory.requestUserPlaylists(getResources().getInteger(R.integer.soundfit_deezer_user_id));
+        }
+        AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new PlaylistListener());
+        task.execute(request);
+    }
+
+    @Override
     public void onItemClick(final AdapterView<?> parent, final View view,
                             final int position, final long id) {
         Playlist playlist = mPlaylistList.get(position);
-        mPlaylistPlayer.playPlaylist(playlist.getId());
-    //    createNotification(playlist.getTitle());
-                /*// Launch the Home activity
-                Intent intent = new Intent(UserPlaylistListFragment.this.getActivity(), UserTracksActivity.class);
-                startActivity(intent);*/
+        Intent i = new Intent(getActivity(), PlaylistActivity.class);
+        i.putExtra(PlaylistActivity.EXTRA_PLAYLIST_ID, playlist.getId());
+        startActivity(i);
     }
 
     /**
@@ -139,13 +159,6 @@ public class PlaylistFragment extends GenericFragment implements PlayerWrapperLi
         }
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        DeezerRequest request = DeezerRequestFactory.requestCurrentUserPlaylists();
-        AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new PlaylistListener());
-        task.execute(request);
-    }
 
     @Override
     public void onPlayerProgress(long l) {

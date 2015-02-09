@@ -66,6 +66,11 @@
     <!-- Playlist -->
     <string name="my_playlist">Mes Playlists</string>
     <string name="soundfit_playlist">SoundFit Playlist</string>
+    <string name="slow_playlist">Playlist Slow</string>
+    <string name="normal_playlist">Playlist Normal</string>
+    <string name="move_playlist">Playlist Move</string>
+    <string name="not_sorted_list">Non Classé</string>
+
 
     <!-- Contact -->
     <string name="contact_subject">Application Soundfit - Android</string>
