@@ -57,9 +57,4 @@ public abstract class GenericActivity extends ActionBarActivity implements Dialo
     public void onCancel() {
     }
 
-    protected boolean shouldUpRecreateTask(Activity activity, Intent targetIntent) {
-        String action = activity.getIntent().getAction();
-        return action != null && !action.equals(Intent.ACTION_MAIN);
-    }
-
 }

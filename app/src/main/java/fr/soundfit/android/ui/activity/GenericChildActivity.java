@@ -23,8 +23,7 @@ public class GenericChildActivity extends GenericActivity {
         switch (item.getItemId()) {
             case android.R.id.home: {
                 Intent upIntent = NavUtils.getParentActivityIntent(this);
-                if (shouldUpRecreateTask(this, upIntent)) {
-//              if (NavUtils.shouldUpRecreateTask(this, upIntent)) { TODO Bug Android ?
+                if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
                     TaskStackBuilder.create(this)
                             .addNextIntentWithParentStack(upIntent)
                             .startActivities();
