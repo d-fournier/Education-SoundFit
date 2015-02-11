@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.fragment.NavigationDrawerFragment;
 import fr.soundfit.android.ui.fragment.PlaceholderFragment;
+import fr.soundfit.android.ui.fragment.PlaylistPagerFragment;
 import fr.soundfit.android.ui.fragment.RunningFragment;
 import fr.soundfit.android.ui.fragment.SettingsFragment;
 import fr.soundfit.android.ui.fragment.StartActivityFragment;
@@ -57,7 +58,7 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
                 fragment = selectHomeFragment();
                 break;
             case R.id.id_drawer_playlist:
-                fragment = PlaceholderFragment.newInstance();
+                fragment = PlaylistPagerFragment.newInstance();
                 break;
             case R.id.id_drawer_challenges:
                 fragment = PlaceholderFragment.newInstance();
