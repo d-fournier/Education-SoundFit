@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.deezer.sdk.model.Playlist;
 import com.deezer.sdk.model.Track;
@@ -12,12 +13,14 @@ import com.deezer.sdk.network.request.AsyncDeezerTask;
 import com.deezer.sdk.network.request.DeezerRequest;
 import com.deezer.sdk.network.request.DeezerRequestFactory;
 import com.deezer.sdk.network.request.event.JsonRequestListener;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.activity.GenericActivity;
+import fr.soundfit.android.ui.activity.PlaylistActivity;
 import fr.soundfit.android.ui.adapter.TrackCategoryPagerAdapter;
 import fr.soundfit.android.ui.view.SlidingTabLayout;
 
@@ -26,7 +29,7 @@ import fr.soundfit.android.ui.view.SlidingTabLayout;
  * Package : fr.soundfit.android.ui.fragment
  * By Donovan on 05/02/2015.
  */
-public class TrackCategoryPagerFragment extends GenericFragment implements SlidingTabLayout.TabColorizer {
+public class TrackCategoryPagerFragment extends GenericFragment implements SlidingTabLayout.TabColorizer, View.OnClickListener {
 
     public static final String TAG = TrackCategoryPagerFragment.class.getSimpleName();
 
@@ -38,6 +41,7 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
 
     protected SlidingTabLayout mSlidingTabLayout;
     protected ViewPager mViewPager;
+    protected FloatingActionButton mSortButton;
 
 
     public static TrackCategoryPagerFragment newInstance(long playlistId) {
@@ -51,7 +55,7 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_pager;
+        return R.layout.fragment_pager_button;
     }
 
     @Override
@@ -59,7 +63,8 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
         super.bindView(view);
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
-
+        mSortButton = (FloatingActionButton) view.findViewById(R.id.fab);
+        mSortButton.setOnClickListener(this);
         mDeezerConnect = ((GenericActivity)getActivity()).getDeezerConnection();
     }
 
@@ -87,6 +92,14 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
         }
     }
 
+    @Override
+    public void onClick(View view) {
+        if(getActivity() instanceof PlaylistActivity){
+            PlaylistActivity activity = (PlaylistActivity) getActivity();
+            activity.displaySortFragment(mPlaylist);
+        }
+    }
+
     private class TrackListener extends JsonRequestListener {
         @Override
         public void onResult(Object result, Object requestId) {
@@ -96,6 +109,7 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
                 mSlidingTabLayout.setDistributeEvenly(true);
                 mSlidingTabLayout.setCustomTabColorizer(TrackCategoryPagerFragment.this);
                 mSlidingTabLayout.setViewPager(mViewPager);
+                mSortButton.setVisibility(View.VISIBLE);
             }
             catch (ClassCastException e) {
                 displayError(true);
