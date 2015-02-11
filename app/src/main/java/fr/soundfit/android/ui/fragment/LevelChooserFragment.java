@@ -20,8 +20,6 @@ public class LevelChooserFragment extends GenericDialogFragment implements View.
 
     public static final String TAG = LevelChooserFragment.class.getSimpleName();
 
-
-
     protected Button mNextButton;
     protected Button mFirstChoiceBt;
     protected Button mSecondChoiceBt;
