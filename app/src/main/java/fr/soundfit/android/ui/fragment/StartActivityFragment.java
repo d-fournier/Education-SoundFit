@@ -25,6 +25,7 @@ import fr.soundfit.android.R;
 import fr.soundfit.android.service.PlayerService;
 import fr.soundfit.android.ui.activity.GenericActivity;
 import fr.soundfit.android.ui.activity.HomeActivity;
+import fr.soundfit.android.utils.PrefUtils;
 
 /**
  * Project : SoundFit
@@ -74,12 +75,14 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
         super.bindView(view);
         mLevelSpinner = (Spinner) view.findViewById(R.id.start_activity_spinner_level);
         mLevelSpinner.setOnItemSelectedListener(this);
+        mLevelSpinner.setSelection(PrefUtils.getUserLevel(getActivity()));
         mRangeBar = (RangeBar) view.findViewById(R.id.start_activity_range_bar);
         mRangeBar.setOnRangeBarChangeListener(this);
         mRangeBar.setOnTouchListener(this);
         mRangeTV = (TextView) view.findViewById(R.id.start_activity_range_string);
         mMusicSpinner = (Spinner) view.findViewById(R.id.start_activity_spinner_music);
         mMusicSpinner.setOnItemSelectedListener(this);
+        mMusicSpinner.setSelection(PrefUtils.getUserMusicPreference(getActivity()));
         mValidateButton = (ImageButton) view.findViewById(R.id.start_activity_validate);
         mValidateButton.setOnClickListener(this);
 
@@ -143,6 +146,7 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     @Override
     public void onClick(View v) {
         if(v == mValidateButton){
+
             Intent intent = new Intent(getActivity(), PlayerService.class);
             Bundle bundle = new Bundle();
             bundle.putLong(PlayerService.EXTRA_PLAYLIST_ID, mPlaylistList.get(mPlaylistSpinner.getSelectedItemPosition()).getId());
@@ -151,7 +155,6 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
             if(getActivity() instanceof HomeActivity){
                 ((HomeActivity)getActivity()).onNavigationDrawerItemSelected(getResources().getStringArray(R.array.drawer_items)[0]);
             }
-            // TODO Launch Service and change Fragment
         }
     }
 

@@ -163,7 +163,6 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
 
     private void selectItem(int position) {
         String tag = getResources().getStringArray(R.array.drawer_items)[position];
-
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
