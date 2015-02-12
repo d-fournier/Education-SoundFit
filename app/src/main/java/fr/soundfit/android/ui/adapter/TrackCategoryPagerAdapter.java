@@ -18,7 +18,8 @@ import fr.soundfit.android.ui.fragment.TrackListFragment;
  */
 public class TrackCategoryPagerAdapter extends FragmentPagerAdapter {
 
-    protected final static int TAB_NUMBER = 4;
+    protected final static int TAB_NUMBER_USER_PLAYLIST = 4;
+    protected final static int TAB_NUMBER_SOUNDFIT_PLAYLIST = 3;
     protected final static int SLOW_INDEX = 0;
     protected final static int NORMAL_INDEX = 1;
     protected final static int MOVE_INDEX = 2;
@@ -26,13 +27,25 @@ public class TrackCategoryPagerAdapter extends FragmentPagerAdapter {
 
     protected FragmentManager mFragmentManager;
     protected Context mContext;
+
     protected Playlist mPlaylist;
+    protected long mSoundfitPlaylistID;
+    protected boolean mIsUserPlaylist;
 
     public TrackCategoryPagerAdapter(FragmentManager fm, Context context, Playlist playlist) {
         super(fm);
+        mIsUserPlaylist = true;
         mFragmentManager = fm;
         mContext = context;
         mPlaylist = playlist;
+    }
+
+    public TrackCategoryPagerAdapter(FragmentManager fm, Context context, long playlistId) {
+        super(fm);
+        mIsUserPlaylist = false;
+        mFragmentManager = fm;
+        mContext = context;
+        mSoundfitPlaylistID = playlistId;
     }
 
     @Override
@@ -52,38 +65,10 @@ public class TrackCategoryPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Fragment frag;
-        String tag;
-        switch (position){
-            case SLOW_INDEX:
-                tag = TrackListFragment.TAG+ SLOW_INDEX;
-                frag = mFragmentManager.findFragmentByTag(tag);
-                if(frag == null){
-                    frag = TrackListFragment.newInstance(mPlaylist, 0);
-                }
-                break;
-            case MOVE_INDEX:
-                tag = TrackListFragment.TAG+ MOVE_INDEX;
-                frag = mFragmentManager.findFragmentByTag(tag);
-                if(frag == null){
-                    frag = TrackListFragment.newInstance(mPlaylist, 2);
-                }
-                break;
-            case NOT_SORTED_INDEX:
-                tag = TrackListFragment.TAG+ NOT_SORTED_INDEX;
-                frag = mFragmentManager.findFragmentByTag(tag);
-                if(frag == null){
-                    frag = TrackListFragment.newInstance(mPlaylist, -1);
-                }
-                break;
-            default:
-            case NORMAL_INDEX:
-                tag = TrackListFragment.TAG+ NORMAL_INDEX;
-                frag = mFragmentManager.findFragmentByTag(tag);
-                if(frag == null){
-                    frag = TrackListFragment.newInstance(mPlaylist, 1);
-                }
-                break;
+        String tag = TrackListFragment.TAG + position;
+        Fragment frag = mFragmentManager.findFragmentByTag(tag);
+        if(frag == null){
+            frag = mIsUserPlaylist ? TrackListFragment.newInstance(mPlaylist, position) : TrackListFragment.newInstance(mSoundfitPlaylistID, position);
         }
         return frag;
     }
@@ -92,7 +77,7 @@ public class TrackCategoryPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return TAB_NUMBER;
+        return mIsUserPlaylist ? TAB_NUMBER_USER_PLAYLIST : TAB_NUMBER_SOUNDFIT_PLAYLIST;
     }
 
 

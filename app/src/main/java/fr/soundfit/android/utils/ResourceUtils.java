@@ -13,7 +13,8 @@ public class ResourceUtils {
     public enum ResourceType{
         ID ("id"),
         STRING ("string"),
-        DRAWABLE ("drawable");
+        DRAWABLE ("drawable"),
+        ARRAY ("array");
 
         private String mName = "";
         ResourceType(String name){

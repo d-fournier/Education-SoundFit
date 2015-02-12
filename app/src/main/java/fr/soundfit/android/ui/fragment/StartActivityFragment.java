@@ -24,7 +24,6 @@ import java.util.List;
 import fr.soundfit.android.R;
 import fr.soundfit.android.service.PlayerService;
 import fr.soundfit.android.ui.activity.GenericActivity;
-import fr.soundfit.android.ui.activity.HomeActivity;
 import fr.soundfit.android.utils.PrefUtils;
 
 /**
@@ -134,7 +133,7 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
         if(isUserPlaylist){
             request = DeezerRequestFactory.requestCurrentUserPlaylists();
         } else {
-            request = DeezerRequestFactory.requestUserPlaylists(getResources().getInteger(R.integer.soundfit_deezer_user_id));
+            request = DeezerRequestFactory.requestUserPlaylists(getResources().getInteger(R.integer.deezer_user_soundfit_id));
         }
         AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new PlaylistListener());
         task.execute(request);

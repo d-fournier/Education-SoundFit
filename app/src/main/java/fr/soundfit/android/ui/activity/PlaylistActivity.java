@@ -20,8 +20,11 @@ import fr.soundfit.android.ui.fragment.TrackCategoryPagerFragment;
 public class PlaylistActivity extends GenericChildActivity {
 
     public static final String EXTRA_PLAYLIST_ID = "fr.soundfit.android.EXTRA_PLAYLIST_ID";
+    public static final String EXTRA_IS_USER_PLAYLIST = "fr.soundfit.android.EXTRA_IS_USER_PLAYLIST";
 
     private long mPlaylistId;
+    private boolean mIsUserPlaylist;
+
     private Fragment mMainFragment;
     private Fragment mSortFragment;
 
@@ -33,6 +36,7 @@ public class PlaylistActivity extends GenericChildActivity {
         Bundle extras = getIntent().getExtras();
         if(extras != null){
             mPlaylistId = extras.getLong(EXTRA_PLAYLIST_ID);
+            mIsUserPlaylist = extras.getBoolean(EXTRA_IS_USER_PLAYLIST);
         }
 
         String tag = TrackCategoryPagerFragment.TAG + mPlaylistId;
@@ -40,7 +44,7 @@ public class PlaylistActivity extends GenericChildActivity {
         final FragmentManager fm = getSupportFragmentManager();
         mMainFragment = fm.findFragmentByTag(tag);
         if (mMainFragment == null) {
-            mMainFragment =  TrackCategoryPagerFragment.newInstance(mPlaylistId);
+            mMainFragment =  TrackCategoryPagerFragment.newInstance(mPlaylistId, mIsUserPlaylist);
             fm.beginTransaction().add(R.id.container, mMainFragment, tag).commit();
         } else {
             fm.beginTransaction().show(mMainFragment).commit();

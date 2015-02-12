@@ -34,8 +34,11 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
     public static final String TAG = TrackCategoryPagerFragment.class.getSimpleName();
 
     private static final String EXTRA_PLAYLIST_ID = "fr.soundfit.android.EXTRA_PLAYLIST_ID";
+    private static final String EXTRA_IS_USER_PLAYLIST = "fr.soundfit.android.EXTRA_IS_USER_PLAYLIST";
 
     private long mPlaylistId = 0;
+    private boolean mIsUserPlaylist;
+
     private Playlist mPlaylist;
     protected DeezerConnect mDeezerConnect = null;
 
@@ -44,14 +47,14 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
     protected FloatingActionButton mSortButton;
 
 
-    public static TrackCategoryPagerFragment newInstance(long playlistId) {
+    public static TrackCategoryPagerFragment newInstance(long playlistId, boolean isUserPlaylist) {
         TrackCategoryPagerFragment fragment = new TrackCategoryPagerFragment();
         Bundle args = new Bundle();
         args.putLong(EXTRA_PLAYLIST_ID, playlistId);
+        args.putBoolean(EXTRA_IS_USER_PLAYLIST, isUserPlaylist);
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     protected int getLayoutId() {
@@ -63,10 +66,19 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
         super.bindView(view);
         mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
         mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.sliding_tabs);
+        mSlidingTabLayout.setDistributeEvenly(true);
+        mSlidingTabLayout.setCustomTabColorizer(TrackCategoryPagerFragment.this);
         mSortButton = (FloatingActionButton) view.findViewById(R.id.fab);
         mSortButton.setOnClickListener(this);
         mDeezerConnect = ((GenericActivity)getActivity()).getDeezerConnection();
         displayLoading(true);
+
+        if(!mIsUserPlaylist){
+            mViewPager.setAdapter(new TrackCategoryPagerAdapter(getChildFragmentManager(), getActivity(), mPlaylistId));
+            mSlidingTabLayout.setViewPager(mViewPager);
+            mSortButton.setVisibility(View.GONE);
+            displayLoading(false);
+        }
     }
 
     @Override
@@ -79,13 +91,14 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
         super.initArg(args);
         if(args != null){
             mPlaylistId = args.getLong(EXTRA_PLAYLIST_ID);
+            mIsUserPlaylist = args.getBoolean(EXTRA_IS_USER_PLAYLIST, true);
         }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if(mPlaylist == null){
+        if(mPlaylist == null && mIsUserPlaylist){
             DeezerRequest request = DeezerRequestFactory.requestPlaylist(mPlaylistId);
             AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new TrackListener());
             task.execute(request);
@@ -106,10 +119,7 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
             try {
                 mPlaylist = (Playlist) result;
                 mViewPager.setAdapter(new TrackCategoryPagerAdapter(getChildFragmentManager(), getActivity(), mPlaylist));
-                mSlidingTabLayout.setDistributeEvenly(true);
-                mSlidingTabLayout.setCustomTabColorizer(TrackCategoryPagerFragment.this);
                 mSlidingTabLayout.setViewPager(mViewPager);
-                mSortButton.setVisibility(View.VISIBLE);
                 displayLoading(false);
             }
             catch (ClassCastException e) {
