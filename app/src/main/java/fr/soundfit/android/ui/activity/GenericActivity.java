@@ -10,6 +10,8 @@ import com.deezer.sdk.network.connect.DeezerConnect;
 import com.deezer.sdk.network.connect.SessionStore;
 import com.deezer.sdk.network.connect.event.DialogListener;
 
+import fr.soundfit.android.R;
+
 /**
  * Project : SoundFit
  * Package : fr.soundfit.android.ui.activity
@@ -17,7 +19,6 @@ import com.deezer.sdk.network.connect.event.DialogListener;
  */
 public abstract class GenericActivity extends ActionBarActivity implements DialogListener {
 
-    private final static String DEEZER_ID = "151511";
     private final static String[] DEEZER_PERMISSIONS = new String[] {
             Permissions.BASIC_ACCESS, Permissions.OFFLINE_ACCESS
     };
@@ -29,7 +30,7 @@ public abstract class GenericActivity extends ActionBarActivity implements Dialo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDeezerConnect = new DeezerConnect(this, DEEZER_ID);
+        mDeezerConnect = new DeezerConnect(this, getString(R.string.deezer_app_id));
         new SessionStore().restore(mDeezerConnect, this);
 
     }

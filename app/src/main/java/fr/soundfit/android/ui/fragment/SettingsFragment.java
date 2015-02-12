@@ -38,7 +38,7 @@ public class SettingsFragment extends GenericFragment implements AdapterView.OnI
     @Override
     protected void bindView(View view) {
         super.bindView(view);
-        mDrawerListView = (ListView) view;
+        mDrawerListView = (ListView) view.findViewById(R.id.list);
         mDrawerListView.setOnItemClickListener(this);
         mAdapter = new DrawerAdapter(getActivity(), R.array.settings_items);
         mDrawerListView.setAdapter(mAdapter);
@@ -48,7 +48,6 @@ public class SettingsFragment extends GenericFragment implements AdapterView.OnI
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
         String tag = mAdapter.getTag(position);
         int itemId = ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, tag, getActivity());
-
         switch(itemId){
             case R.id.id_settings_my_account:
                 break;

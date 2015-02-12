@@ -3,6 +3,8 @@ package fr.soundfit.android.utils;
         import android.content.Context;
         import android.content.res.Resources;
 
+        import java.lang.reflect.Array;
+
 /**
  * Created by Donovan on 12/07/2014.
  */
@@ -28,5 +30,6 @@ public class ResourceUtils {
         Resources r = context.getResources();
         return r.getIdentifier(type + "_" + baseName, type.toString(), context.getPackageName());
     }
+
 
 }

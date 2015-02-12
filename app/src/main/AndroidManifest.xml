@@ -47,6 +47,9 @@
         <service
             android:name=".service.SortService"
             android:exported="false"/>
+        <service
+            android:name=".service.PlayerService"
+            android:exported="false"/>
 
         <provider
             android:name=".provider.SoundfitProvider"

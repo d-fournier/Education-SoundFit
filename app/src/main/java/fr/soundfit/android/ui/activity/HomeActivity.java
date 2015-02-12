@@ -9,10 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import fr.soundfit.android.R;
+import fr.soundfit.android.service.PlayerService;
 import fr.soundfit.android.ui.fragment.NavigationDrawerFragment;
 import fr.soundfit.android.ui.fragment.PlaceholderFragment;
 import fr.soundfit.android.ui.fragment.PlaylistPagerFragment;
+import fr.soundfit.android.ui.fragment.RunningFragment;
 import fr.soundfit.android.ui.fragment.SettingsFragment;
+import fr.soundfit.android.ui.fragment.StartActivityFragment;
 import fr.soundfit.android.utils.ResourceUtils;
 
 public class HomeActivity extends GenericActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -53,7 +56,7 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
         Fragment fragment;
         switch (id){
             case R.id.id_drawer_home:
-                fragment = PlaceholderFragment.newInstance();
+                fragment = selectHomeFragment();
                 break;
             case R.id.id_drawer_playlist:
                 fragment = PlaylistPagerFragment.newInstance();
@@ -98,5 +101,14 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private Fragment selectHomeFragment(){
+        if(PlayerService.isRunning()){
+            return RunningFragment.newInstance();
+        } else {
+            return StartActivityFragment.newInstance();
+
+        }
     }
 }

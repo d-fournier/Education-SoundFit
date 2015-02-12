@@ -48,21 +48,21 @@
                         android:id="@+id/chooser_first_choice"
                         style="@style/Button_Rounded_Red"
                         android:drawableLeft="@drawable/dice_1"
-                        android:text="@string/level_chooser_first_choice"
+                        android:text="@string/level_chooser_beginner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <Button
                         android:id="@+id/chooser_second_choice"
                         style="@style/Button_Rounded_Red"
                         android:drawableLeft="@drawable/dice_2"
-                        android:text="@string/level_chooser_second_choice"
+                        android:text="@string/level_chooser_experienced"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <Button
                         android:id="@+id/chooser_third_choice"
                         style="@style/Button_Rounded_Red"
                         android:drawableLeft="@drawable/dice_3"
-                        android:text="@string/level_chooser_third_choice"
+                        android:text="@string/level_chooser_expert"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
