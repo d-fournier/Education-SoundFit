@@ -84,9 +84,8 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
     @Override
     public void onStart() {
         super.onStart();
-        DeezerRequest request;
-        request = DeezerRequestFactory.requestPlaylist(mPlaylistId);
         if(mPlaylist == null){
+            DeezerRequest request = DeezerRequestFactory.requestPlaylist(mPlaylistId);
             AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new TrackListener());
             task.execute(request);
         }

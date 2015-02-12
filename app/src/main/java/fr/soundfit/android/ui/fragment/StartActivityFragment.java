@@ -1,16 +1,30 @@
 package fr.soundfit.android.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.deezer.sdk.model.Playlist;
+import com.deezer.sdk.network.connect.DeezerConnect;
+import com.deezer.sdk.network.request.AsyncDeezerTask;
+import com.deezer.sdk.network.request.DeezerRequest;
+import com.deezer.sdk.network.request.DeezerRequestFactory;
+import com.deezer.sdk.network.request.event.JsonRequestListener;
 import com.edmodo.rangebar.RangeBar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.soundfit.android.R;
+import fr.soundfit.android.service.PlayerService;
+import fr.soundfit.android.ui.activity.GenericActivity;
+import fr.soundfit.android.ui.activity.HomeActivity;
 
 /**
  * Project : SoundFit
@@ -28,6 +42,9 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     private final static int MAX_BAR_VALUE = 10;
     private final static int TICK_RATIO = 10;
 
+    protected DeezerConnect mDeezerConnect = null;
+    private List<Playlist> mPlaylistList;
+    private List<String> mPlaylistName;
 
 
     private Spinner mLevelSpinner;
@@ -63,9 +80,16 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
         mRangeTV = (TextView) view.findViewById(R.id.start_activity_range_string);
         mMusicSpinner = (Spinner) view.findViewById(R.id.start_activity_spinner_music);
         mMusicSpinner.setOnItemSelectedListener(this);
-        mPlaylistSpinner = (Spinner) view.findViewById(R.id.start_activity_spinner_playlist);
         mValidateButton = (ImageButton) view.findViewById(R.id.start_activity_validate);
         mValidateButton.setOnClickListener(this);
+
+        mDeezerConnect = ((GenericActivity)getActivity()).getDeezerConnection();
+        mPlaylistSpinner = (Spinner) view.findViewById(R.id.start_activity_spinner_playlist);
+        mPlaylistList = new ArrayList<Playlist>();
+        mPlaylistName = new ArrayList<>();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, mPlaylistName);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mPlaylistSpinner.setAdapter(adapter);
     }
 
     @Override
@@ -102,10 +126,15 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     }
 
     private void displayPlaylist(boolean isUserPlaylist){
+        mValidateButton.setEnabled(false);
+        DeezerRequest request;
         if(isUserPlaylist){
-            //TODO Populate
+            request = DeezerRequestFactory.requestCurrentUserPlaylists();
         } else {
+            request = DeezerRequestFactory.requestUserPlaylists(getResources().getInteger(R.integer.soundfit_deezer_user_id));
         }
+        AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new PlaylistListener());
+        task.execute(request);
     }
 
     @Override
@@ -114,8 +143,41 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     @Override
     public void onClick(View v) {
         if(v == mValidateButton){
+            Intent intent = new Intent(getActivity(), PlayerService.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong(PlayerService.EXTRA_PLAYLIST_ID, mPlaylistList.get(mPlaylistSpinner.getSelectedItemPosition()).getId());
+            intent.putExtras(bundle);
+            getActivity().startService(intent);
+            if(getActivity() instanceof HomeActivity){
+                ((HomeActivity)getActivity()).onNavigationDrawerItemSelected(getResources().getStringArray(R.array.drawer_items)[0]);
+            }
             // TODO Launch Service and change Fragment
         }
+    }
+
+    private class PlaylistListener extends JsonRequestListener {
+        @Override
+        public void onResult(Object result, Object requestId) {
+            mPlaylistList.clear();
+            mPlaylistName.clear();
+            try {
+                mPlaylistList.addAll((List<Playlist>) result);
+                for (Playlist p : mPlaylistList){
+                    mPlaylistName.add(p.getTitle());
+                }
+            }
+            catch (ClassCastException e) {
+            }
+            ((ArrayAdapter)mPlaylistSpinner.getAdapter()).notifyDataSetChanged();
+            mValidateButton.setEnabled(true);
+        }
+
+        @Override
+        public void onUnparsedResult(String response, Object requestId) { }
+
+        @Override
+        public void onException(Exception exception, Object requestId) { }
+
     }
 
 }

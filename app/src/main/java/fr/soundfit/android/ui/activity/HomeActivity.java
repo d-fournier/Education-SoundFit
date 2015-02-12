@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import fr.soundfit.android.R;
+import fr.soundfit.android.service.PlayerService;
 import fr.soundfit.android.ui.fragment.NavigationDrawerFragment;
 import fr.soundfit.android.ui.fragment.PlaceholderFragment;
 import fr.soundfit.android.ui.fragment.PlaylistPagerFragment;
@@ -103,18 +104,11 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
     }
 
     private Fragment selectHomeFragment(){
-        if(isRunning()){
+        if(PlayerService.isRunning()){
             return RunningFragment.newInstance();
         } else {
             return StartActivityFragment.newInstance();
 
         }
-    }
-
-    // TODO Update Condition
-    private boolean isRunning(){
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.container);
-        return fragment instanceof StartActivityFragment;
     }
 }

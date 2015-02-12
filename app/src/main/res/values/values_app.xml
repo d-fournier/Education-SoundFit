@@ -6,6 +6,7 @@
     
     <string name="contact_mail">contact@soundfit.fr</string>
     <!-- T0D0 Update Values -->
+    <string name="deezer_app_id">151511</string>
     <integer name="soundfit_deezer_user_id">19385701</integer>
 
 </resources>
