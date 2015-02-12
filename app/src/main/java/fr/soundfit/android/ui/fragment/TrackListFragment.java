@@ -76,6 +76,7 @@ public class TrackListFragment extends GenericFragment implements  LoaderManager
         mAdapter = new TrackAdapter(getActivity(), 0, mTrackList);
         mTrackLV.setAdapter(mAdapter);
         mDeezerConnect = ((GenericActivity)getActivity()).getDeezerConnection();
+        displayLoading(true);
     }
 
     @Override
@@ -132,6 +133,7 @@ public class TrackListFragment extends GenericFragment implements  LoaderManager
             }
         }
         mAdapter.notifyDataSetChanged();
+        displayLoading(false);
     }
 
     @Override

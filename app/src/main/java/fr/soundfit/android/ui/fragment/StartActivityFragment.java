@@ -146,15 +146,13 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     @Override
     public void onClick(View v) {
         if(v == mValidateButton){
-
+            mValidateButton.setEnabled(false);
             Intent intent = new Intent(getActivity(), PlayerService.class);
             Bundle bundle = new Bundle();
             bundle.putLong(PlayerService.EXTRA_PLAYLIST_ID, mPlaylistList.get(mPlaylistSpinner.getSelectedItemPosition()).getId());
             intent.putExtras(bundle);
             getActivity().startService(intent);
-            if(getActivity() instanceof HomeActivity){
-                ((HomeActivity)getActivity()).onNavigationDrawerItemSelected(getResources().getStringArray(R.array.drawer_items)[0]);
-            }
+            displayLoading(true);
         }
     }
 

@@ -84,6 +84,7 @@ public class PlaylistListFragment extends GenericFragment implements AdapterView
 
         mPlaylistLV.setOnItemClickListener(this);
 
+        displayLoading(true);
     }
 
     @Override
@@ -114,11 +115,12 @@ public class PlaylistListFragment extends GenericFragment implements AdapterView
             mPlaylistList.clear();
             try {
                 mPlaylistList.addAll((List<Playlist>) result);
+                displayLoading(false);
+                mAdapter.notifyDataSetChanged();
             }
             catch (ClassCastException e) {
                 displayError(true);
             }
-            mAdapter.notifyDataSetChanged();
         }
 
         @Override

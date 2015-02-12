@@ -26,4 +26,5 @@ dependencies {
     compile files('src/main/libs/deezer-sdk-0.10.16.jar')
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.2@jar'
     compile 'com.melnykov:floatingactionbutton:1.2.0'
+    compile 'com.pnikosis:materialish-progress:1.4'
 }

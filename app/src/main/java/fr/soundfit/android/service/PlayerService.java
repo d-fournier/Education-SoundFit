@@ -7,9 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Binder;
-import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v4.app.LoaderManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.CursorLoader;
@@ -111,15 +109,18 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
                 SoundfitContract.SongSortTable.PROJ.COLS, null, null, null);
         mCursorLoader.registerListener(LOADER_TRACK_LIST, this);
         mCursorLoader.startLoading();
-
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        mPlaylistId = intent.getExtras().getLong(EXTRA_PLAYLIST_ID);
-        DeezerRequest request = DeezerRequestFactory.requestPlaylist(mPlaylistId);
-        AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new TrackListener());
-        task.execute(request);
+        if(intent == null || intent.getExtras() == null){
+            terminateService();
+        } else {
+            mPlaylistId = intent.getExtras().getLong(EXTRA_PLAYLIST_ID);
+            DeezerRequest request = DeezerRequestFactory.requestPlaylist(mPlaylistId);
+            AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new TrackListener());
+            task.execute(request);
+        }
         return START_STICKY;
     }
 
@@ -176,8 +177,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     @Override
     public void onTrackEnded(Track track) {
         if(!playNextTrack()){
-            launchPlayer();
-            playNextTrack();
+            restartPlayer();
         }
     }
 
@@ -191,7 +191,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         return false;
     }
 
-    private void launchPlayer(){
+    private void restartPlayer(){
         if(mCursor == null || mPlaylist == null){
             return;
         }
@@ -208,8 +208,8 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         for(Track t : mPlaylist.getTracks()){
             mAvailableTracks.get(databaseContent.get(t.getId())).add(t);
         }
-        updateNotification();
         playNextTrack();
+        // TODO Case where No song in normal / slow / move mode
     }
 
     @Override
@@ -221,7 +221,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     public void onLoadComplete(Loader<Cursor> loader, Cursor data) {
         mCursor = data;
         if(mPlaylist != null){
-            launchPlayer();
+            restartPlayer();
         }
     }
 
@@ -232,7 +232,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             try {
                 mPlaylist = (Playlist) result;
                 if(mCursor != null){
-                    launchPlayer();
+                    restartPlayer();
                 }
             } catch (ClassCastException e) {
                 // TODO

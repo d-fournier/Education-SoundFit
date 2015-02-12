@@ -66,6 +66,7 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
         mSortButton = (FloatingActionButton) view.findViewById(R.id.fab);
         mSortButton.setOnClickListener(this);
         mDeezerConnect = ((GenericActivity)getActivity()).getDeezerConnection();
+        displayLoading(true);
     }
 
     @Override
@@ -109,6 +110,7 @@ public class TrackCategoryPagerFragment extends GenericFragment implements Slidi
                 mSlidingTabLayout.setCustomTabColorizer(TrackCategoryPagerFragment.this);
                 mSlidingTabLayout.setViewPager(mViewPager);
                 mSortButton.setVisibility(View.VISIBLE);
+                displayLoading(false);
             }
             catch (ClassCastException e) {
                 displayError(true);

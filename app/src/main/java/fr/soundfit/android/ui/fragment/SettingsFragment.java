@@ -38,7 +38,7 @@ public class SettingsFragment extends GenericFragment implements AdapterView.OnI
     @Override
     protected void bindView(View view) {
         super.bindView(view);
-        mDrawerListView = (ListView) view;
+        mDrawerListView = (ListView) view.findViewById(R.id.list);
         mDrawerListView.setOnItemClickListener(this);
         mAdapter = new DrawerAdapter(getActivity(), R.array.settings_items);
         mDrawerListView.setAdapter(mAdapter);
