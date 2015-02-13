@@ -7,6 +7,6 @@ import com.deezer.sdk.model.Playlist;
  */
 public class DeezerUtils {
     public static boolean isPlaylistAvailable(Playlist p){
-        return !p.getTitle().startsWith("_");
+        return !p.getTitle().startsWith("_") && !p.getTitle().equalsIgnoreCase("Loved tracks");
     }
 }

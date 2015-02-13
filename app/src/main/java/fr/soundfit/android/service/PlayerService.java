@@ -12,6 +12,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.SparseArray;
 
 import com.deezer.sdk.model.Playlist;
@@ -24,6 +25,8 @@ import com.deezer.sdk.network.request.DeezerRequestFactory;
 import com.deezer.sdk.network.request.event.DeezerError;
 import com.deezer.sdk.network.request.event.JsonRequestListener;
 import com.deezer.sdk.player.TrackPlayer;
+import com.deezer.sdk.player.event.OnPlayerStateChangeListener;
+import com.deezer.sdk.player.event.PlayerState;
 import com.deezer.sdk.player.event.PlayerWrapperListener;
 import com.deezer.sdk.player.exception.TooManyPlayersExceptions;
 import com.deezer.sdk.player.networkcheck.WifiOnlyNetworkStateChecker;
@@ -36,12 +39,13 @@ import java.util.Map;
 import fr.soundfit.android.R;
 import fr.soundfit.android.provider.SoundfitContract;
 import fr.soundfit.android.ui.activity.HomeActivity;
+import fr.soundfit.android.utils.ConstUtils;
 import fr.soundfit.android.utils.ResourceUtils;
 
 /**
  * Created by Donovan on 11/02/2015.
  */
-public class PlayerService extends Service implements PlayerWrapperListener, Loader.OnLoadCompleteListener<Cursor> {
+public class PlayerService extends Service implements PlayerWrapperListener, Loader.OnLoadCompleteListener<Cursor>, OnPlayerStateChangeListener {
 
     private static final int NOTIFICATION_ID = 1502121158;
     private static final int LOADER_TRACK_LIST = 1502091642;
@@ -69,12 +73,12 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
 
     private CursorLoader mCursorLoader;
     private Cursor mCursor;
-    private SparseArray<List<Track>> mAllTracks = new SparseArray<List<Track>>(3);
+    private SparseArray<List<Track>> mAllTracks = new SparseArray<>(3);
 
-    private SparseArray<List<Track>> mAvailableTracks = new SparseArray<List<Track>>(3);
+    private SparseArray<List<Track>> mAvailableTracks = new SparseArray<>(3);
 
     public class LocalBinder extends Binder {
-        PlayerService getService() {
+        public PlayerService getService() {
             // Return this instance of LocalService so clients can call public methods
             return PlayerService.this;
         }
@@ -82,16 +86,15 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
 
     @Override
     public IBinder onBind(Intent intent) {
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.cancel(NOTIFICATION_ID);
         mIsBinded = true;
+        updateNotification();
         return mBinder;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        updateNotification();
         mIsBinded = false;
+        updateNotification();
         return super.onUnbind(intent);
     }
 
@@ -108,6 +111,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         try {
             mTrackPlayer = new TrackPlayer(getApplication(), mDeezerConnect, new WifiOnlyNetworkStateChecker());
             mTrackPlayer.addPlayerListener(this);
+            mTrackPlayer.addOnPlayerStateChangeListener(this);
         } catch (TooManyPlayersExceptions tooManyPlayersExceptions) {
             tooManyPlayersExceptions.printStackTrace();
         } catch (DeezerError deezerError) {
@@ -193,6 +197,16 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         stopSelf();
     }
 
+    private void sendTrackBroadcast(){
+        Intent intent = new Intent(ConstUtils.BroadcastConst.EVENT_NEW_TRACK);
+        intent.putExtra(ConstUtils.BroadcastConst.EXTRA_TRACK, mCurrentTrack);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void sendEventBroadcast(String event){
+        Intent intent = new Intent(event);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
 
     @Override
     public void onAllTracksEnded() {
@@ -203,23 +217,34 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     public void onPlayTrack(Track track) {
         mCurrentTrack = track;
         updateNotification();
+        sendTrackBroadcast();
     }
 
     @Override
     public void onTrackEnded(Track track) {
-        if(!playNextTrack()){
-            restartPlayer();
+        playNextTrack();
+    }
+
+    @Override
+    public void onPlayerStateChange(PlayerState playerState, long l) {
+        if(playerState.equals(PlayerState.PAUSED)){
+            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_PAUSE);
+        } else if(playerState.equals(PlayerState.PLAYING)){
+            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_PLAY);
+        } else if(playerState.equals(PlayerState.STOPPED)){
+            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_STOP);
+        } else if(playerState.equals(PlayerState.INITIALIZING)){
+            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_INIT);
         }
     }
 
-    private boolean playNextTrack(){
-        if(mAvailableTracks.get(1).size()!=0){
-            long id = mAvailableTracks.get(1).get(0).getId();
-            mAvailableTracks.get(1).remove(0);
-            mTrackPlayer.playTrack(id);
-            return true;
+    private void playNextTrack(){
+        if(mAvailableTracks.get(1).size()==0){
+            restartPlayer();
         }
-        return false;
+        long id = mAvailableTracks.get(1).get(0).getId();
+        mAvailableTracks.get(1).remove(0);
+        mTrackPlayer.playTrack(id);
     }
 
     private void restartPlayer(){
@@ -248,7 +273,6 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             mAvailableTracks.put(1, new ArrayList<Track>(mAllTracks.get(1)));
             mAvailableTracks.put(2, new ArrayList<Track>(mAllTracks.get(2)));
         }
-        playNextTrack();
         // TODO Case where No song in normal / slow / move mode
     }
 
@@ -262,6 +286,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         mCursor = data;
         if(mPlaylist != null){
             restartPlayer();
+            playNextTrack();
         }
     }
 
@@ -273,6 +298,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
                 mPlaylist = (Playlist) result;
                 if(mCursor != null){
                     restartPlayer();
+                    playNextTrack();
                 }
             } else if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_SLOW)){
                 mAllTracks.put(0, ((Playlist)result).getTracks());
@@ -283,6 +309,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             }
             if(mAllTracks.size() == 3){
                 restartPlayer();
+                playNextTrack();
             }
         }
 
@@ -294,4 +321,24 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     }
 
 
+    // ------ Bind Method
+    public void nextTrack(){
+        playNextTrack();
+    }
+
+    public void previousTrack(){
+        mTrackPlayer.skipToPreviousTrack();
+    }
+
+    public void togglePlayer(){
+        if(mTrackPlayer.getPlayerState().equals(PlayerState.PLAYING)){
+            mTrackPlayer.pause();
+        } else {
+            mTrackPlayer.play();
+        }
+    }
+
+    public Track getCurrentTrack(){
+        return mCurrentTrack;
+    }
 }

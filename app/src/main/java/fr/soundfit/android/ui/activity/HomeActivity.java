@@ -1,12 +1,19 @@
 package fr.soundfit.android.ui.activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.deezer.sdk.model.Track;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.service.PlayerService;
@@ -16,6 +23,7 @@ import fr.soundfit.android.ui.fragment.PlaylistPagerFragment;
 import fr.soundfit.android.ui.fragment.RunningFragment;
 import fr.soundfit.android.ui.fragment.SettingsFragment;
 import fr.soundfit.android.ui.fragment.StartActivityFragment;
+import fr.soundfit.android.utils.ConstUtils;
 import fr.soundfit.android.utils.ResourceUtils;
 
 public class HomeActivity extends GenericActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -30,6 +38,9 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
      */
     private CharSequence mTitle;
 
+    private BroadcastReceiver mMessageReceiver = new PlayerListener();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +54,19 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter(ConstUtils.BroadcastConst.EVENT_INIT));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter(ConstUtils.BroadcastConst.EVENT_STOP));
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
     }
 
     @Override
@@ -111,4 +135,16 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
 
         }
     }
+
+    private class PlayerListener extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(ConstUtils.BroadcastConst.EVENT_INIT) || intent.getAction().equals(ConstUtils.BroadcastConst.EVENT_STOP)) {
+                mNavigationDrawerFragment.updateHomeFragment();
+            }
+
+        }
+
+    };
 }

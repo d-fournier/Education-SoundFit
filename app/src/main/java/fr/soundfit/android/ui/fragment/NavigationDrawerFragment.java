@@ -222,6 +222,11 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
         return super.onOptionsItemSelected(item);
     }
 
+    public void updateHomeFragment(){
+        String tag = getResources().getStringArray(R.array.drawer_items)[mCurrentSelectedPosition];
+        mCallbacks.onNavigationDrawerItemSelected(tag);
+    }
+
     /**
      * Per the navigation drawer design guidelines, updates the action bar to show the global app
      * 'context', rather than just what's in the current screen.
