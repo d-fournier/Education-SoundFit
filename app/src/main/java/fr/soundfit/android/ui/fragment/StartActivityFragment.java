@@ -55,6 +55,9 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     private Spinner mPlaylistSpinner;
     private ImageButton mValidateButton;
 
+    private TextView mSpeedTV;
+    private TextView mDistanceTV;
+
     public StartActivityFragment() {
     }
 
@@ -93,6 +96,16 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, mPlaylistName);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mPlaylistSpinner.setAdapter(adapter);
+
+        mSpeedTV = (TextView) view.findViewById(R.id.speed_text);
+        mDistanceTV = (TextView) view.findViewById(R.id.distance_text);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // TODO Launch Loader for last Informations
     }
 
     @Override
@@ -129,7 +142,7 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     }
 
     private void displayPlaylist(boolean isUserPlaylist){
-        mValidateButton.setVisibility(View.GONE);
+        mValidateButton.setEnabled(false);
         DeezerRequest request;
         if(isUserPlaylist){
             request = DeezerRequestFactory.requestCurrentUserPlaylists();
@@ -146,7 +159,7 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     @Override
     public void onClick(View v) {
         if(v == mValidateButton){
-            mValidateButton.setVisibility(View.VISIBLE);
+            mValidateButton.setEnabled(true);
             Intent intent = new Intent(getActivity(), PlayerService.class);
             Bundle bundle = new Bundle();
             bundle.putLong(PlayerService.EXTRA_PLAYLIST_ID, mPlaylistList.get(mPlaylistSpinner.getSelectedItemPosition()).getId());
@@ -174,8 +187,7 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
             }
             ((ArrayAdapter)mPlaylistSpinner.getAdapter()).notifyDataSetChanged();
             if(mPlaylistList.size()>0){
-                // TODO Use Enabled ...
-                mValidateButton.setVisibility(View.VISIBLE);
+                mValidateButton.setEnabled(true);
             }
         }
 

@@ -43,8 +43,6 @@ public class TrackListFragment extends GenericFragment implements  LoaderManager
     private static final String EXTRA_PLAYLIST = "fr.soundfit.android.EXTRA_PLAYLIST";
     private static final String EXTRA_TYPE = "fr.soundfit.android.EXTRA_TYPE";
 
-    private static final String PLAYLIST_PREFIX = "playlist_";
-
     private static final int LOADER_TRACK_LIST = 1502091642;
 
     protected DeezerConnect mDeezerConnect = null;
@@ -152,7 +150,7 @@ public class TrackListFragment extends GenericFragment implements  LoaderManager
         switch (id) {
             case LOADER_TRACK_LIST:
                 Uri uri;
-                if(mType != -1){
+                if(mType != 3){
                     uri = SoundfitContract.SongSortTable.buildUriWithType(""+mType);
                 } else {
                     uri = SoundfitContract.SongSortTable.buildUri();

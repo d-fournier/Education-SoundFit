@@ -117,7 +117,6 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         } catch (DeezerError deezerError) {
             deezerError.printStackTrace();
         }
-        sRunning = true;
     }
 
     @Override
@@ -125,6 +124,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         if(intent == null || intent.getExtras() == null){
             terminateService();
         } else {
+            sRunning = true;
             mPlaylistId = intent.getExtras().getLong(EXTRA_PLAYLIST_ID);
             mIsUserPlaylist = intent.getExtras().getBoolean(EXTRA_IS_USER_PLAYLIST);
         }
@@ -162,8 +162,6 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     @Override
     public void onDestroy() {
         super.onDestroy();
-        sRunning = false;
-        // Stop the cursor loader
         if (mCursorLoader != null) {
             mCursorLoader.unregisterListener(this);
             mCursorLoader.cancelLoad();
@@ -192,6 +190,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     }
 
     private void terminateService(){
+        sRunning = false;
         mTrackPlayer.stop();
         stopForeground(true);
         stopSelf();
@@ -203,8 +202,9 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-    private void sendEventBroadcast(String event){
+    private void sendEventBroadcast(String event, String message){
         Intent intent = new Intent(event);
+        intent.putExtra(ConstUtils.BroadcastConst.EXTRA_MESSAGE, message);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
@@ -228,26 +228,25 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     @Override
     public void onPlayerStateChange(PlayerState playerState, long l) {
         if(playerState.equals(PlayerState.PAUSED)){
-            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_PAUSE);
+            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_PAUSE, null);
         } else if(playerState.equals(PlayerState.PLAYING)){
-            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_PLAY);
+            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_PLAY, null);
         } else if(playerState.equals(PlayerState.STOPPED)){
-            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_STOP);
-        } else if(playerState.equals(PlayerState.INITIALIZING)){
-            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_INIT);
+            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_STOP, null);
         }
     }
 
     private void playNextTrack(){
-        if(mAvailableTracks.get(1).size()==0){
-            restartPlayer();
+        int nextLevelSong = 1;
+        if(mAvailableTracks.get(nextLevelSong).size()==0){
+            restartPlayer(false);
         }
-        long id = mAvailableTracks.get(1).get(0).getId();
-        mAvailableTracks.get(1).remove(0);
+        long id = mAvailableTracks.get(nextLevelSong).get(0).getId();
+        mAvailableTracks.get(nextLevelSong).remove(0);
         mTrackPlayer.playTrack(id);
     }
 
-    private void restartPlayer(){
+    private void restartPlayer(boolean autoplay){
         if(mIsUserPlaylist){
             if(mCursor == null || mPlaylist == null){
                 return;
@@ -263,17 +262,28 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             mAvailableTracks.put(1, new ArrayList<Track>());
             mAvailableTracks.put(2, new ArrayList<Track>());
             for(Track t : mPlaylist.getTracks()){
-                mAvailableTracks.get(databaseContent.get(t.getId())).add(t);
+                Integer level = databaseContent.get(t.getId());
+                if(level != null){
+                    mAvailableTracks.get(level).add(t);
+                }
             }
         } else {
             if(mAllTracks.size() != 3){
                 return;
             }
-            mAvailableTracks.put(0, new ArrayList<Track>(mAllTracks.get(0)));
-            mAvailableTracks.put(1, new ArrayList<Track>(mAllTracks.get(1)));
-            mAvailableTracks.put(2, new ArrayList<Track>(mAllTracks.get(2)));
+            mAvailableTracks.put(0, new ArrayList<>(mAllTracks.get(0)));
+            mAvailableTracks.put(1, new ArrayList<>(mAllTracks.get(1)));
+            mAvailableTracks.put(2, new ArrayList<>(mAllTracks.get(2)));
         }
-        // TODO Case where No song in normal / slow / move mode
+        if(mAvailableTracks.get(0).size() == 0 || mAvailableTracks.get(1).size() == 0 || mAvailableTracks.get(2).size() == 0){
+            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_ERROR, getString(R.string.error_playlist_not_completed));
+            terminateService();
+            return;
+        }
+        if(autoplay) {
+            playNextTrack();
+            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_INIT, null);
+        }
     }
 
     @Override
@@ -285,8 +295,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     public void onLoadComplete(Loader<Cursor> loader, Cursor data) {
         mCursor = data;
         if(mPlaylist != null){
-            restartPlayer();
-            playNextTrack();
+            restartPlayer(true);
         }
     }
 
@@ -297,8 +306,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_ALL)){
                 mPlaylist = (Playlist) result;
                 if(mCursor != null){
-                    restartPlayer();
-                    playNextTrack();
+                    restartPlayer(true);
                 }
             } else if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_SLOW)){
                 mAllTracks.put(0, ((Playlist)result).getTracks());
@@ -308,8 +316,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
                 mAllTracks.put(1, ((Playlist)result).getTracks());
             }
             if(mAllTracks.size() == 3){
-                restartPlayer();
-                playNextTrack();
+                restartPlayer(true);
             }
         }
 

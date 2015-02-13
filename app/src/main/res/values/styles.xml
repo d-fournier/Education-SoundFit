@@ -4,6 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/theme_red</item>
         <item name="colorPrimaryDark">@color/theme_red_dark</item>
+        <item name="md_positive_color">@color/theme_red</item>
     </style>
 
     <!-- Base application theme. -->

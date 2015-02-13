@@ -111,7 +111,6 @@ public class RunningFragment extends GenericFragment implements View.OnClickList
                     .cacheOnDisk(true)
                     .showImageOnLoading(R.drawable.song_cover)
                     .build();
-            // TODO Put in resources
             ImageLoader.getInstance().displayImage(track.getAlbum().getCoverUrl()+"?size=big", mCoverIV, defaultOptions);
         }
     }

@@ -44,7 +44,7 @@
                 android:layout_marginLeft="@dimen/space_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="test"
+                android:text="@string/loading"
                 android:textColor="@color/theme_red"/>
 
         </LinearLayout>
@@ -69,7 +69,7 @@
                 android:layout_marginLeft="@dimen/space_default"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="test"
+                android:text="@string/loading"
                 android:textColor="@color/theme_red"/>
 
 
@@ -138,6 +138,13 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/space_small"
             android:entries="@array/preference_music_array"/>
+
+        <TextView
+            android:text="@string/selected_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_medium" />
 
         <Spinner
             android:id="@+id/start_activity_spinner_playlist"
