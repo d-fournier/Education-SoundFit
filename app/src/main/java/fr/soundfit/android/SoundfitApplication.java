@@ -38,7 +38,7 @@ public class SoundfitApplication extends Application {
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
                 // TODO Update Drawable
-                .showImageOnLoading(R.drawable.ic_action_options)
+                .showImageOnLoading(R.drawable.song_cover)
                 .build();
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
                 .threadPriority(Thread.NORM_PRIORITY - 2)
