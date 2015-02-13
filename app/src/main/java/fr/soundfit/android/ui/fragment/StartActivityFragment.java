@@ -24,7 +24,7 @@ import java.util.List;
 import fr.soundfit.android.R;
 import fr.soundfit.android.service.PlayerService;
 import fr.soundfit.android.ui.activity.GenericActivity;
-import fr.soundfit.android.ui.activity.HomeActivity;
+import fr.soundfit.android.utils.DeezerUtils;
 import fr.soundfit.android.utils.PrefUtils;
 
 /**
@@ -129,12 +129,12 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     }
 
     private void displayPlaylist(boolean isUserPlaylist){
-        mValidateButton.setEnabled(false);
+        mValidateButton.setVisibility(View.GONE);
         DeezerRequest request;
         if(isUserPlaylist){
             request = DeezerRequestFactory.requestCurrentUserPlaylists();
         } else {
-            request = DeezerRequestFactory.requestUserPlaylists(getResources().getInteger(R.integer.soundfit_deezer_user_id));
+            request = DeezerRequestFactory.requestUserPlaylists(getResources().getInteger(R.integer.deezer_user_soundfit_id));
         }
         AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new PlaylistListener());
         task.execute(request);
@@ -146,7 +146,7 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     @Override
     public void onClick(View v) {
         if(v == mValidateButton){
-            mValidateButton.setEnabled(false);
+            mValidateButton.setVisibility(View.VISIBLE);
             Intent intent = new Intent(getActivity(), PlayerService.class);
             Bundle bundle = new Bundle();
             bundle.putLong(PlayerService.EXTRA_PLAYLIST_ID, mPlaylistList.get(mPlaylistSpinner.getSelectedItemPosition()).getId());
@@ -162,15 +162,20 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
             mPlaylistList.clear();
             mPlaylistName.clear();
             try {
-                mPlaylistList.addAll((List<Playlist>) result);
-                for (Playlist p : mPlaylistList){
-                    mPlaylistName.add(p.getTitle());
+                for (Playlist p : (List<Playlist>) result){
+                    if(DeezerUtils.isPlaylistAvailable(p)){
+                        mPlaylistList.add(p);
+                        mPlaylistName.add(p.getTitle());
+                    }
                 }
             }
             catch (ClassCastException e) {
             }
             ((ArrayAdapter)mPlaylistSpinner.getAdapter()).notifyDataSetChanged();
-            mValidateButton.setEnabled(true);
+            if(mPlaylistList.size()>0){
+                // TODO Use Enabled ...
+                mValidateButton.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
