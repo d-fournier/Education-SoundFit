@@ -31,7 +31,7 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
     /**
      * Remember the position of the selected item.
      */
-    private static final String STATE_SELECTED_POSITION = "fr.dfournier.eclypsia.STATE_SELECTED_POSITION";
+    private static final String STATE_SELECTED_POSITION = "fr.soundfit.android.STATE_SELECTED_POSITION";
 
 
     /**
@@ -163,7 +163,6 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
 
     private void selectItem(int position) {
         String tag = getResources().getStringArray(R.array.drawer_items)[position];
-
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);

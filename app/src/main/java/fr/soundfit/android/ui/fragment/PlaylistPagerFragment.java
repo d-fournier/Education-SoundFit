@@ -1,6 +1,7 @@
 package fr.soundfit.android.ui.fragment;
 
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
@@ -11,15 +12,15 @@ import fr.soundfit.android.ui.view.SlidingTabLayout;
 /**
  * Project : SoundFit
  * Package : fr.soundfit.android.ui.fragment
- * By Donovan on 01/02/2015.
+ * By Donovan on 05/02/2015.
  */
-public class PlaylistFragment extends GenericFragment implements SlidingTabLayout.TabColorizer {
+public class PlaylistPagerFragment extends GenericFragment implements SlidingTabLayout.TabColorizer {
 
-    private SlidingTabLayout mSlidingTabLayout;
-    private ViewPager mViewPager;
+    protected SlidingTabLayout mSlidingTabLayout;
+    protected ViewPager mViewPager;
 
-    public static PlaylistFragment newInstance() {
-        PlaylistFragment fragment = new PlaylistFragment();
+    public static PlaylistPagerFragment newInstance() {
+        PlaylistPagerFragment fragment = new PlaylistPagerFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -28,7 +29,7 @@ public class PlaylistFragment extends GenericFragment implements SlidingTabLayou
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_playlist;
+        return R.layout.fragment_pager;
     }
 
     @Override
@@ -40,13 +41,12 @@ public class PlaylistFragment extends GenericFragment implements SlidingTabLayou
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setCustomTabColorizer(this);
         mSlidingTabLayout.setViewPager(mViewPager);
-
-
     }
 
     @Override
     public int getIndicatorColor(int position) {
         return getResources().getColor(R.color.theme_red);
     }
+
 
 }

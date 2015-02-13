@@ -48,14 +48,14 @@
                         android:id="@+id/chooser_first_choice"
                         style="@style/Button_Rounded_Red"
                         android:drawableLeft="@drawable/dice_1"
-                        android:text="@string/music_chooser_first_choice"
+                        android:text="@string/music_chooser_discover"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <Button
                         android:id="@+id/chooser_second_choice"
                         style="@style/Button_Rounded_Red"
                         android:drawableLeft="@drawable/dice_2"
-                        android:text="@string/music_chooser_second_choice"
+                        android:text="@string/music_chooser_my_playlist"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>

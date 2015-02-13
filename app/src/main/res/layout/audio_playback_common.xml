@@ -84,14 +84,14 @@
 			android:layout_height="1dp"
 			android:layout_weight="1" />
 
-		<!-- <Button -->
-		<!-- android:id="@+id/button_goto" -->
-		<!-- android:layout_width="wrap_content" -->
-		<!-- android:layout_height="wrap_content" -->
-		<!-- android:background="@android:color/transparent" -->
-		<!-- android:text="#64" -->
-		<!-- android:textColor="@android:color/white" -->
-		<!-- android:textSize="22sp" /> -->
+		 <!--<Button -->
+		 <!--android:id="@+id/button_goto" -->
+		 <!--android:layout_width="wrap_content" -->
+		 <!--android:layout_height="wrap_content" -->
+		 <!--android:background="@android:color/transparent" -->
+		 <!--android:text="#64" -->
+		 <!--android:textColor="@android:color/white" -->
+		 <!--android:textSize="22sp" /> -->
 	</LinearLayout>
 
 	<LinearLayout

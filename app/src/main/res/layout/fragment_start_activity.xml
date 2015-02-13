@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/space_default">
+
+        <TextView
+            android:text="@string/selected_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/start_activity_spinner_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/level_string_array"/>
+
+        <TextView
+            android:id="@+id/start_activity_range_string"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.edmodo.rangebar.RangeBar
+            android:id="@+id/start_activity_range_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_default"
+            android:layout_marginRight="@dimen/space_default"
+            custom:tickCount="101"
+            custom:tickHeight="0dp"
+            custom:thumbRadius="2dp"
+            custom:thumbColorNormal="@color/theme_red"
+            custom:thumbColorPressed="@color/theme_red_dark"
+            custom:connectingLineColor ="@color/theme_red"/>
+
+        <TextView
+            android:text="@string/selected_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Spinner
+            android:id="@+id/start_activity_spinner_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/preference_music_array"/>
+
+        <Spinner
+            android:id="@+id/start_activity_spinner_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/start_activity_validate"
+            style="@style/Button_Round_Red"
+            android:src="@drawable/abc_ic_menu_paste_mtrl_am_alpha"
+            android:layout_width="@dimen/circle_length"
+            android:layout_height="@dimen/circle_length" />
+
+
+    </LinearLayout>
+
+</ScrollView>

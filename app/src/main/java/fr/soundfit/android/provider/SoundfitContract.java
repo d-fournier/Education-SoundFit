@@ -20,6 +20,7 @@ public class SoundfitContract {
 
     public interface Tables {
         static final String SONG_SORT = "song_sort";
+        static final String USER_DATA = "user_data";
     }
 
 
@@ -62,8 +63,8 @@ public class SoundfitContract {
         }
 
 
-        public static Uri buildUriWithSongID(String id) {
-            return CONTENT_URI.buildUpon().appendPath(String.valueOf(id)).build();
+        public static Uri buildUriWithType(String type) {
+            return CONTENT_URI.buildUpon().appendPath(String.valueOf(type)).build();
         }
 
         public static String getSongID(Uri uri) {
