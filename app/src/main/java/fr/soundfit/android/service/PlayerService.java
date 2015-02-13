@@ -36,6 +36,7 @@ import java.util.Map;
 import fr.soundfit.android.R;
 import fr.soundfit.android.provider.SoundfitContract;
 import fr.soundfit.android.ui.activity.HomeActivity;
+import fr.soundfit.android.utils.ResourceUtils;
 
 /**
  * Created by Donovan on 11/02/2015.
@@ -44,7 +45,13 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
 
     private static final int NOTIFICATION_ID = 1502121158;
     private static final int LOADER_TRACK_LIST = 1502091642;
+    private static final String DEEZER_PLAYLIST_MOVE = "fr.soundfit.android.DEEZER_PLAYLIST_MOVE";
+    private static final String DEEZER_PLAYLIST_SLOW = "fr.soundfit.android.DEEZER_PLAYLIST_SLOW";
+    private static final String DEEZER_PLAYLIST_NORMAL = "fr.soundfit.android.DEEZER_PLAYLIST_NORMAL";
+    private static final String DEEZER_PLAYLIST_ALL = "fr.soundfit.android.DEEZER_PLAYLIST_ALL";
+
     public static final String EXTRA_PLAYLIST_ID = "fr.soundfit.android.EXTRA_PLAYLIST_ID";
+    public static final String EXTRA_IS_USER_PLAYLIST = "fr.soundfit.android.EXTRA_IS_USER_PLAYLIST";
 
 
     private static boolean sRunning = false;
@@ -58,8 +65,11 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     private Playlist mPlaylist;
     private Track mCurrentTrack;
 
+    private boolean mIsUserPlaylist;
+
     private CursorLoader mCursorLoader;
     private Cursor mCursor;
+    private SparseArray<List<Track>> mAllTracks = new SparseArray<List<Track>>(3);
 
     private SparseArray<List<Track>> mAvailableTracks = new SparseArray<List<Track>>(3);
 
@@ -104,11 +114,6 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             deezerError.printStackTrace();
         }
         sRunning = true;
-
-        mCursorLoader = new CursorLoader(this, SoundfitContract.SongSortTable.buildUri(),
-                SoundfitContract.SongSortTable.PROJ.COLS, null, null, null);
-        mCursorLoader.registerListener(LOADER_TRACK_LIST, this);
-        mCursorLoader.startLoading();
     }
 
     @Override
@@ -117,9 +122,35 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             terminateService();
         } else {
             mPlaylistId = intent.getExtras().getLong(EXTRA_PLAYLIST_ID);
+            mIsUserPlaylist = intent.getExtras().getBoolean(EXTRA_IS_USER_PLAYLIST);
+        }
+        if(mIsUserPlaylist){
             DeezerRequest request = DeezerRequestFactory.requestPlaylist(mPlaylistId);
+            request.setId(DEEZER_PLAYLIST_ALL);
             AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new TrackListener());
             task.execute(request);
+            mCursorLoader = new CursorLoader(this, SoundfitContract.SongSortTable.buildUri(),
+                    SoundfitContract.SongSortTable.PROJ.COLS, null, null, null);
+            mCursorLoader.registerListener(LOADER_TRACK_LIST, this);
+            mCursorLoader.startLoading();
+        } else {
+            int[] id = getResources().getIntArray(ResourceUtils.getResourceId(ResourceUtils.ResourceType.ARRAY,""+mPlaylistId, this));
+
+            DeezerRequest request = DeezerRequestFactory.requestPlaylist(id[2]);
+            request.setId(DEEZER_PLAYLIST_MOVE);
+            AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new TrackListener());
+            task.execute(request);
+
+            request = DeezerRequestFactory.requestPlaylist(id[0]);
+            request.setId(DEEZER_PLAYLIST_SLOW);
+            task = new AsyncDeezerTask(mDeezerConnect,new TrackListener());
+            task.execute(request);
+
+            request = DeezerRequestFactory.requestPlaylist(id[1]);
+            request.setId(DEEZER_PLAYLIST_NORMAL);
+            task = new AsyncDeezerTask(mDeezerConnect,new TrackListener());
+            task.execute(request);
+
         }
         return START_STICKY;
     }
@@ -192,21 +223,30 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     }
 
     private void restartPlayer(){
-        if(mCursor == null || mPlaylist == null){
-            return;
-        }
-        Map<Long, Integer> databaseContent = new HashMap<>();
-        if(mCursor!= null && mCursor.moveToFirst()) {
-            databaseContent.put(mCursor.getLong(SoundfitContract.SongSortTable.PROJ.ID_SONG), mCursor.getInt(SoundfitContract.SongSortTable.PROJ.ID_TYPE));
-            while (mCursor.moveToNext()){
-                databaseContent.put(mCursor.getLong(SoundfitContract.SongSortTable.PROJ.ID_SONG), mCursor.getInt(SoundfitContract.SongSortTable.PROJ.ID_TYPE));
+        if(mIsUserPlaylist){
+            if(mCursor == null || mPlaylist == null){
+                return;
             }
-        }
-        mAvailableTracks.put(0, new ArrayList<Track>());
-        mAvailableTracks.put(1, new ArrayList<Track>());
-        mAvailableTracks.put(2, new ArrayList<Track>());
-        for(Track t : mPlaylist.getTracks()){
-            mAvailableTracks.get(databaseContent.get(t.getId())).add(t);
+            Map<Long, Integer> databaseContent = new HashMap<>();
+            if(mCursor!= null && mCursor.moveToFirst()) {
+                databaseContent.put(mCursor.getLong(SoundfitContract.SongSortTable.PROJ.ID_SONG), mCursor.getInt(SoundfitContract.SongSortTable.PROJ.ID_TYPE));
+                while (mCursor.moveToNext()){
+                    databaseContent.put(mCursor.getLong(SoundfitContract.SongSortTable.PROJ.ID_SONG), mCursor.getInt(SoundfitContract.SongSortTable.PROJ.ID_TYPE));
+                }
+            }
+            mAvailableTracks.put(0, new ArrayList<Track>());
+            mAvailableTracks.put(1, new ArrayList<Track>());
+            mAvailableTracks.put(2, new ArrayList<Track>());
+            for(Track t : mPlaylist.getTracks()){
+                mAvailableTracks.get(databaseContent.get(t.getId())).add(t);
+            }
+        } else {
+            if(mAllTracks.size() != 3){
+                return;
+            }
+            mAvailableTracks.put(0, new ArrayList<Track>(mAllTracks.get(0)));
+            mAvailableTracks.put(1, new ArrayList<Track>(mAllTracks.get(1)));
+            mAvailableTracks.put(2, new ArrayList<Track>(mAllTracks.get(2)));
         }
         playNextTrack();
         // TODO Case where No song in normal / slow / move mode
@@ -229,13 +269,20 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
 
         @Override
         public void onResult(Object result, Object requestId) {
-            try {
+            if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_ALL)){
                 mPlaylist = (Playlist) result;
                 if(mCursor != null){
                     restartPlayer();
                 }
-            } catch (ClassCastException e) {
-                // TODO
+            } else if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_SLOW)){
+                mAllTracks.put(0, ((Playlist)result).getTracks());
+            } else if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_MOVE)){
+                mAllTracks.put(2, ((Playlist)result).getTracks());
+            } else if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_NORMAL)){
+                mAllTracks.put(1, ((Playlist)result).getTracks());
+            }
+            if(mAllTracks.size() == 3){
+                restartPlayer();
             }
         }
 

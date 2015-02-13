@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"/>
 
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/start_activity_validate"
             style="@style/Button_Round_Red"
             android:src="@drawable/abc_ic_menu_paste_mtrl_am_alpha"

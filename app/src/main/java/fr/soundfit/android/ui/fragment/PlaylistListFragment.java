@@ -20,6 +20,7 @@ import fr.soundfit.android.R;
 import fr.soundfit.android.ui.activity.GenericActivity;
 import fr.soundfit.android.ui.activity.PlaylistActivity;
 import fr.soundfit.android.ui.adapter.PlaylistAdapter;
+import fr.soundfit.android.utils.DeezerUtils;
 
 /**
  * Project : SoundFit
@@ -104,7 +105,7 @@ public class PlaylistListFragment extends GenericFragment implements AdapterView
             try {
                 List<Playlist> tmp = (List<Playlist>) result;
                 for(Playlist p : tmp){
-                    if(!p.getTitle().startsWith("_"))
+                    if(DeezerUtils.isPlaylistAvailable(p))
                         mPlaylistList.add(p);
                 }
                 displayLoading(false);
