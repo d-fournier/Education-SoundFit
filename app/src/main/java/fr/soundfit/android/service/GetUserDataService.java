@@ -75,46 +75,27 @@ public class GetUserDataService extends IntentService {
             PebbleKit.startAppOnPebble(getApplicationContext(), Constants.SPORTS_UUID);
 
 
-
-
-
-
         //Choix de la musique
-        //ChoixDeLaMusique(String niveau)
+        //ChoixDeLaMusique()
     }
 
-    public void ChoixDeLaMusique(String niveau){
-        switch (niveau){
-            case "debutant":
-                            if (Constants.SPORTS_DATA_SPEED >6 && Constants.SPORTS_DATA_SPEED <9) {
+    /**
+     * Ici je choisi la playliste en fonction du niveau de l'utilisateur et de sa vitesse
+     *
+     */
+    public void ChoixDeLaMusique(){
 
-                            }
-                            else if (Constants.SPORTS_DATA_SPEED >9 && Constants.SPORTS_DATA_SPEED <11) {
+     if (Constants.SPORTS_DATA_SPEED >6 && Constants.SPORTS_DATA_SPEED <9) {
+         //ici je lance la playliste move
 
-                            }else if (Constants.SPORTS_DATA_SPEED >11 && Constants.SPORTS_DATA_SPEED <14) {
+      }
+     else if (Constants.SPORTS_DATA_SPEED >9 && Constants.SPORTS_DATA_SPEED <11) {
+        //ici je lance la playliste normal
 
-                            }
-                            break;
-            case "confirme":
-                            if (Constants.SPORTS_DATA_SPEED >6 && Constants.SPORTS_DATA_SPEED <9) {
-                            }
-                            else if (Constants.SPORTS_DATA_SPEED >9 && Constants.SPORTS_DATA_SPEED <11) {
+     }else if (Constants.SPORTS_DATA_SPEED >11 && Constants.SPORTS_DATA_SPEED <14) {
+        //ici je lance la playliste slow
 
-                            }else if (Constants.SPORTS_DATA_SPEED >11 && Constants.SPORTS_DATA_SPEED <14) {
-
-                            }
-                            break;
-            case "expert":
-                            if (Constants.SPORTS_DATA_SPEED >6 && Constants.SPORTS_DATA_SPEED <9) {
-                            }
-                            else if (Constants.SPORTS_DATA_SPEED >9 && Constants.SPORTS_DATA_SPEED <11) {
-
-                            }else if (Constants.SPORTS_DATA_SPEED >11 && Constants.SPORTS_DATA_SPEED <14) {
-
-                            }
-                            break;
-            default: break;
-        }
+      }
     }
 }
 

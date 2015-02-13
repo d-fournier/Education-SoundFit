@@ -41,6 +41,20 @@ public class SoundfitDatabase extends SQLiteOpenHelper {
         execSQL(newsTable, sqLiteDatabase);
     }
 
+    /**
+     * Je crée la table UserData Dans lequel je vais enregistrer la vistesse et le timestamp
+     * @param sqLiteDatabase
+     */
+    protected void createUserDataDatabase(SQLiteDatabase sqLiteDatabase) {
+        String newsTable = new StringBuilder() //
+                .append("CREATE TABLE ").append(SoundfitContract.Tables.USER_DATA) //
+                .append(" ( '").append(BaseColumns._ID).append("' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, '") //
+                .append(SoundfitContract.UserDataTable.SPEED).append("' INTEGER NOT NULL, '") //
+                .append(SoundfitContract.UserDataTable.TIMESTAMP).append("' INTEGER NOT NULL ); '") //
+                .toString();
+        execSQL(newsTable, sqLiteDatabase);
+    }
+
     private void execSQL(String request, SQLiteDatabase sqLiteDatabase){
         sqLiteDatabase.execSQL(request);
         if (DEBUG) {

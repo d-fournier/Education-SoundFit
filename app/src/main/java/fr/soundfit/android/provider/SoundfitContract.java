@@ -39,6 +39,22 @@ public class SoundfitContract {
         static final String ID_TYPE = "id_type";
 
     }
+
+    /**
+     * User Data
+     */
+    public interface UserDataColumns {
+        /** Default Column _ID */
+        /**
+         * Primary key id (INTEGER)
+         */
+        static final String SPEED = "speed";
+        /**
+         * Title (TEXT)
+         */
+        static final String TIMESTAMP = "timestamp";
+
+    }
     public static class SongSortTable implements SongSortColumns, BaseColumns {
 
         public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_SONG_SORT).build();
@@ -55,6 +71,39 @@ public class SoundfitContract {
                     BaseColumns._ID,
                     Tables.SONG_SORT + "." + SongSortColumns.ID_SONG, //
                     Tables.SONG_SORT + "." + SongSortColumns.ID_TYPE, //
+            };
+        }
+
+        public static Uri buildUri() {
+            return CONTENT_URI;
+        }
+
+
+        public static Uri buildUriWithType(String type) {
+            return CONTENT_URI.buildUpon().appendPath(String.valueOf(type)).build();
+        }
+
+        public static String getSongID(Uri uri) {
+            return uri.getPathSegments().get(1);
+        }
+    }
+
+    public static class UserDataTable implements BaseColumns,UserDataColumns {
+
+        public static final Uri CONTENT_URI = BASE_CONTENT_URI.buildUpon().appendPath(PATH_SONG_SORT).build();
+
+        public static final String CONTENT_TYPE = "vnd.android.cursor.dir/" + VENDOR_NAME + "." + PATH_SONG_SORT;
+        public static final String CONTENT_ITEM_TYPE = "vnd.android.cursor.item/" + VENDOR_NAME + "." + PATH_SONG_SORT;
+
+        public static class PROG {
+            public static int _ID = 0;
+            public static int SPEED = 1;
+            public static int TIMESTAMP = 2;
+
+            public static String[] COLS = new String[]{ //
+                    BaseColumns._ID,
+                    Tables.USER_DATA + "." + UserDataColumns.SPEED, //
+                    Tables.USER_DATA + "." + UserDataColumns.TIMESTAMP, //
             };
         }
 
