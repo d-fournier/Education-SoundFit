@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.deezer.sdk.model.Track;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.w3c.dom.Text;
@@ -105,7 +106,13 @@ public class RunningFragment extends GenericFragment implements View.OnClickList
         if(track != null){
             mTitleTV.setText(track.getTitle());
             mArtistTV.setText(track.getArtist().getName());
-            ImageLoader.getInstance().displayImage(track.getAlbum().getCoverUrl(), mCoverIV);
+            DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                    .cacheInMemory(true)
+                    .cacheOnDisk(true)
+                    .showImageOnLoading(R.drawable.song_cover)
+                    .build();
+            // TODO Put in resources
+            ImageLoader.getInstance().displayImage(track.getAlbum().getCoverUrl()+"?size=big", mCoverIV, defaultOptions);
         }
     }
 

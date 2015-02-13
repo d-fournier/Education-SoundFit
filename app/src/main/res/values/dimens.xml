@@ -22,12 +22,14 @@
 
     <dimen name="space_small">8dp</dimen>
     <dimen name="space_default">16dp</dimen>
+    <dimen name="space_big">32dp</dimen>
     <dimen name="content_witdh">280dp</dimen>
     <dimen name="splachscreen_space">16dp</dimen>
 
     <!-- Shape dimensions -->
     <dimen name="corner_radius">8dp</dimen>
     <dimen name="circle_length">70dp</dimen>
+    <dimen name="circle_icon">48dp</dimen>
 
     <!-- Chooser Offser -->
     <dimen name="chooser_offset">-24dp</dimen>

@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_action_play"
+        android:src="@drawable/ic_sort_variant_white_36dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         fab:fab_colorNormal="@color/theme_red"

@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/player_background"
+    android:layout_height="match_parent"
+    android:background="@color/theme_grey_dark"
     android:orientation="vertical"
     tools:ignore="ContentDescription" >
 
@@ -14,15 +14,36 @@
         android:adjustViewBounds="true"
         android:scaleType="centerCrop" />
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:layout_marginBottom="1dip"
-        android:background="#ffffffff" />
-
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_default"
+        android:background="@color/theme_white">
+
+        <TextView
+            android:id="@+id/song_artist"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textStyle="bold"
+            android:textColor="@color/theme_red" />
+
+        <TextView
+            android:id="@+id/song_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="@color/theme_red" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingTop="4dip" >
@@ -33,25 +54,28 @@
             android:layout_weight="1" />
 
         <ImageButton
+            style="@style/Button_Round_White"
             android:id="@+id/song_skip_backward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_action_previous" />
+            android:src="@drawable/ic_previous" />
+
 
         <ImageButton
+            style="@style/Button_Round_White"
             android:id="@+id/song_play_pause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_action_play" />
+            android:layout_marginLeft="@dimen/space_default"
+            android:layout_marginRight="@dimen/space_default"
+            android:src="@drawable/ic_play" />
 
         <ImageButton
+            style="@style/Button_Round_White"
             android:id="@+id/song_skip_forward"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_action_next" />
+            android:src="@drawable/ic_next" />
 
         <View
             android:layout_width="0dp"
@@ -60,37 +84,5 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="4dip"
-        android:paddingTop="1dip" >
-
-        <TextView
-            android:id="@+id/song_artist"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0"
-            android:ellipsize="marquee"
-            android:gravity="left"
-            android:text="@string/empty"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textStyle="bold|italic" />
-
-        <TextView
-            android:id="@+id/song_title"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0"
-            android:ellipsize="marquee"
-            android:gravity="left"
-            android:singleLine="true"
-            android:text="@string/empty"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textStyle="italic" />
-    </LinearLayout>
 
 </LinearLayout>

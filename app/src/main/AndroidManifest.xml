@@ -11,12 +11,13 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
 
         <activity
             android:name=".ui.activity.SplashscreenActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -26,22 +27,23 @@
         <activity
             android:name=".ui.activity.WelcomeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name="fr.soundfit.android.ui.activity.HomeActivity"
-            android:label="@string/app_name">
-        </activity>
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+
 
         <activity
             android:name="fr.soundfit.android.ui.activity.PlaylistActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".ui.activity.HomeActivity" >
-
+            android:parentActivityName=".ui.activity.HomeActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.activity.HomeActivity" />
-
         </activity>
 
         <service

@@ -7,7 +7,6 @@
         android:src="@drawable/logo_red"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/space_default"
-        android:layout_marginRight="@dimen/space_default" />
+        android:layout_margin="@dimen/space_default"/>
 
 </LinearLayout>

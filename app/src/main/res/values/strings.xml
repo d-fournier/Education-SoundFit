@@ -2,13 +2,6 @@
 <!-- Will contain all localisable string -->
 <resources>
 
-    <!-- Widgets -->
-    <string name="empty"></string>
-    <string name="default_duration">0:00</string>
-
-    <string name="hello_world">Page 1</string>
-    <string name="action_settings">Paramètres</string>
-
     <!-- Authentification -->
     <string name="connect">Se connecter</string>
 
@@ -18,11 +11,17 @@
     <string name="unavailable">Indisponible</string>
     <string name="ok">OK</string>
 
+    <string name="last_performance">Ma dernière performance</string>
+    <string name="next_performance">Ma prochaine performance</string>
+    <string name="speed_unit">%1$s km/h</string>
+    <string name="distance_unit">%1$s km</string>
+
     <!-- MenuDrawer -->
     <string name="home">Accueil</string>
     <string name="playlist">Playlists</string>
     <string name="challenges">Challenges</string>
     <string name="parameters">Paramètres</string>
+
     <!-- MenuSettings -->
     <string name="welcome">Accueil</string>
     <string name="profile">Profil</string>
@@ -61,15 +60,10 @@
     <!-- Start Activity -->
     <string name="selected_level">Niveau sélectionné</string>
     <string name="selected_music">Mode de diffusion sélectionné</string>
+    <string name="no_historic">Aucune course</string>
 
-
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
+    <string name="navigation_drawer_open">Ouvrir Menu</string>
+    <string name="navigation_drawer_close">Fermer Menu</string>
 
     <!-- Playlist -->
     <string name="my_playlist">Mes Playlists</string>

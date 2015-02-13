@@ -176,7 +176,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         if(!mIsBinded && mCurrentTrack != null){
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
-                            .setSmallIcon(R.drawable.ic_action_play)
+                            .setSmallIcon(R.drawable.ic_notification)
                             .setContentTitle(mCurrentTrack.getTitle())
                             .setContentText(mCurrentTrack.getArtist().getName());
             Intent resultIntent = new Intent(this, HomeActivity.class);

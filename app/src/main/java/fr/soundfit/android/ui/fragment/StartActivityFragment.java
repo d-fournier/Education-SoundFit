@@ -150,6 +150,7 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
             Intent intent = new Intent(getActivity(), PlayerService.class);
             Bundle bundle = new Bundle();
             bundle.putLong(PlayerService.EXTRA_PLAYLIST_ID, mPlaylistList.get(mPlaylistSpinner.getSelectedItemPosition()).getId());
+            bundle.putBoolean(PlayerService.EXTRA_IS_USER_PLAYLIST, mMusicSpinner.getSelectedItemPosition() == USER_PLAYLIST);
             intent.putExtras(bundle);
             getActivity().startService(intent);
             displayLoading(true);
