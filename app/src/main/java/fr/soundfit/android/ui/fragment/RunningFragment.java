@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -102,6 +105,18 @@ public class RunningFragment extends GenericFragment implements View.OnClickList
         }
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.running_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
     private void updateView(Track track){
         if(track != null){
             mTitleTV.setText(track.getTitle());
@@ -142,5 +157,18 @@ public class RunningFragment extends GenericFragment implements View.OnClickList
         }
     };
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.stop:
+                if (mBound) {
+                    mService.terminateService();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

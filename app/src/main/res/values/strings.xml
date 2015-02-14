@@ -100,4 +100,5 @@
     <!-- About -->
     <string name="about_desc">SoundFit est une application qui permet d\’adapter des playlists musicales en temps réel en fonction de l\’évolution de l\’activité physique d\’un utilisateur d\’objet connecté ! La capacité de l\’application est de pouvoir créer une interaction entre les objets connectés et la musique.</string>
 
+    <string name="stop">Arrêter</string>
 </resources>

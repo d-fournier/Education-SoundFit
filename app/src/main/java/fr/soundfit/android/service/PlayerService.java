@@ -87,14 +87,12 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     @Override
     public IBinder onBind(Intent intent) {
         mIsBinded = true;
-        updateNotification();
         return mBinder;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
         mIsBinded = false;
-        updateNotification();
         return super.onUnbind(intent);
     }
 
@@ -171,7 +169,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     }
 
     private void updateNotification(){
-        if(!mIsBinded && mCurrentTrack != null){
+        if(mCurrentTrack != null){
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(this)
                             .setSmallIcon(R.drawable.ic_notification)
@@ -184,12 +182,10 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(resultPendingIntent);
             startForeground(NOTIFICATION_ID, mBuilder.build());
-        } else {
-            stopForeground(true);
         }
     }
 
-    private void terminateService(){
+    public void terminateService(){
         sRunning = false;
         mTrackPlayer.stop();
         stopForeground(true);
