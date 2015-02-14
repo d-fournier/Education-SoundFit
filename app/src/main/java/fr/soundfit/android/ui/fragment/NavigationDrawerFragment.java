@@ -193,8 +193,8 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
         outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
+        super.onSaveInstanceState(outState);
     }
 
     @Override

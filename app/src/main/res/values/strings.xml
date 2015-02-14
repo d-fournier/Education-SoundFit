@@ -107,8 +107,8 @@
     <string name="tutorial_start_activity_desc">Vérifiez vos paramètres et appuyez sur la chaussure pour lancer la course et la musique !</string>
 
     <string name="tutorial_playlist_list_title">Playlist</string>
-    <string name="tutorial_playlist_list_desc">Consultez les différentes playlists disponibles et les chansons qu\'elles contiennent.\nChoisissez une de vos playlist pour trier ses chansons selon votre style de course</string>
+    <string name="tutorial_playlist_list_desc">Consultez les différentes playlists disponibles et les chansons qu\'elles contiennent.\nChoisissez une de vos playlists pour trier ses chansons selon votre style de course</string>
 
     <string name="tutorial_sort_title">Triez !</string>
-    <string name="tutorial_sort_desc">Sélectionnez le type de votre musique. Une chanson slow sera diffusée en cas de sur-régime. Une chanson move sera diffusée si vous ralentissez. Une chanson normale sera jouée dans les autres cas !</string>
+    <string name="tutorial_sort_desc">Sélectionnez le type de votre musique.\n- Une chanson slow sera diffusée en cas de sur-régime.\n- Une chanson move sera diffusée si vous ralentissez.\n- Une chanson normale sera jouée dans les autres cas !</string>
 </resources>

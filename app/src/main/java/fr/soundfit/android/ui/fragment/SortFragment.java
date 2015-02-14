@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.deezer.sdk.model.Playlist;
 import com.deezer.sdk.model.Track;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -151,7 +152,12 @@ public class SortFragment extends GenericFragment implements  LoaderManager.Load
             }
         }
         mDisplayedTrack = mUnsortSong.get(0);
-        ImageLoader.getInstance().displayImage(mDisplayedTrack.getAlbum().getCoverUrl(), mCoverSongIV);
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .showImageOnLoading(R.drawable.song_cover)
+                .build();
+        ImageLoader.getInstance().displayImage(mDisplayedTrack.getAlbum().getCoverUrl()+"?size=big", mCoverSongIV, defaultOptions);
         mSongNameTV.setText(mDisplayedTrack.getTitle() + " - " + mDisplayedTrack.getArtist().getName());
     }
 
