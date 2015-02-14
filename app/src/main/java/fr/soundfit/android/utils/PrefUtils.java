@@ -12,6 +12,8 @@ import android.preference.PreferenceManager;
 public class PrefUtils {
 
 
+    private static final String PREF_NEXT_SONG_TYPE = "PREF_NEXT_SONG_TYPE";
+
     private static final String PREF_USER_IS_CONNECTED = "PREF_USER_IS_CONNECTED";
     private static final String PREF_USER_LEVEL = "PREF_USER_LEVEL";
     private static final String PREF_USER_MUSIC_PREFERENCE = "PREF_USER_MUSIC_PREFERENCE";
@@ -76,6 +78,21 @@ public class PrefUtils {
         SharedPreferences sp = PreferenceManager
                 .getDefaultSharedPreferences(context);
         sp.edit().putInt(PREF_USER_MUSIC_PREFERENCE, value).apply();
+    }
+
+    public static int getNextSongType(Context context){
+        if(context == null)
+            return -1;
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getInt(PREF_NEXT_SONG_TYPE, 1);
+    }
+
+    public static void setNextSongType(Context context, int value){
+        if(context == null || value > 2 || value < 0)
+            return ;
+        SharedPreferences sp = PreferenceManager
+                .getDefaultSharedPreferences(context);
+        sp.edit().putInt(PREF_NEXT_SONG_TYPE, value).apply();
     }
 
 

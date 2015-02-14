@@ -40,6 +40,7 @@ import fr.soundfit.android.R;
 import fr.soundfit.android.provider.SoundfitContract;
 import fr.soundfit.android.ui.activity.HomeActivity;
 import fr.soundfit.android.utils.ConstUtils;
+import fr.soundfit.android.utils.PrefUtils;
 import fr.soundfit.android.utils.ResourceUtils;
 
 /**
@@ -233,7 +234,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     }
 
     private void playNextTrack(){
-        int nextLevelSong = 1;
+        int nextLevelSong = PrefUtils.getNextSongType(this);
         if(mAvailableTracks.get(nextLevelSong).size()==0){
             restartPlayer(false);
         }
