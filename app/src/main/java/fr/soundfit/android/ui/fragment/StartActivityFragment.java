@@ -2,6 +2,9 @@ package fr.soundfit.android.ui.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.deezer.sdk.model.Playlist;
 import com.deezer.sdk.network.connect.DeezerConnect;
 import com.deezer.sdk.network.request.AsyncDeezerTask;
@@ -99,12 +103,33 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
 
         mSpeedTV = (TextView) view.findViewById(R.id.speed_text);
         mDistanceTV = (TextView) view.findViewById(R.id.distance_text);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.help_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.help:
+                new MaterialDialog.Builder(getActivity()).title(R.string.tutorial_start_activity_title).content(R.string.tutorial_start_activity_desc)
+                        .positiveText(R.string.ok).show();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
         // TODO Launch Loader for last Informations
     }
 
