@@ -348,11 +348,13 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         }
     }
 
-    public void togglePlayer(){
+    public boolean togglePlayer(){
         if(mTrackPlayer.getPlayerState().equals(PlayerState.PLAYING)){
             mTrackPlayer.pause();
+            return false;
         } else {
             mTrackPlayer.play();
+            return true;
         }
     }
 

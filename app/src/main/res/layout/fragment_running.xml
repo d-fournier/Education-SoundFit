@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/space_default"
             android:layout_marginRight="@dimen/space_default"
-            android:src="@drawable/ic_play" />
+            android:src="@drawable/ic_pause" />
 
         <ImageButton
             style="@style/Button_Round_White"

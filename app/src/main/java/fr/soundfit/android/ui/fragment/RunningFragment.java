@@ -96,7 +96,8 @@ public class RunningFragment extends GenericFragment implements View.OnClickList
     public void onClick(View view) {
         if(mBound){
             if(view == mPlayPause){
-                mService.togglePlayer();
+                int res = mService.togglePlayer() ? R.drawable.ic_pause : R.drawable.ic_play;
+                mPlayPause.setImageResource(res);
             } else if(view == mPreviousBt){
                 mService.previousTrack();
             } else if(view == mNextBt){
