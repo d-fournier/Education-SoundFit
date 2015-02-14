@@ -46,13 +46,17 @@ public class SoundfitContract {
     public interface UserDataColumns {
         /** Default Column _ID */
         /**
-         * Primary key id (INTEGER)
+         * Title id (INTEGER)
          */
         static final String SPEED = "speed";
         /**
-         * Title (TEXT)
+         * Title (INTEGER)
          */
         static final String TIMESTAMP = "timestamp";
+        /**
+         * Title (INTEGER)
+         */
+        static final String DISTANCE = "distance";
 
     }
     public static class SongSortTable implements SongSortColumns, BaseColumns {
@@ -98,11 +102,13 @@ public class SoundfitContract {
         public static class PROG {
             public static int _ID = 0;
             public static int SPEED = 1;
-            public static int TIMESTAMP = 2;
+            public static int DISTANCE = 2;
+            public static int TIMESTAMP = 3;
 
-            public static String[] COLS = new String[]{ //
+            public static String[] COLS_DATA = new String[]{ //
                     BaseColumns._ID,
-                    Tables.USER_DATA + "." + UserDataColumns.SPEED, //
+                    Tables.USER_DATA + "." + UserDataColumns.SPEED,//
+                    Tables.USER_DATA + "." + UserDataColumns.DISTANCE,//
                     Tables.USER_DATA + "." + UserDataColumns.TIMESTAMP, //
             };
         }

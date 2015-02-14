@@ -1,8 +1,5 @@
 package fr.soundfit.android.ui.fragment;
 
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,29 +7,20 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.deezer.sdk.model.Playlist;
-import com.deezer.sdk.model.Track;
 import com.deezer.sdk.network.connect.DeezerConnect;
 import com.deezer.sdk.network.request.AsyncDeezerTask;
 import com.deezer.sdk.network.request.DeezerRequest;
 import com.deezer.sdk.network.request.DeezerRequestFactory;
-import com.deezer.sdk.network.request.event.DeezerError;
 import com.deezer.sdk.network.request.event.JsonRequestListener;
-import com.deezer.sdk.network.request.event.OAuthException;
-import com.deezer.sdk.player.PlaylistPlayer;
-import com.deezer.sdk.player.event.OnPlayerProgressListener;
-import com.deezer.sdk.player.event.PlayerWrapperListener;
-import com.deezer.sdk.player.exception.TooManyPlayersExceptions;
-import com.deezer.sdk.player.networkcheck.WifiAndMobileNetworkStateChecker;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.activity.GenericActivity;
-import fr.soundfit.android.ui.activity.HomeActivity;
 import fr.soundfit.android.ui.activity.PlaylistActivity;
-import fr.soundfit.android.ui.activity.SplashscreenActivity;
 import fr.soundfit.android.ui.adapter.PlaylistAdapter;
+import fr.soundfit.android.utils.DeezerUtils;
 
 /**
  * Project : SoundFit
@@ -94,7 +82,7 @@ public class PlaylistListFragment extends GenericFragment implements AdapterView
         if(mIsUserPlaylist){
             request = DeezerRequestFactory.requestCurrentUserPlaylists();
         } else {
-            request = DeezerRequestFactory.requestUserPlaylists(getResources().getInteger(R.integer.soundfit_deezer_user_id));
+            request = DeezerRequestFactory.requestUserPlaylists(getResources().getInteger(R.integer.deezer_user_soundfit_id));
         }
         AsyncDeezerTask task = new AsyncDeezerTask(mDeezerConnect,new PlaylistListener());
         task.execute(request);
@@ -106,6 +94,7 @@ public class PlaylistListFragment extends GenericFragment implements AdapterView
         Playlist playlist = mPlaylistList.get(position);
         Intent i = new Intent(getActivity(), PlaylistActivity.class);
         i.putExtra(PlaylistActivity.EXTRA_PLAYLIST_ID, playlist.getId());
+        i.putExtra(PlaylistActivity.EXTRA_IS_USER_PLAYLIST, mIsUserPlaylist);
         startActivity(i);
     }
 
@@ -114,7 +103,11 @@ public class PlaylistListFragment extends GenericFragment implements AdapterView
         public void onResult(Object result, Object requestId) {
             mPlaylistList.clear();
             try {
-                mPlaylistList.addAll((List<Playlist>) result);
+                List<Playlist> tmp = (List<Playlist>) result;
+                for(Playlist p : tmp){
+                    if(DeezerUtils.isPlaylistAvailable(p))
+                        mPlaylistList.add(p);
+                }
                 displayLoading(false);
                 mAdapter.notifyDataSetChanged();
             }

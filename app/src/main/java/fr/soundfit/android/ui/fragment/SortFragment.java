@@ -48,8 +48,6 @@ public class SortFragment extends GenericFragment implements  LoaderManager.Load
     private Button mNormalBt;
     private Button mMoveBt;
 
-
-
     public static SortFragment newInstance(Playlist playlist) {
         SortFragment fragment = new SortFragment();
         Bundle args = new Bundle();
@@ -144,8 +142,6 @@ public class SortFragment extends GenericFragment implements  LoaderManager.Load
                 };
                 handler.sendEmptyMessage(0);
                 return;
-            } else {
-                // TODO display no more songs
             }
         }
         mDisplayedTrack = mUnsortSong.get(0);
@@ -164,7 +160,6 @@ public class SortFragment extends GenericFragment implements  LoaderManager.Load
             } else {
                 type = 2;
             }
-            Toast.makeText(getActivity(), "Coucou", Toast.LENGTH_SHORT).show();
             SortService.launchService(getActivity(), mDisplayedTrack.getId(), type);
         }
         displayNextSong();

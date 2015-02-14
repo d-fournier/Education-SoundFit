@@ -14,13 +14,97 @@
         android:padding="@dimen/space_default">
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/last_performance"
+            android:textColor="@color/theme_red"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_xxlarge"
+            android:textAllCaps="true"/>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/space_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:background="@drawable/button_round_red"
+                android:layout_width="@dimen/circle_icon"
+                android:layout_height="@dimen/circle_icon"
+                android:src="@drawable/ic_speed"
+                android:scaleType="centerInside"
+                android:padding="@dimen/space_small"/>
+
+            <TextView
+                android:id="@+id/speed_text"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/space_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/loading"
+                android:textColor="@color/theme_red"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/space_default"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:background="@drawable/button_round_red"
+                android:layout_width="@dimen/circle_icon"
+                android:layout_height="@dimen/circle_icon"
+                android:src="@drawable/ic_distance"
+                android:scaleType="centerInside"
+                android:padding="@dimen/space_small"/>
+            <TextView
+                android:id="@+id/distance_text"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/space_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/loading"
+                android:textColor="@color/theme_red"/>
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="@dimen/space_default"
+            android:layout_marginBottom="@dimen/space_default"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:padding="@dimen/space_default"
+            android:background="@color/theme_red"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/next_performance"
+            android:textColor="@color/theme_red"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_xxlarge"
+            android:textAllCaps="true"/>
+
+        <TextView
             android:text="@string/selected_level"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_medium"/>
+
         <Spinner
             android:id="@+id/start_activity_spinner_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/space_small"
             android:entries="@array/level_string_array"/>
 
         <TextView
@@ -42,25 +126,38 @@
             custom:connectingLineColor ="@color/theme_red"/>
 
         <TextView
-            android:text="@string/selected_level"
+            android:text="@string/selected_music"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_medium" />
 
         <Spinner
             android:id="@+id/start_activity_spinner_music"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/space_small"
             android:entries="@array/preference_music_array"/>
+
+        <TextView
+            android:text="@string/selected_playlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_medium" />
 
         <Spinner
             android:id="@+id/start_activity_spinner_playlist"
+            android:padding="@dimen/space_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
         <ImageButton
-            android:id="@+id/start_activity_validate"
             style="@style/Button_Round_Red"
-            android:src="@drawable/abc_ic_menu_paste_mtrl_am_alpha"
+            android:id="@+id/start_activity_validate"
+            android:src="@drawable/ic_basket"
+            android:scaleType="fitCenter"
+            android:padding="@dimen/space_small"
             android:layout_width="@dimen/circle_length"
             android:layout_height="@dimen/circle_length" />
 

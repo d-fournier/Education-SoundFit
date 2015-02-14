@@ -23,12 +23,14 @@ import com.getpebble.android.kit.Constants;
 import com.getpebble.android.kit.PebbleKit;
 import com.getpebble.android.kit.util.PebbleDictionary;
 
+import java.sql.Timestamp;
 import java.util.Random;
 
 import java.util.ArrayList;
 
 import fr.soundfit.android.provider.SoundfitContract;
 import fr.soundfit.android.provider.SoundfitDatabase;
+import fr.soundfit.android.utils.PrefUtils;
 
 /**
  * Created by Emmael on 13/02/2015.
@@ -42,11 +44,17 @@ public class GetUserDataService extends IntentService {
     private int sportsState = Constants.SPORTS_STATE_INIT;
     private boolean useMetric = false;
 
+    //Ma bdd
     protected static SoundfitDatabase mDatabase;
+    //
+    protected static PrefUtils mPrefUtils;
 
     public GetUserDataService() {
         super(TAG);
+        //j'initialise ma base de donnée
         mDatabase = new SoundfitDatabase(getApplicationContext(), SoundfitDatabase.DATABASE_NAME, null, SoundfitDatabase.DATABASE_VERSION);
+        //j'initialise ma variable
+        //mPrefUtils = new PrefUtils();
     }
     public GetUserDataService(String name) {
         super(name);
@@ -57,9 +65,10 @@ public class GetUserDataService extends IntentService {
 
         //création d'une content value
         ContentValues values = new ContentValues();
-        //j'associe une valeur à un nom de colonne
-        /*values.put();
-        values.put();*/
+        //j'associe MES VALEURES à mes noms de colonnes
+        values.put(SoundfitContract.UserDataColumns.SPEED,Constants.SPORTS_DATA_SPEED);
+        values.put(SoundfitContract.UserDataColumns.DISTANCE,Constants.SPORTS_DISTANCE_KEY);
+        values.put(SoundfitContract.UserDataColumns.TIMESTAMP,new Timestamp(System.currentTimeMillis()).getTime());
 
         /**
          * Il faut que je créer ma table USER DATA MAIS pas ici, dans SoundfitDatabase
@@ -69,10 +78,10 @@ public class GetUserDataService extends IntentService {
         final SQLiteDatabase db = mDatabase.getWritableDatabase();
 
         //Je recupere la vitesse et j'enregistre dans la bdd
-        //db.insertOrThrow(SoundfitContract.Tables.USER_DATA, null, values);
+        db.insertOrThrow(SoundfitContract.Tables.USER_DATA, null, values);
 
         // Send a broadcast to launch the specified application on the connected Pebble
-            PebbleKit.startAppOnPebble(getApplicationContext(), Constants.SPORTS_UUID);
+        PebbleKit.startAppOnPebble(getApplicationContext(), Constants.SPORTS_UUID);
 
 
         //Choix de la musique
@@ -85,18 +94,17 @@ public class GetUserDataService extends IntentService {
      */
     public void ChoixDeLaMusique(){
 
-     if (Constants.SPORTS_DATA_SPEED >6 && Constants.SPORTS_DATA_SPEED <9) {
-         //ici je lance la playliste move
+        if (Constants.SPORTS_DATA_SPEED >6 && Constants.SPORTS_DATA_SPEED <9) {
+            //ici je lance la playliste move
+            PrefUtils.setNextSongType(getApplicationContext(),2);
+        }
+        else if (Constants.SPORTS_DATA_SPEED >9 && Constants.SPORTS_DATA_SPEED <11) {
+            //ici je lance la playliste normal
+            PrefUtils.setNextSongType(getApplicationContext(),1);
 
-      }
-     else if (Constants.SPORTS_DATA_SPEED >9 && Constants.SPORTS_DATA_SPEED <11) {
-        //ici je lance la playliste normal
-
-
-     }else if (Constants.SPORTS_DATA_SPEED >11 && Constants.SPORTS_DATA_SPEED <14) {
-        //ici je lance la playliste slow
-
-      }
+        }else if (Constants.SPORTS_DATA_SPEED >11 && Constants.SPORTS_DATA_SPEED <14) {
+            //ici je lance la playliste slow
+            PrefUtils.setNextSongType(getApplicationContext(),0);
+        }
     }
 }
-

@@ -13,7 +13,8 @@ public class ResourceUtils {
     public enum ResourceType{
         ID ("id"),
         STRING ("string"),
-        DRAWABLE ("drawable");
+        DRAWABLE ("drawable"),
+        ARRAY ("array");
 
         private String mName = "";
         ResourceType(String name){
@@ -29,6 +30,13 @@ public class ResourceUtils {
             return -1;
         Resources r = context.getResources();
         return r.getIdentifier(type + "_" + baseName, type.toString(), context.getPackageName());
+    }
+
+    public static int getResourceId(String prefix, ResourceType type, String baseName, Context context){
+        if(context == null)
+            return -1;
+        Resources r = context.getResources();
+        return r.getIdentifier(prefix + "_" + baseName, type.toString(), context.getPackageName());
     }
 
 

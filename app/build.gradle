@@ -27,5 +27,6 @@ dependencies {
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.2@jar'
     compile 'com.melnykov:floatingactionbutton:1.2.0'
     compile 'com.pnikosis:materialish-progress:1.4'
+    compile 'com.afollestad:material-dialogs:0.6.2.4'
     compile 'com.getpebble:pebblekit:2.5.0'
 }

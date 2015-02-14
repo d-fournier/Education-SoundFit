@@ -50,6 +50,7 @@ public class SoundfitDatabase extends SQLiteOpenHelper {
                 .append("CREATE TABLE ").append(SoundfitContract.Tables.USER_DATA) //
                 .append(" ( '").append(BaseColumns._ID).append("' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, '") //
                 .append(SoundfitContract.UserDataTable.SPEED).append("' INTEGER NOT NULL, '") //
+                .append(SoundfitContract.UserDataTable.DISTANCE).append("' INTEGER NOT NULL, '") //
                 .append(SoundfitContract.UserDataTable.TIMESTAMP).append("' INTEGER NOT NULL ); '") //
                 .toString();
         execSQL(newsTable, sqLiteDatabase);
