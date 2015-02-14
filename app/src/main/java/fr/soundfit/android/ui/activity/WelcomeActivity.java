@@ -25,7 +25,7 @@ public class WelcomeActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-        mAdapter = new WelcomePagerAdapter(getSupportFragmentManager());
+        mAdapter = new WelcomePagerAdapter(getSupportFragmentManager(), this);
         mPager = (ViewPager)findViewById(R.id.welcome_pager);
         mPager.setAdapter(mAdapter);
     }

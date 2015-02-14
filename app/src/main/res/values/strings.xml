@@ -46,6 +46,15 @@
     <string name="password">Mot de passe</string>
     <string name="password_again">Confirmez le mot de passe</string>
 
+    <!-- Tuto -->
+    <string name="tuto_motivate_title">Motivez vous !</string>
+    <string name="tuto_motivate_desc">Soundfit permet d\adapter vos musiques préférées en temps réel, en fonction de l\évolution de votre activité physique.</string>
+    <string name="tuto_discover_title">Découvrez !</string>
+    <string name="tuto_discover_desc">Laissez Soundfit vous faire découvrir de nouveaux morceaux !</string>
+    <string name="tuto_share_title">Partagez !</string>
+    <string name="tuto_share_desc">Partagez ensuite les nouveaux morceaux découverts avec vos amis !</string>
+
+    
     <!-- Level -->
     <string name="level_chooser_title">Choix du niveau</string>
     <string name="level_chooser_beginner">Débutant</string>
