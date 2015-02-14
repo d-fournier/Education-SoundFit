@@ -76,7 +76,7 @@ public class GetUserDataService extends IntentService {
 
 
         //Choix de la musique
-        //ChoixDeLaMusique()
+        ChoixDeLaMusique();
     }
 
     /**
@@ -91,6 +91,7 @@ public class GetUserDataService extends IntentService {
       }
      else if (Constants.SPORTS_DATA_SPEED >9 && Constants.SPORTS_DATA_SPEED <11) {
         //ici je lance la playliste normal
+
 
      }else if (Constants.SPORTS_DATA_SPEED >11 && Constants.SPORTS_DATA_SPEED <14) {
         //ici je lance la playliste slow
