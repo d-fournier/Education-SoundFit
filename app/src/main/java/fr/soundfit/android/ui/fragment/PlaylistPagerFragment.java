@@ -3,7 +3,12 @@ package fr.soundfit.android.ui.fragment;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.adapter.PlaylistPagerAdapter;
@@ -41,11 +46,34 @@ public class PlaylistPagerFragment extends GenericFragment implements SlidingTab
         mSlidingTabLayout.setDistributeEvenly(true);
         mSlidingTabLayout.setCustomTabColorizer(this);
         mSlidingTabLayout.setViewPager(mViewPager);
+
+        setHasOptionsMenu(true);
     }
 
     @Override
     public int getIndicatorColor(int position) {
         return getResources().getColor(R.color.theme_red);
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.help_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.help:
+                new MaterialDialog.Builder(getActivity()).title(R.string.tutorial_playlist_list_title).content(R.string.tutorial_playlist_list_desc)
+                        .positiveText(R.string.ok).show();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

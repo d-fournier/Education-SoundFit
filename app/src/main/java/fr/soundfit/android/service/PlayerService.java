@@ -29,6 +29,7 @@ import com.deezer.sdk.player.event.OnPlayerStateChangeListener;
 import com.deezer.sdk.player.event.PlayerState;
 import com.deezer.sdk.player.event.PlayerWrapperListener;
 import com.deezer.sdk.player.exception.TooManyPlayersExceptions;
+import com.deezer.sdk.player.networkcheck.WifiAndMobileNetworkStateChecker;
 import com.deezer.sdk.player.networkcheck.WifiOnlyNetworkStateChecker;
 
 import java.util.ArrayList;
@@ -112,7 +113,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         mDeezerConnect = new DeezerConnect(this, getString(R.string.deezer_app_id));
         new SessionStore().restore(mDeezerConnect, this);
         try {
-            mTrackPlayer = new TrackPlayer(getApplication(), mDeezerConnect, new WifiOnlyNetworkStateChecker());
+            mTrackPlayer = new TrackPlayer(getApplication(), mDeezerConnect, new WifiAndMobileNetworkStateChecker());
             mTrackPlayer.addPlayerListener(this);
             mTrackPlayer.addOnPlayerStateChangeListener(this);
         } catch (TooManyPlayersExceptions tooManyPlayersExceptions) {
@@ -347,11 +348,13 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         }
     }
 
-    public void togglePlayer(){
+    public boolean togglePlayer(){
         if(mTrackPlayer.getPlayerState().equals(PlayerState.PLAYING)){
             mTrackPlayer.pause();
+            return false;
         } else {
             mTrackPlayer.play();
+            return true;
         }
     }
 

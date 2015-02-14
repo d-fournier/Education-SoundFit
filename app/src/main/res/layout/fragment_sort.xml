@@ -9,10 +9,13 @@ android:background="@color/theme_white">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
+        android:src="@drawable/song_cover"
         android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/sort_song_name"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -28,6 +31,7 @@ android:background="@color/theme_white">
             android:layout_weight="1"
             android:text="@string/slow_playlist"
             android:layout_height="match_parent"
+            android:textColor="@color/theme_red"
             android:tag="0"/>
         <Button
             android:id="@+id/sort_normal_button"
@@ -36,6 +40,7 @@ android:background="@color/theme_white">
             android:layout_weight="1"
             android:text="@string/normal_playlist"
             android:layout_height="match_parent"
+            android:textColor="@color/theme_red"
             android:tag="1"/>
         <Button
             android:id="@+id/sort_move_button"
@@ -44,6 +49,7 @@ android:background="@color/theme_white">
             android:layout_weight="1"
             android:text="@string/move_playlist"
             android:layout_height="match_parent"
+            android:textColor="@color/theme_red"
             android:tag="2"/>
 
     </LinearLayout>

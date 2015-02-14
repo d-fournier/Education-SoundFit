@@ -8,14 +8,19 @@ import android.os.Message;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.deezer.sdk.model.Playlist;
 import com.deezer.sdk.model.Track;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
@@ -82,6 +87,8 @@ public class SortFragment extends GenericFragment implements  LoaderManager.Load
         mNormalBt.setOnClickListener(this);
         mMoveBt = (Button) view.findViewById(R.id.sort_move_button);
         mMoveBt.setOnClickListener(this);
+
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -145,7 +152,12 @@ public class SortFragment extends GenericFragment implements  LoaderManager.Load
             }
         }
         mDisplayedTrack = mUnsortSong.get(0);
-        ImageLoader.getInstance().displayImage(mDisplayedTrack.getAlbum().getCoverUrl(), mCoverSongIV);
+        DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .showImageOnLoading(R.drawable.song_cover)
+                .build();
+        ImageLoader.getInstance().displayImage(mDisplayedTrack.getAlbum().getCoverUrl()+"?size=big", mCoverSongIV, defaultOptions);
         mSongNameTV.setText(mDisplayedTrack.getTitle() + " - " + mDisplayedTrack.getArtist().getName());
     }
 
@@ -164,4 +176,27 @@ public class SortFragment extends GenericFragment implements  LoaderManager.Load
         }
         displayNextSong();
     }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.help_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.help:
+                new MaterialDialog.Builder(getActivity()).title(R.string.tutorial_sort_title).content(R.string.tutorial_sort_desc)
+                        .positiveText(R.string.ok).show();
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
 }

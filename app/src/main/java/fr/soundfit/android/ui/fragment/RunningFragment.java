@@ -90,17 +90,24 @@ public class RunningFragment extends GenericFragment implements View.OnClickList
         mTitleTV = (TextView) view.findViewById(R.id.song_title);
         mArtistTV = (TextView) view.findViewById(R.id.song_artist);
         mCoverIV = (ImageView) view.findViewById(R.id.song_cover);
+        mPreviousBt.setEnabled(false);
+        mNextBt.setEnabled(false);
     }
 
     @Override
     public void onClick(View view) {
         if(mBound){
             if(view == mPlayPause){
-                mService.togglePlayer();
+                int res = mService.togglePlayer() ? R.drawable.ic_pause : R.drawable.ic_play;
+                mPlayPause.setImageResource(res);
             } else if(view == mPreviousBt){
                 mService.previousTrack();
+                mPreviousBt.setEnabled(false);
+                mNextBt.setEnabled(false);
             } else if(view == mNextBt){
                 mService.nextTrack();
+                mPreviousBt.setEnabled(false);
+                mNextBt.setEnabled(false);
             }
         }
     }
@@ -127,6 +134,8 @@ public class RunningFragment extends GenericFragment implements View.OnClickList
                     .showImageOnLoading(R.drawable.song_cover)
                     .build();
             ImageLoader.getInstance().displayImage(track.getAlbum().getCoverUrl()+"?size=big", mCoverIV, defaultOptions);
+            mPreviousBt.setEnabled(true);
+            mNextBt.setEnabled(true);
         }
     }
 
