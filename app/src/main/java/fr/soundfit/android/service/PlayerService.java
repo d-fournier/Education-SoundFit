@@ -68,7 +68,9 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     private DeezerConnect mDeezerConnect;
     private long mPlaylistId;
     private Playlist mPlaylist;
+
     private Track mCurrentTrack;
+    private int mCurrentType;
 
     private boolean mIsUserPlaylist;
 
@@ -77,6 +79,8 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     private SparseArray<List<Track>> mAllTracks = new SparseArray<>(3);
 
     private SparseArray<List<Track>> mAvailableTracks = new SparseArray<>(3);
+
+    private List<Long> mHistory = new ArrayList<>();
 
     public class LocalBinder extends Binder {
         public PlayerService getService() {
@@ -212,6 +216,9 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
 
     @Override
     public void onPlayTrack(Track track) {
+        if(mCurrentTrack != null){
+            mHistory.add(0, mCurrentTrack.getId());
+        }
         mCurrentTrack = track;
         updateNotification();
         sendTrackBroadcast();
@@ -234,13 +241,14 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     }
 
     private void playNextTrack(){
-        int nextLevelSong = PrefUtils.getNextSongType(this);
-        if(mAvailableTracks.get(nextLevelSong).size()==0){
+        int nextSongType = PrefUtils.getNextSongType(this);
+        if(mAvailableTracks.get(nextSongType).size()==0){
             restartPlayer(false);
         }
-        long id = mAvailableTracks.get(nextLevelSong).get(0).getId();
-        mAvailableTracks.get(nextLevelSong).remove(0);
+        long id = mAvailableTracks.get(nextSongType).get(0).getId();
+        mAvailableTracks.get(nextSongType).remove(0);
         mTrackPlayer.playTrack(id);
+        mCurrentType = nextSongType;
     }
 
     private void restartPlayer(boolean autoplay){
@@ -331,7 +339,12 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     }
 
     public void previousTrack(){
-        mTrackPlayer.skipToPreviousTrack();
+        if(mHistory.size()>0){
+            mAvailableTracks.get(mCurrentType).add(0, mCurrentTrack);
+            mCurrentTrack = null;
+            mTrackPlayer.playTrack(mHistory.get(0));
+            mHistory.remove(0);
+        }
     }
 
     public void togglePlayer(){
