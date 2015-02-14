@@ -1,0 +1,28 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_grey_dark">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/shortly_challenge"
+        android:scaleType="centerInside"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/theme_white_alpha"/>
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/shortly"
+        android:textSize="@dimen/text_size_xxlarge"
+        android:textColor="@color/theme_red"
+        android:textStyle="bold"
+        android:textAllCaps="true"/>
+
+</FrameLayout>

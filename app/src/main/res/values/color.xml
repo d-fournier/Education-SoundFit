@@ -11,5 +11,6 @@
     <color name="theme_grey_dark">#494c4a</color>
     <color name="theme_black">#000000</color>
 
+    <color name="theme_white_alpha">#CCFFFFFF</color>
 
 </resources>

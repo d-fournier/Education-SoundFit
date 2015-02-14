@@ -14,12 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.deezer.sdk.model.Track;
-
 import fr.soundfit.android.R;
 import fr.soundfit.android.service.PlayerService;
 import fr.soundfit.android.ui.fragment.NavigationDrawerFragment;
-import fr.soundfit.android.ui.fragment.PlaceholderFragment;
+import fr.soundfit.android.ui.fragment.ChallengeFragment;
 import fr.soundfit.android.ui.fragment.PlaylistPagerFragment;
 import fr.soundfit.android.ui.fragment.RunningFragment;
 import fr.soundfit.android.ui.fragment.SettingsFragment;
@@ -88,13 +86,13 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
                 fragment = PlaylistPagerFragment.newInstance();
                 break;
             case R.id.id_drawer_challenges:
-                fragment = PlaceholderFragment.newInstance();
+                fragment = ChallengeFragment.newInstance();
                 break;
             case R.id.id_drawer_parameter:
                 fragment = SettingsFragment.newInstance();
                 break;
             default:
-                fragment = PlaceholderFragment.newInstance();
+                fragment = ChallengeFragment.newInstance();
                 break;
         }
         fragmentManager.beginTransaction()
