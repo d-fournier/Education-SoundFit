@@ -2,11 +2,14 @@
 <resources>
 
     <color name="theme_transparent">#00000000</color>
-    <color name="theme_red">#c10000</color>
-    <color name="theme_red_light">#fff80000</color>
-    <color name="theme_red_dark">#ff840000</color>
+    <color name="theme_red">#c5363b</color>
+    <color name="theme_red_light">#FFF6373C</color>
+    <color name="theme_red_dark">#FFA23237</color>
     <color name="theme_white">#FFFFFF</color>
-    <color name="theme_black">#000000</color>
+    <color name="theme_grey_light">#ffc5c5c5</color>
     <color name="theme_grey">#ff808080</color>
-    <color name="player_background">#Fccc</color>
+    <color name="theme_grey_dark">#494c4a</color>
+    <color name="theme_black">#000000</color>
+
+
 </resources>

@@ -1,5 +1,6 @@
 package fr.soundfit.android.ui.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.afollestad.materialdialogs.MaterialDialog;
 
 import fr.soundfit.android.R;
 import fr.soundfit.android.ui.adapter.DrawerAdapter;
@@ -50,8 +53,10 @@ public class SettingsFragment extends GenericFragment implements AdapterView.OnI
         int itemId = ResourceUtils.getResourceId(ResourceUtils.ResourceType.ID, tag, getActivity());
         switch(itemId){
             case R.id.id_settings_my_account:
+                showShortly(R.string.account_desc);
                 break;
             case R.id.id_settings_sharing:
+                showShortly(R.string.share_desc);
                 break;
             case R.id.id_settings_my_music:
                 showMusicDialog();
@@ -60,10 +65,13 @@ public class SettingsFragment extends GenericFragment implements AdapterView.OnI
                 showLevelDialog();
                 break;
             case R.id.id_settings_my_connected_objects:
+                showShortly(R.string.connected_things_desc);
                 break;
             case R.id.id_settings_about_soundfit:
+                showAbout();
                 break;
             case R.id.id_settings_discover_app:
+                showShortly(R.string.connected_things_desc);
                 break;
             case R.id.id_settings_contact_us:
                 contactUs();
@@ -102,4 +110,15 @@ public class SettingsFragment extends GenericFragment implements AdapterView.OnI
         newFragment.show(ft, MusicPreferenceChooserFragment.TAG);
         newFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
     }
+
+    private void showAbout(){
+        new MaterialDialog.Builder(getActivity()).title(R.string.about).content(R.string.about_desc)
+                .positiveText(R.string.ok).show();
+    }
+
+    private void showShortly(int message){
+        new MaterialDialog.Builder(getActivity()).title(R.string.shortly).content(message)
+                .positiveText(R.string.ok).show();
+    }
+
 }

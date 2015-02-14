@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.deezer.sdk.model.Track;
 
@@ -61,6 +62,7 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
         super.onStart();
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter(ConstUtils.BroadcastConst.EVENT_INIT));
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter(ConstUtils.BroadcastConst.EVENT_STOP));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter(ConstUtils.BroadcastConst.EVENT_ERROR));
     }
 
     @Override
@@ -141,6 +143,9 @@ public class HomeActivity extends GenericActivity implements NavigationDrawerFra
         @Override
         public void onReceive(Context context, Intent intent) {
             if (intent.getAction().equals(ConstUtils.BroadcastConst.EVENT_INIT) || intent.getAction().equals(ConstUtils.BroadcastConst.EVENT_STOP)) {
+                mNavigationDrawerFragment.updateHomeFragment();
+            } else if(intent.getAction().equals(ConstUtils.BroadcastConst.EVENT_ERROR)){
+                Toast.makeText(HomeActivity.this, "Erreur", Toast.LENGTH_LONG).show();
                 mNavigationDrawerFragment.updateHomeFragment();
             }
 

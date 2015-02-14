@@ -22,7 +22,7 @@
                 android:layout_marginTop="@dimen/space_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/splashscreen_logo" />
+                android:src="@drawable/logo_red" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,14 +47,14 @@
                     <Button
                         android:id="@+id/chooser_first_choice"
                         style="@style/Button_Rounded_Red"
-                        android:drawableLeft="@drawable/dice_1"
+                        android:drawableLeft="@drawable/music_pref_ic_discover"
                         android:text="@string/music_chooser_discover"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <Button
                         android:id="@+id/chooser_second_choice"
                         style="@style/Button_Rounded_Red"
-                        android:drawableLeft="@drawable/dice_2"
+                        android:drawableLeft="@drawable/music_pref_ic_user_playlist"
                         android:text="@string/music_chooser_my_playlist"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>

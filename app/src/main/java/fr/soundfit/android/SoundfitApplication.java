@@ -37,8 +37,7 @@ public class SoundfitApplication extends Application {
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
                 .cacheOnDisk(true)
-                // TODO Update Drawable
-                .showImageOnLoading(R.drawable.ic_action_options)
+                .showImageOnLoading(R.drawable.song_cover_small)
                 .build();
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
                 .threadPriority(Thread.NORM_PRIORITY - 2)
@@ -46,7 +45,6 @@ public class SoundfitApplication extends Application {
                 .diskCacheSize(10 * 1024 * 1024) // 10 Mb
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .defaultDisplayImageOptions(defaultOptions)
-
                 .build();
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config);

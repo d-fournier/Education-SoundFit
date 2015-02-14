@@ -10,12 +10,16 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.deezer.sdk.model.Track;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import org.w3c.dom.Text;
@@ -101,11 +105,28 @@ public class RunningFragment extends GenericFragment implements View.OnClickList
         }
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.running_menu, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
     private void updateView(Track track){
         if(track != null){
             mTitleTV.setText(track.getTitle());
             mArtistTV.setText(track.getArtist().getName());
-            ImageLoader.getInstance().displayImage(track.getAlbum().getCoverUrl(), mCoverIV);
+            DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
+                    .cacheInMemory(true)
+                    .cacheOnDisk(true)
+                    .showImageOnLoading(R.drawable.song_cover)
+                    .build();
+            ImageLoader.getInstance().displayImage(track.getAlbum().getCoverUrl()+"?size=big", mCoverIV, defaultOptions);
         }
     }
 
@@ -136,5 +157,18 @@ public class RunningFragment extends GenericFragment implements View.OnClickList
         }
     };
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.stop:
+                if (mBound) {
+                    mService.terminateService();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 }

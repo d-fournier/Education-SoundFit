@@ -80,7 +80,7 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
         mDrawerListView = (ListView) view;
         mDrawerListView.setOnItemClickListener(this);
         mAdapter = new DrawerAdapter(getActivity(), R.array.drawer_items);
-        mDrawerListView.addHeaderView(inflater.inflate(R.layout.item_drawer_header, container));
+        mDrawerListView.addHeaderView(inflater.inflate(R.layout.item_drawer_header, container), null, false);
         mDrawerListView.setAdapter(mAdapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return view;

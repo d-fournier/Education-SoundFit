@@ -4,6 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/theme_red</item>
         <item name="colorPrimaryDark">@color/theme_red_dark</item>
+        <item name="md_positive_color">@color/theme_red</item>
     </style>
 
     <!-- Base application theme. -->
@@ -29,9 +30,17 @@
         <item name="android:textSize">@dimen/text_size_large</item>
     </style>
 
-    <style name="Button_Round_Red">
+    <style name="Button_Round_Red" parent="Button_Round">
         <item name="android:background">@drawable/button_round_red</item>
         <item name="android:textColor">@color/theme_white</item>
+    </style>
+
+    <style name="Button_Round_White" parent="Button_Round">
+        <item name="android:background">@drawable/button_round_white</item>
+        <item name="android:textColor">@color/theme_red</item>
+    </style>
+
+    <style name="Button_Round">
         <item name="android:padding">@dimen/space_default</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/text_size_large</item>

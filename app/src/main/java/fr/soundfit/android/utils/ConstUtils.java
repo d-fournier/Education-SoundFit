@@ -14,6 +14,10 @@ public class ConstUtils {
         public static final String EVENT_NEW_TRACK = "fr.soundfit.android.EVENT_NEW_TRACK";
         public static final String EXTRA_TRACK = "fr.soundfit.android.EXTRA_TRACK";
 
+        public static final String EVENT_ERROR = "fr.soundfit.android.EVENT_ERROR";
+        public static final String EXTRA_MESSAGE = "fr.soundfit.android.EXTRA_MESSAGE";
+
+
     }
 
 

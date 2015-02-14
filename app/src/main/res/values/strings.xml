@@ -2,13 +2,6 @@
 <!-- Will contain all localisable string -->
 <resources>
 
-    <!-- Widgets -->
-    <string name="empty"></string>
-    <string name="default_duration">0:00</string>
-
-    <string name="hello_world">Page 1</string>
-    <string name="action_settings">Paramètres</string>
-
     <!-- Authentification -->
     <string name="connect">Se connecter</string>
 
@@ -18,11 +11,19 @@
     <string name="unavailable">Indisponible</string>
     <string name="ok">OK</string>
 
+    <string name="last_performance">Ma dernière performance</string>
+    <string name="next_performance">Ma prochaine performance</string>
+    <string name="speed_unit">%1$s km/h</string>
+    <string name="distance_unit">%1$s km</string>
+    <string name="no_information">Aucune information</string>
+    <string name="loading">Chargement des informations &#8230;</string>
+
     <!-- MenuDrawer -->
     <string name="home">Accueil</string>
     <string name="playlist">Playlists</string>
     <string name="challenges">Challenges</string>
     <string name="parameters">Paramètres</string>
+
     <!-- MenuSettings -->
     <string name="welcome">Accueil</string>
     <string name="profile">Profil</string>
@@ -45,6 +46,15 @@
     <string name="password">Mot de passe</string>
     <string name="password_again">Confirmez le mot de passe</string>
 
+    <!-- Tuto -->
+    <string name="tuto_motivate_title">Motivez vous !</string>
+    <string name="tuto_motivate_desc">Soundfit permet d\adapter vos musiques préférées en temps réel, en fonction de l\évolution de votre activité physique.</string>
+    <string name="tuto_discover_title">Découvrez !</string>
+    <string name="tuto_discover_desc">Laissez Soundfit vous faire découvrir de nouveaux morceaux !</string>
+    <string name="tuto_share_title">Partagez !</string>
+    <string name="tuto_share_desc">Partagez ensuite les nouveaux morceaux découverts avec vos amis !</string>
+
+    
     <!-- Level -->
     <string name="level_chooser_title">Choix du niveau</string>
     <string name="level_chooser_beginner">Débutant</string>
@@ -61,15 +71,11 @@
     <!-- Start Activity -->
     <string name="selected_level">Niveau sélectionné</string>
     <string name="selected_music">Mode de diffusion sélectionné</string>
+    <string name="selected_playlist">Playlist sélectionnée</string>
+    <string name="no_historic">Aucune course</string>
 
-
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="action_example">Example action</string>
+    <string name="navigation_drawer_open">Ouvrir Menu</string>
+    <string name="navigation_drawer_close">Fermer Menu</string>
 
     <!-- Playlist -->
     <string name="my_playlist">Mes Playlists</string>
@@ -83,4 +89,16 @@
     <string name="contact_subject">Application Soundfit - Android</string>
     <string name="contact_chooser">Envoyer par email</string>
 
+    <!-- Error -->
+    <string name="error_playlist_not_completed">Erreur\nLa playlist n\'est pas conforme.</string>
+    <string name="shortly">Prochainement</string>
+    <string name="account_desc">Vous pourrez consulter toutes les informations relatives à votre compte en ligne SoundFit.</string>
+    <string name="share_desc">Vous pourrez gérer les options de partage automatique en fin d\'activité.</string>
+    <string name="connected_things_desc">Vous pourrez bientot ajouter de nombreux objets connectés des marques partenaires (Withings &#8230;)</string>
+    <string name="discover_desc">Vous pourrez bientôt retrouver les tutoriaux et les aides disponibles dans cette section</string>
+
+    <!-- About -->
+    <string name="about_desc">SoundFit est une application qui permet d\’adapter des playlists musicales en temps réel en fonction de l\’évolution de l\’activité physique d\’un utilisateur d\’objet connecté ! La capacité de l\’application est de pouvoir créer une interaction entre les objets connectés et la musique.</string>
+
+    <string name="stop">Arrêter</string>
 </resources>
