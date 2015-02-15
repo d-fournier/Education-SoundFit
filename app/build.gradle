@@ -28,4 +28,5 @@ dependencies {
     compile 'com.melnykov:floatingactionbutton:1.2.0'
     compile 'com.pnikosis:materialish-progress:1.4'
     compile 'com.afollestad:material-dialogs:0.6.2.4'
+    compile 'com.getpebble:pebblekit:2.6.0@aar'
 }

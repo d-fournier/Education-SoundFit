@@ -33,6 +33,16 @@ android:background="@color/theme_white">
             android:layout_height="match_parent"
             android:textColor="@color/theme_red"
             android:tag="0"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/theme_red"
+            android:layout_marginTop="@dimen/space_big"
+            android:layout_marginBottom="@dimen/space_big"
+            />
+
+
         <Button
             android:id="@+id/sort_normal_button"
             style="?android:attr/buttonBarButtonStyle"
@@ -42,6 +52,16 @@ android:background="@color/theme_white">
             android:layout_height="match_parent"
             android:textColor="@color/theme_red"
             android:tag="1"/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/theme_red"
+            android:layout_marginTop="@dimen/space_big"
+            android:layout_marginBottom="@dimen/space_big"
+            />
+
+
         <Button
             android:id="@+id/sort_move_button"
             style="?android:attr/buttonBarButtonStyle"

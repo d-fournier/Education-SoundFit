@@ -10,6 +10,7 @@
     <string name="validate">Valider</string>
     <string name="unavailable">Indisponible</string>
     <string name="ok">OK</string>
+    <string name="test">Tester quand même</string>
 
     <string name="last_performance">Ma dernière performance</string>
     <string name="next_performance">Ma prochaine performance</string>
@@ -48,7 +49,7 @@
 
     <!-- Tuto -->
     <string name="tuto_motivate_title">Motivez vous !</string>
-    <string name="tuto_motivate_desc">Soundfit permet d\adapter vos musiques préférées en temps réel, en fonction de l\évolution de votre activité physique.</string>
+    <string name="tuto_motivate_desc">Soundfit permet d\'adapter vos musiques préférées en temps réel, en fonction de l\'évolution de votre activité physique.</string>
     <string name="tuto_discover_title">Découvrez !</string>
     <string name="tuto_discover_desc">Laissez Soundfit vous faire découvrir de nouveaux morceaux !</string>
     <string name="tuto_share_title">Partagez !</string>
@@ -94,14 +95,18 @@
     <string name="shortly">Prochainement</string>
     <string name="account_desc">Vous pourrez consulter toutes les informations relatives à votre compte en ligne SoundFit.</string>
     <string name="share_desc">Vous pourrez gérer les options de partage automatique en fin d\'activité.</string>
-    <string name="connected_things_desc">Vous pourrez bientot ajouter de nombreux objets connectés des marques partenaires (Withings &#8230;)</string>
+    <string name="connected_things_desc">Vous pourrez bientot ajouter de nombreux objets connectés des marques partenaires (Withings, Ironova &#8230;)</string>
     <string name="discover_desc">Vous pourrez bientôt retrouver les tutoriaux et les aides disponibles dans cette section</string>
 
     <!-- About -->
-    <string name="about_desc">SoundFit est une application qui permet d\’adapter des playlists musicales en temps réel en fonction de l\’évolution de l\’activité physique d\’un utilisateur d\’objet connecté ! La capacité de l\’application est de pouvoir créer une interaction entre les objets connectés et la musique.</string>
+    <string name="about_desc">SoundFit est une application qui permet d\'adapter des playlists musicales en temps réel en fonction de l\'évolution de l\'activité physique d\'un utilisateur d\'objet connecté ! La capacité de l\'application est de pouvoir créer une interaction entre les objets connectés et la musique.</string>
 
     <string name="stop">Arrêter</string>
     <string name="help">Aide</string>
+
+    <string name="error_pebble_not_found_title">Erreur</string>
+    <string name="error_pebble_not_found_desc">L\'application Soundfit est actuellement compatible uniquement avec une montre Pebble.\nPour fonctionner, vous devez installer l\'application Pebble et porter votre accessoire le temps de la course.</string>
+
 
     <string name="tutorial_start_activity_title">Lancez-vous !</string>
     <string name="tutorial_start_activity_desc">Vérifiez vos paramètres et appuyez sur la chaussure pour lancer la course et la musique !</string>
