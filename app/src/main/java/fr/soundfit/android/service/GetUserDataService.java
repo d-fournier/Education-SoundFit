@@ -17,6 +17,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.getpebble.android.kit.Constants;
@@ -86,6 +88,18 @@ public class GetUserDataService extends IntentService {
 
         //Choix de la musique
         ChoixDeLaMusique();
+
+        //j'endore mon un peu mon service
+        for (int i=0; i<5; i++) {
+            Log.i("SimpleWakefulReceiver", "Running service " + (i + 1)
+                    + "/5 @ " + SystemClock.elapsedRealtime());
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+            }
+        }
+        Log.i("SimpleWakefulReceiver", "Completed service @ " + SystemClock.elapsedRealtime());
+        WakefulReceiver.completeWakefulIntent(intent);
     }
 
     /**
@@ -106,5 +120,13 @@ public class GetUserDataService extends IntentService {
             //ici je lance la playliste slow
             PrefUtils.setNextSongType(getApplicationContext(),0);
         }
+    }
+
+    /**
+     * Je calcul la moyenne des vitesse pour en deduire l'allure
+     */
+
+    public void CalculeDeAllure(){
+
     }
 }
