@@ -1,9 +1,7 @@
 package fr.soundfit.android.service;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Binder;
@@ -30,7 +28,6 @@ import com.deezer.sdk.player.event.PlayerState;
 import com.deezer.sdk.player.event.PlayerWrapperListener;
 import com.deezer.sdk.player.exception.TooManyPlayersExceptions;
 import com.deezer.sdk.player.networkcheck.WifiAndMobileNetworkStateChecker;
-import com.deezer.sdk.player.networkcheck.WifiOnlyNetworkStateChecker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,9 +74,9 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
 
     private CursorLoader mCursorLoader;
     private Cursor mCursor;
-    private SparseArray<List<Track>> mAllTracks = new SparseArray<>(3);
+    private SparseArray<List<Track>> mAllTracks = new SparseArray<>();
 
-    private SparseArray<List<Track>> mAvailableTracks = new SparseArray<>(3);
+    private SparseArray<List<Track>> mAvailableTracks = new SparseArray<>();
 
     private List<Long> mHistory = new ArrayList<>();
 
@@ -160,7 +157,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             task.execute(request);
 
         }
-        return START_STICKY;
+        return START_REDELIVER_INTENT;
     }
 
     @Override
@@ -171,7 +168,18 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             mCursorLoader.cancelLoad();
             mCursorLoader.stopLoading();
         }
-
+        mCursor = null;
+        if(mTrackPlayer != null){
+            mTrackPlayer.stop();
+            mTrackPlayer.release();
+        }
+        if(mAvailableTracks != null)
+            mAvailableTracks.clear();
+        if(mAllTracks != null)
+            mAllTracks.clear();
+        if(mHistory != null)
+            mHistory.clear();
+        mCurrentTrack = null;
     }
 
     private void updateNotification(){
@@ -244,7 +252,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     private void playNextTrack(){
         int nextSongType = PrefUtils.getNextSongType(this);
         if(mAvailableTracks.get(nextSongType).size()==0){
-            restartPlayer(false);
+            reloadPlaylist(nextSongType);
         }
         long id = mAvailableTracks.get(nextSongType).get(0).getId();
         mAvailableTracks.get(nextSongType).remove(0);
@@ -252,7 +260,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         mCurrentType = nextSongType;
     }
 
-    private void restartPlayer(boolean autoplay){
+    private void startPlayer(){
         if(mIsUserPlaylist){
             if(mCursor == null || mPlaylist == null){
                 return;
@@ -264,32 +272,38 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
                     databaseContent.put(mCursor.getLong(SoundfitContract.SongSortTable.PROJ.ID_SONG), mCursor.getInt(SoundfitContract.SongSortTable.PROJ.ID_TYPE));
                 }
             }
-            mAvailableTracks.put(0, new ArrayList<Track>());
-            mAvailableTracks.put(1, new ArrayList<Track>());
-            mAvailableTracks.put(2, new ArrayList<Track>());
+            mAllTracks.put(0, new ArrayList<Track>());
+            mAllTracks.put(1, new ArrayList<Track>());
+            mAllTracks.put(2, new ArrayList<Track>());
             for(Track t : mPlaylist.getTracks()){
                 Integer level = databaseContent.get(t.getId());
                 if(level != null){
-                    mAvailableTracks.get(level).add(t);
+                    mAllTracks.get(level).add(t);
                 }
             }
-        } else {
-            if(mAllTracks.size() != 3){
-                return;
-            }
-            mAvailableTracks.put(0, new ArrayList<>(mAllTracks.get(0)));
-            mAvailableTracks.put(1, new ArrayList<>(mAllTracks.get(1)));
-            mAvailableTracks.put(2, new ArrayList<>(mAllTracks.get(2)));
         }
+
+        if(mAllTracks.size() != 3){
+            return;
+        }
+        mAvailableTracks.put(0, new ArrayList<>(mAllTracks.get(0)));
+        mAvailableTracks.put(1, new ArrayList<>(mAllTracks.get(1)));
+        mAvailableTracks.put(2, new ArrayList<>(mAllTracks.get(2)));
+
         if(mAvailableTracks.get(0).size() == 0 || mAvailableTracks.get(1).size() == 0 || mAvailableTracks.get(2).size() == 0){
             sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_ERROR, getString(R.string.error_playlist_not_completed));
             terminateService();
             return;
         }
-        if(autoplay) {
-            playNextTrack();
-            sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_INIT, null);
+        playNextTrack();
+        sendEventBroadcast(ConstUtils.BroadcastConst.EVENT_INIT, null);
+    }
+
+    private void reloadPlaylist(int type){
+        if(mAllTracks.size() != 3){
+            return;
         }
+        mAvailableTracks.put(type, new ArrayList<>(mAllTracks.get(type)));
     }
 
     @Override
@@ -301,7 +315,7 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
     public void onLoadComplete(Loader<Cursor> loader, Cursor data) {
         mCursor = data;
         if(mPlaylist != null){
-            restartPlayer(true);
+            startPlayer();
         }
     }
 
@@ -312,17 +326,19 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
             if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_ALL)){
                 mPlaylist = (Playlist) result;
                 if(mCursor != null){
-                    restartPlayer(true);
+                    startPlayer();
                 }
-            } else if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_SLOW)){
-                mAllTracks.put(0, ((Playlist)result).getTracks());
-            } else if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_MOVE)){
-                mAllTracks.put(2, ((Playlist)result).getTracks());
-            } else if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_NORMAL)){
-                mAllTracks.put(1, ((Playlist)result).getTracks());
-            }
-            if(mAllTracks.size() == 3){
-                restartPlayer(true);
+            } else {
+                if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_SLOW)){
+                    mAllTracks.put(0, ((Playlist)result).getTracks());
+                } else if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_MOVE)){
+                    mAllTracks.put(2, ((Playlist)result).getTracks());
+                } else if(((String)requestId).equalsIgnoreCase(DEEZER_PLAYLIST_NORMAL)){
+                    mAllTracks.put(1, ((Playlist)result).getTracks());
+                }
+                if(mAllTracks.size() == 3){
+                    startPlayer();
+                }
             }
         }
 
@@ -339,13 +355,15 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         playNextTrack();
     }
 
-    public void previousTrack(){
+    public boolean previousTrack(){
         if(mHistory.size()>0){
             mAvailableTracks.get(mCurrentType).add(0, mCurrentTrack);
             mCurrentTrack = null;
             mTrackPlayer.playTrack(mHistory.get(0));
             mHistory.remove(0);
+            return true;
         }
+        return false;
     }
 
     public boolean togglePlayer(){

@@ -3,8 +3,8 @@
 
     <string-array name="tutorial_item">
         <item>motivate</item>
-        <item>share</item>
         <item>discover</item>
+        <item>share</item>
     </string-array>
 
     <item name="desc_discover" type="string">@string/tuto_discover_desc</item>

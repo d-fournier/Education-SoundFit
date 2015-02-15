@@ -44,7 +44,6 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     private final static int CUSTOM_LEVEL = 3;
 
     private final static int MIN_BAR_VALUE = 5;
-    private final static int MAX_BAR_VALUE = 10;
     private final static int TICK_RATIO = 10;
 
     protected DeezerConnect mDeezerConnect = null;

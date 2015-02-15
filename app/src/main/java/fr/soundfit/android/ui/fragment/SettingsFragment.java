@@ -71,7 +71,7 @@ public class SettingsFragment extends GenericFragment implements AdapterView.OnI
                 showAbout();
                 break;
             case R.id.id_settings_discover_app:
-                showShortly(R.string.connected_things_desc);
+                showShortly(R.string.discover_desc);
                 break;
             case R.id.id_settings_contact_us:
                 contactUs();
