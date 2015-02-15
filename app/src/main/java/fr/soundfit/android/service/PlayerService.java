@@ -230,7 +230,19 @@ public class PlayerService extends Service implements PlayerWrapperListener, Loa
         }
         mCurrentTrack = track;
         updateNotification();
+        sendToConnectedThings();
         sendTrackBroadcast();
+    }
+
+    private void sendToConnectedThings() {
+        //TODO Move elsewhere
+        if(mCurrentTrack != null){
+            final Intent i = new Intent("com.getpebble.action.NOW_PLAYING");
+            i.putExtra("artist", mCurrentTrack.getArtist().getName());
+            i.putExtra("album", mCurrentTrack.getAlbum().getTitle());
+            i.putExtra("track", mCurrentTrack.getTitle());
+            sendBroadcast(i);
+        }
     }
 
     @Override
