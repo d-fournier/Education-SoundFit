@@ -10,6 +10,7 @@
     <string name="validate">Valider</string>
     <string name="unavailable">Indisponible</string>
     <string name="ok">OK</string>
+    <string name="test">Tester quand même</string>
 
     <string name="last_performance">Ma dernière performance</string>
     <string name="next_performance">Ma prochaine performance</string>
@@ -102,6 +103,10 @@
 
     <string name="stop">Arrêter</string>
     <string name="help">Aide</string>
+
+    <string name="error_pebble_not_found_title">Erreur</string>
+    <string name="error_pebble_not_found_desc">L\'application Soundfit est actuellement compatible uniquement avec une montre Pebble.\nPour fonctionner, vous devez installer l\'application Pebble et porter votre accessoire le temps de la course.</string>
+
 
     <string name="tutorial_start_activity_title">Lancez-vous !</string>
     <string name="tutorial_start_activity_desc">Vérifiez vos paramètres et appuyez sur la chaussure pour lancer la course et la musique !</string>

@@ -1,7 +1,10 @@
 package fr.soundfit.android.ui.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -28,6 +31,7 @@ import java.util.List;
 import fr.soundfit.android.R;
 import fr.soundfit.android.service.PlayerService;
 import fr.soundfit.android.ui.activity.GenericActivity;
+import fr.soundfit.android.utils.ConstUtils;
 import fr.soundfit.android.utils.DeezerUtils;
 import fr.soundfit.android.utils.PrefUtils;
 
@@ -119,7 +123,6 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
             case R.id.help:
                 new MaterialDialog.Builder(getActivity()).title(R.string.tutorial_start_activity_title).content(R.string.tutorial_start_activity_desc)
                         .positiveText(R.string.ok).show();
-
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -183,16 +186,14 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
     @Override
     public void onClick(View v) {
         if(v == mValidateButton){
-            mValidateButton.setEnabled(true);
-            Intent intent = new Intent(getActivity(), PlayerService.class);
-            Bundle bundle = new Bundle();
-            bundle.putLong(PlayerService.EXTRA_PLAYLIST_ID, mPlaylistList.get(mPlaylistSpinner.getSelectedItemPosition()).getId());
-            bundle.putBoolean(PlayerService.EXTRA_IS_USER_PLAYLIST, mMusicSpinner.getSelectedItemPosition() == USER_PLAYLIST);
-            intent.putExtras(bundle);
-            getActivity().startService(intent);
-            displayLoading(true);
+            if(isPebbleInstalled()){
+                launchRun();
+            } else {
+                displayDialogPebble();
+            }
         }
     }
+
 
     private class PlaylistListener extends JsonRequestListener {
         @Override
@@ -222,6 +223,45 @@ public class StartActivityFragment extends GenericFragment implements AdapterVie
         public void onException(Exception exception, Object requestId) { }
 
     }
+
+    private boolean isPebbleInstalled() {
+        PackageManager pm = getActivity().getPackageManager();
+        boolean app_installed;
+        try {
+            pm.getPackageInfo(ConstUtils.PEBBLE_URI, PackageManager.GET_ACTIVITIES);
+            app_installed = true;
+        }
+        catch (PackageManager.NameNotFoundException e) {
+            app_installed = false;
+        }
+        return app_installed ;
+    }
+
+    private void displayDialogPebble() {
+        new MaterialDialog.Builder(getActivity()).title(R.string.error_pebble_not_found_title).content(R.string.error_pebble_not_found_desc)
+                .positiveText(R.string.ok).negativeText(R.string.test).negativeColorRes(R.color.theme_red).callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
+                    }
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
+                        launchRun();
+                    }
+                }).show();
+    }
+
+    private void launchRun(){
+        mValidateButton.setEnabled(false);
+        Intent intent = new Intent(getActivity(), PlayerService.class);
+        Bundle bundle = new Bundle();
+        bundle.putLong(PlayerService.EXTRA_PLAYLIST_ID, mPlaylistList.get(mPlaylistSpinner.getSelectedItemPosition()).getId());
+        bundle.putBoolean(PlayerService.EXTRA_IS_USER_PLAYLIST, mMusicSpinner.getSelectedItemPosition() == USER_PLAYLIST);
+        intent.putExtras(bundle);
+        getActivity().startService(intent);
+        displayLoading(true);
+    }
+
 
 }
 

@@ -16,9 +16,8 @@ public class ConstUtils {
 
         public static final String EVENT_ERROR = "fr.soundfit.android.EVENT_ERROR";
         public static final String EXTRA_MESSAGE = "fr.soundfit.android.EXTRA_MESSAGE";
-
-
     }
 
 
+    public static final String PEBBLE_URI = "com.getpebble.android";
 }
