@@ -53,6 +53,21 @@
             android:name=".service.PlayerService"
             android:exported="false"/>
 
+        <receiver
+            android:name=".service.WakefulReceiver"
+            android:label="@string/app_name"
+            android:enabled="true" >
+        </receiver>
+
+        <service
+            android:name=".service.GetUserDataService"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name=".service.GetUserDataService" />
+            </intent-filter>
+        </service>
+
         <provider
             android:name=".provider.SoundfitProvider"
             android:authorities="fr.soundfit.android.provider"
