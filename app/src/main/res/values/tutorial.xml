@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="tutorial_item">
+        <item>motivate</item>
+        <item>discover</item>
+        <item>share</item>
+    </string-array>
+
+    <item name="desc_discover" type="string">@string/tuto_discover_desc</item>
+    <item name="desc_motivate" type="string">@string/tuto_motivate_desc</item>
+    <item name="desc_share" type="string">@string/tuto_share_desc</item>
+
+    <item name="title_discover" type="string">@string/tuto_discover_title</item>
+    <item name="title_motivate" type="string">@string/tuto_motivate_title</item>
+    <item name="title_share" type="string">@string/tuto_share_title</item>
+
+    <item name="drawable_discover" type="drawable">@drawable/bkg_intro_discover</item>
+    <item name="drawable_motivate" type="drawable">@drawable/bkg_intro_motivate</item>
+    <item name="drawable_share" type="drawable">@drawable/bkg_intro_share</item>
+
+
+</resources>

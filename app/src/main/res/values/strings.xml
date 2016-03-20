@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Will contain all localisable string -->
+<resources>
+
+    <!-- Authentification -->
+    <string name="connect">Se connecter</string>
+
+    <!-- Common String -->
+    <string name="next">Suivant</string>
+    <string name="validate">Valider</string>
+    <string name="unavailable">Indisponible</string>
+    <string name="ok">OK</string>
+    <string name="test">Tester quand même</string>
+
+    <string name="last_performance">Ma dernière performance</string>
+    <string name="next_performance">Ma prochaine performance</string>
+    <string name="speed_unit">%1$s km/h</string>
+    <string name="distance_unit">%1$s km</string>
+    <string name="no_information">Aucune information</string>
+    <string name="loading">Chargement des informations &#8230;</string>
+
+    <!-- MenuDrawer -->
+    <string name="home">Accueil</string>
+    <string name="playlist">Playlists</string>
+    <string name="challenges">Challenges</string>
+    <string name="parameters">Paramètres</string>
+
+    <!-- MenuSettings -->
+    <string name="welcome">Accueil</string>
+    <string name="profile">Profil</string>
+    <string name="my_account">Mon compte</string>
+    <string name="sharing">Partage</string>
+    <string name="my_activity">Mon Activité</string>
+    <string name="my_music">Ma Musique</string>
+    <string name="my_level">Mon niveau</string>
+    <string name="my_connected_objects">Mes objets connectés</string>
+    <string name="about">A Propos</string>
+    <string name="about_soundfit">A propos de Soundfit</string>
+    <string name="discover_app">Découvrir l\'application</string>
+    <string name="contact_us">Nous contacter</string>
+
+    <!-- Login -->
+    <string name="sign_up_title">A new journey is coming !</string>
+    <string name="name_first">Prénom</string>
+    <string name="name_last">Nom</string>
+    <string name="mail">Email</string>
+    <string name="password">Mot de passe</string>
+    <string name="password_again">Confirmez le mot de passe</string>
+
+    <!-- Tuto -->
+    <string name="tuto_motivate_title">Motivez vous !</string>
+    <string name="tuto_motivate_desc">Soundfit permet d\'adapter vos musiques préférées en temps réel, en fonction de l\'évolution de votre activité physique.</string>
+    <string name="tuto_discover_title">Découvrez !</string>
+    <string name="tuto_discover_desc">Laissez Soundfit vous faire découvrir de nouveaux morceaux !</string>
+    <string name="tuto_share_title">Partagez !</string>
+    <string name="tuto_share_desc">Partagez ensuite les nouveaux morceaux découverts avec vos amis !</string>
+
+    
+    <!-- Level -->
+    <string name="level_chooser_title">Choix du niveau</string>
+    <string name="level_chooser_beginner">Débutant</string>
+    <string name="level_chooser_experienced">Confirmé</string>
+    <string name="level_chooser_expert">Expert</string>
+    <string name="level_chooser_customised">Perso</string>
+    <string name="level_range_string">Vitesse comprise entre %1$s et %2$s km/h</string>
+
+    <!-- Music -->
+    <string name="music_chooser_title">Mode de diffusion</string>
+    <string name="music_chooser_discover">Découvrir</string>
+    <string name="music_chooser_my_playlist">Mes playlists</string>
+
+    <!-- Start Activity -->
+    <string name="selected_level">Niveau sélectionné</string>
+    <string name="selected_music">Mode de diffusion sélectionné</string>
+    <string name="selected_playlist">Playlist sélectionnée</string>
+    <string name="no_historic">Aucune course</string>
+
+    <string name="navigation_drawer_open">Ouvrir Menu</string>
+    <string name="navigation_drawer_close">Fermer Menu</string>
+
+    <!-- Playlist -->
+    <string name="my_playlist">Mes Playlists</string>
+    <string name="soundfit_playlist">SoundFit Playlist</string>
+    <string name="slow_playlist">Playlist Slow</string>
+    <string name="normal_playlist">Playlist Normal</string>
+    <string name="move_playlist">Playlist Move</string>
+    <string name="not_sorted_list">Non Classé</string>
+
+    <!-- Contact -->
+    <string name="contact_subject">Application Soundfit - Android</string>
+    <string name="contact_chooser">Envoyer par email</string>
+
+    <!-- Error -->
+    <string name="error_playlist_not_completed">Erreur\nLa playlist n\'est pas conforme.</string>
+    <string name="shortly">Prochainement</string>
+    <string name="account_desc">Vous pourrez consulter toutes les informations relatives à votre compte en ligne SoundFit.</string>
+    <string name="share_desc">Vous pourrez gérer les options de partage automatique en fin d\'activité.</string>
+    <string name="connected_things_desc">Vous pourrez bientot ajouter de nombreux objets connectés des marques partenaires (Withings, Ironova &#8230;)</string>
+    <string name="discover_desc">Vous pourrez bientôt retrouver les tutoriaux et les aides disponibles dans cette section</string>
+
+    <!-- About -->
+    <string name="about_desc">SoundFit est une application qui permet d\'adapter des playlists musicales en temps réel en fonction de l\'évolution de l\'activité physique d\'un utilisateur d\'objet connecté ! La capacité de l\'application est de pouvoir créer une interaction entre les objets connectés et la musique.</string>
+
+    <string name="stop">Arrêter</string>
+    <string name="help">Aide</string>
+
+    <string name="error_pebble_not_found_title">Erreur</string>
+    <string name="error_pebble_not_found_desc">L\'application Soundfit est actuellement compatible uniquement avec une montre Pebble.\nPour fonctionner, vous devez installer l\'application Pebble et porter votre accessoire le temps de la course.</string>
+
+
+    <string name="tutorial_start_activity_title">Lancez-vous !</string>
+    <string name="tutorial_start_activity_desc">Vérifiez vos paramètres et appuyez sur la chaussure pour lancer la course et la musique !</string>
+
+    <string name="tutorial_playlist_list_title">Playlist</string>
+    <string name="tutorial_playlist_list_desc">Consultez les différentes playlists disponibles et les chansons qu\'elles contiennent.\nChoisissez une de vos playlists pour trier ses chansons selon votre style de course</string>
+
+    <string name="tutorial_sort_title">Triez !</string>
+    <string name="tutorial_sort_desc">Sélectionnez le type de votre musique.\n- Une chanson slow sera diffusée en cas de sur-régime.\n- Une chanson move sera diffusée si vous ralentissez.\n- Une chanson normale sera jouée dans les autres cas !</string>
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="settings_items">
+        <item>settings_profile</item>
+        <item>settings_my_account</item>
+        <item>settings_sharing</item>
+        <item>settings_my_activity</item>
+        <item>settings_my_music</item>
+        <item>settings_my_level</item>
+        <item>settings_my_connected_objects</item>
+        <item>settings_about</item>
+        <item>settings_about_soundfit</item>
+        <item>settings_discover_app</item>
+        <item>settings_contact_us</item>
+    </string-array>
+
+    <item name="string_settings_profile" type="string">@string/profile</item>
+    <item name="string_settings_my_account" type="string">@string/my_account</item>
+    <item name="string_settings_sharing" type="string">@string/sharing</item>
+    <item name="string_settings_my_activity" type="string">@string/my_activity</item>
+    <item name="string_settings_my_music" type="string">@string/my_music</item>
+    <item name="string_settings_my_level" type="string">@string/my_level</item>
+    <item name="string_settings_my_connected_objects" type="string">@string/my_connected_objects</item>
+    <item name="string_settings_about" type="string">@string/about</item>
+    <item name="string_settings_about_soundfit" type="string">@string/about_soundfit</item>
+    <item name="string_settings_discover_app" type="string">@string/discover_app</item>
+    <item name="string_settings_contact_us" type="string">@string/contact_us</item>
+
+    <item name="id_settings_profile" type="id">-1</item>
+    <item name="id_settings_my_account" type="id">0</item>
+    <item name="id_settings_sharing" type="id">1</item>
+    <item name="id_settings_my_activity" type="id">-1</item>
+    <item name="id_settings_my_music" type="id">2</item>
+    <item name="id_settings_my_level" type="id">3</item>
+    <item name="id_settings_my_connected_objects" type="id">4</item>
+    <item name="id_settings_about" type="id">-1</item>
+    <item name="id_settings_about_soundfit" type="id">5</item>
+    <item name="id_settings_discover_app" type="id">6</item>
+    <item name="id_settings_contact_us" type="id">7</item>
+
+
+</resources>

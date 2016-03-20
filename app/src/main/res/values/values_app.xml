@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Will contain all non-localisable string -->
+<resources>
+
+    <string name="app_name">SoundFit</string>
+    
+    <string name="contact_mail">contact@soundfit.fr</string>
+    <!-- T0D0 Update Values -->
+    <string name="deezer_app_id">151511</string>
+    <integer name="deezer_user_soundfit_id">334512491</integer>
+
+    <integer-array name="array_1148491731">
+        <item>1148492081</item>
+        <item>1148492211</item>
+        <item>1148492291</item>
+    </integer-array>
+
+</resources>

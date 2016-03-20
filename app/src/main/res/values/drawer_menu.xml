@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="drawer_items">
+        <item>drawer_home</item>
+        <item>drawer_playlist</item>
+        <item>drawer_challenges</item>
+        <item>drawer_parameter</item>
+    </string-array>
+
+    <item name="string_drawer_home" type="string">@string/home</item>
+    <item name="string_drawer_playlist" type="string">@string/playlist</item>
+    <item name="string_drawer_challenges" type="string">@string/challenges</item>
+    <item name="string_drawer_parameter" type="string">@string/parameters</item>
+
+    <item name="id_drawer_home" type="id">0</item>
+    <item name="id_drawer_playlist" type="id">1</item>
+    <item name="id_drawer_challenges" type="id">2</item>
+    <item name="id_drawer_parameter" type="id">3</item>
+
+
+</resources>
